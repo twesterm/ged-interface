@@ -98,7 +98,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Correction of the Center</string>
+       <string>Center correction</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_11">
@@ -650,6 +650,9 @@
       <width>800</width>
       <height>600</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="frameShape">
      <enum>QFrame::Box</enum>

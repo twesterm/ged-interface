@@ -10,6 +10,7 @@ MainWindowClass::MainWindowClass(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindowClass)
 {
     ui->setupUi(this);
+    ui->picLabel->installEventFilter(this); //installs the eventhandler do get the mousclicks on the pic
 }
 
 MainWindowClass::~MainWindowClass()

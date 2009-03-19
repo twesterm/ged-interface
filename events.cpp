@@ -3,6 +3,33 @@
 #include "qmessagebox.h"
 #include "qiodevice.h"
 #include "mainwindow.h"
+ #include <QMouseEvent>
+#include <QPixmap>
+#include <iostream>
+
+//void QLabel::mousePressEvent( QMouseEvent * event ) {
+//      ui->XNULLlineEdit->setText(QString::number(event->x()));
+//}
+
+bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) {
+    if (watched != ui->picLabel) return false;
+                QMouseEvent *e = dynamic_cast<QMouseEvent*> (event);
+                if (e != 0 && e->type() == QEvent::MouseButtonPress) {
+                    if (ui->listWidget->count()>0) {
+                     GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
+                     std::cout << link->getIXMA().toInt() << std::endl;
+                     std::cout << link->getJYMA().toInt() << std::endl;
+                     float xscale = (link->getIXMA().toInt())/(ui->picLabel->width());
+                     float yscale = (link->getJYMA().toInt())/ui->picLabel->height();
+                     ui->XNULLlineEdit->setText(QString::number(e->x()*xscale));
+                     ui->YNULLlineEdit->setText(QString::number(e->y()*yscale));
+                 }
+                }
+                return false;
+
+
+
+}
 
 void MainWindowClass::on_actionOpenFile_triggered()
 {
@@ -30,6 +57,10 @@ void MainWindowClass::on_actionOpenFile_triggered()
           newItem->setPath(fileNames.at(i));
           ui->listWidget->insertItem(ui->listWidget->count(), newItem);
      }
+   /*  if (ui->listWidget->count()>0) {
+         ui->listWidget->setCurrentRow(0);
+         emit ui->listWidget->itemClicked(ui->listWidget->currentItem());
+     } */ //a nice test, but fails
   }
 }
 
@@ -71,6 +102,8 @@ void MainWindowClass::on_listWidget_itemClicked(QListWidgetItem *item) {
     }
 
     QImage image(newbildtext);
+    link->setJYMA(QString::number(image.height()));
+    link->setIXMA(QString::number(image.width()));
     ui->picLabel->setPixmap(QPixmap::fromImage(image));
 
 

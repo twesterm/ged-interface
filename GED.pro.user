@@ -79,7 +79,7 @@
     <value type="QString" >CONFIG+=debug_and_release</value>
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/qmake</value>
-   <value key="abstractProcess.enabled" type="bool" >true</value>
+   <value key="abstractProcess.enabled" type="bool" >false</value>
    <value key="abstractProcess.workingDirectory" type="QString" >/Users/tillwestermann/GED/GED</value>
    <value key="buildConfiguration" type="int" >10</value>
   </valuemap>

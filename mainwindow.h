@@ -16,6 +16,7 @@ class MainWindowClass : public QMainWindow
 public:
     MainWindowClass(QWidget *parent = 0);
     ~MainWindowClass();
+    bool eventFilter ( QObject * watched, QEvent * event );
 
 
     // all Callbacks are in events.cpp
@@ -46,6 +47,7 @@ public:
      void on_IRECOA2lineEdit_textEdited(QString );
      void on_SEPLAlineEdit_textEdited(QString );
      void on_ISECTlineEdit_textEdited(QString );
+ //    void on_picLabel_mousePressEvent( QMouseEvent * event );
 
 private:
     Ui::MainWindowClass *ui;

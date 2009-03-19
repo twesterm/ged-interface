@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Fri Mar 13 14:00:44 2009
+** Created: Wed Mar 18 15:00:07 2009
 **      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -272,6 +272,7 @@ public:
         picLabel = new QLabel(centralwidget);
         picLabel->setObjectName(QString::fromUtf8("picLabel"));
         picLabel->setGeometry(QRect(160, 30, 800, 600));
+        picLabel->setCursor(QCursor(Qt::ArrowCursor));
         picLabel->setFrameShape(QFrame::Box);
         picLabel->setScaledContents(true);
         listWidget = new QListWidget(centralwidget);
@@ -307,7 +308,7 @@ public:
         label_5->setText(QApplication::translate("MainWindowClass", "Y-Null", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("MainWindowClass", "RMIN", 0, QApplication::UnicodeUTF8));
         label_8->setText(QApplication::translate("MainWindowClass", "RMAX", 0, QApplication::UnicodeUTF8));
-        label_9->setText(QApplication::translate("MainWindowClass", "Correction of the Center", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("MainWindowClass", "Center correction", 0, QApplication::UnicodeUTF8));
         label_11->setText(QApplication::translate("MainWindowClass", "Guess for the Center", 0, QApplication::UnicodeUTF8));
         label_16->setText(QApplication::translate("MainWindowClass", "DR", 0, QApplication::UnicodeUTF8));
         label_19->setText(QApplication::translate("MainWindowClass", "RMAXT", 0, QApplication::UnicodeUTF8));
