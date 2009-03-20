@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Fri Mar 20 14:51:28 2009
+** Created: Fri Mar 20 16:55:54 2009
 **      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -303,6 +303,7 @@ public:
         buttonGroup->addButton(centerRadioButton);
         centerRadioButton->setObjectName(QString::fromUtf8("centerRadioButton"));
         centerRadioButton->setGeometry(QRect(300, 650, 101, 21));
+        centerRadioButton->setChecked(true);
         infoLabel = new QLabel(centralwidget);
         infoLabel->setObjectName(QString::fromUtf8("infoLabel"));
         infoLabel->setGeometry(QRect(610, 650, 351, 20));
@@ -365,8 +366,8 @@ public:
         label_28->setText(QApplication::translate("MainWindowClass", "ISECT:", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(bla), QApplication::translate("MainWindowClass", "Adv.", 0, QApplication::UnicodeUTF8));
         picLabel->setText(QString());
-        StartRadioButton->setText(QApplication::translate("MainWindowClass", "Start Sector", 0, QApplication::UnicodeUTF8));
-        EndRadioButton->setText(QApplication::translate("MainWindowClass", "End Sector", 0, QApplication::UnicodeUTF8));
+        StartRadioButton->setText(QApplication::translate("MainWindowClass", "Start Point", 0, QApplication::UnicodeUTF8));
+        EndRadioButton->setText(QApplication::translate("MainWindowClass", "End Point", 0, QApplication::UnicodeUTF8));
         centerRadioButton->setText(QApplication::translate("MainWindowClass", "Center", 0, QApplication::UnicodeUTF8));
         infoLabel->setText(QApplication::translate("MainWindowClass", "Info here", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindowClass", "File", 0, QApplication::UnicodeUTF8));

@@ -35,8 +35,8 @@ public:
      void on_RMINlineEdit_textEdited(QString );
      void on_RMAXlineEdit_textEdited(QString );
      void on_DRlineEdit_textEdited(QString );
-     void on_RMINTlineEdit_textEdited(QString );
-     void on_RMAXTlineEdit_textEdited(QString );
+     void on_RMINTlineEdit_textChanged(QString );
+     void on_RMAXTlineEdit_textChanged(QString );
      void on_DRTlineEdit_textEdited(QString );
      void on_TUNEXPlineEdit_textEdited(QString );
      void on_RADIlineEdit_textEdited(QString );
@@ -48,6 +48,8 @@ public:
      void on_SEPLAlineEdit_textEdited(QString );
      void on_ISECTlineEdit_textEdited(QString );
      void on_UseCheckBox_clicked(bool);
+     void on_StartRadioButton_clicked();
+     void on_EndRadioButton_clicked();
  //    void on_picLabel_mousePressEvent( QMouseEvent * event );
 
 private:

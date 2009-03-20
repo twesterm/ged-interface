@@ -17,12 +17,24 @@ bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) {
                 if (e != 0 && e->type() == QEvent::MouseButtonPress) {
                     if (ui->listWidget->count()>0) {
                      GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
-                     std::cout << link->getIXMA().toInt() << std::endl;
-                     std::cout << link->getJYMA().toInt() << std::endl;
                      float xscale = (link->getIXMA().toInt())/(ui->picLabel->width());
                      float yscale = (link->getJYMA().toInt())/ui->picLabel->height();
-                     ui->XNULLlineEdit->setText(QString::number(e->x()*xscale));
-                     ui->YNULLlineEdit->setText(QString::number(e->y()*yscale));
+                      float x1 = e->x()*xscale;
+                      float y1 = e->y()*yscale;
+                     if (ui->centerRadioButton->isChecked()) {
+
+                        ui->XNULLlineEdit->setText(QString::number(x1));
+                        ui->YNULLlineEdit->setText(QString::number(y1));
+                     } else if (ui->StartRadioButton->isChecked()) {
+                         float x2 = link->getXNULL().toFloat();;
+                         float y2 = link->getYNULL().toFloat();
+                         ui->RMINTlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)));
+                     } else if (ui->EndRadioButton->isChecked()) {
+                         float x2 = link->getXNULL().toFloat();;
+                         float y2 = link->getYNULL().toFloat();
+                         ui->RMAXTlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)));
+                     }
+
                  }
                 }
                 return false;
@@ -228,7 +240,7 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
            } //of ifisEmpty
         }
     }
-     void MainWindowClass::on_RMINTlineEdit_textEdited(QString text){
+     void MainWindowClass::on_RMINTlineEdit_textChanged(QString text){
          if (ui->listWidget->count()>0)  {
             GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
             if (text.length()>0){
@@ -238,7 +250,7 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
            } //of ifisEmpty
         }
     }
-     void MainWindowClass::on_RMAXTlineEdit_textEdited(QString text){
+     void MainWindowClass::on_RMAXTlineEdit_textChanged(QString text){
          if (ui->listWidget->count()>0)  {
             GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
             if (text.length()>0){
@@ -348,5 +360,25 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
            } //of ifisEmpty
         }
     }
+
+    void MainWindowClass::on_StartRadioButton_clicked(){ //tests if we have a center for the distance
+        if (ui->listWidget->count()>0) {
+           GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
+           if (link->getXNULL().toFloat()==0.0) {
+               QMessageBox::information( this, "Error", QString("Please give a center first.)"), "&Ok" );
+               ui->centerRadioButton->setChecked(true);
+           }
+       }
+    }
+       void MainWindowClass::on_EndRadioButton_clicked(){ //tests if we have a center for the distance
+        if (ui->listWidget->count()>0) {
+           GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
+           if (link->getXNULL().toFloat()==0.0) {
+               QMessageBox::information( this, "Error", QString("Please give a center first.)"), "&Ok" );
+               ui->centerRadioButton->setChecked(true);
+           }
+       }
+    }
+
 
 

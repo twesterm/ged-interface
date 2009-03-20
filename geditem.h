@@ -71,6 +71,7 @@ private:
     QString getWAVE();
     QString getDELTAS();
     bool isUseable();
+    float distance(float,  float,  float,  float);
 
 };
 

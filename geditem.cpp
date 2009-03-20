@@ -1,5 +1,7 @@
 #include "geditem.h"
 #include "qstring.h"
+#include <iostream.h>
+#include <math.h>
 
 GEDItem::GEDItem()
 {
@@ -12,13 +14,13 @@ GEDItem::GEDItem()
      this->setXSCAT("130.0");
      this->setYSCAT("110.0");
      this->setANGLE("0.0");
-     this->setXNULL("130.0");
-     this->setYNULL("110.0");
+     this->setXNULL("0");
+     this->setYNULL("0");
      this->setRMIN("8.0");
      this->setRMAX("55.0");
      this->setDR("0.1");
-     this->setRMINT("8.5");
-     this->setRMAXT("58.0");
+     this->setRMINT("0.0");
+     this->setRMAXT("0.0");
      this->setDRT("0.1");
      this->setTUNEXP("0.0");
      this->setRADI("0.0");
@@ -374,4 +376,9 @@ GEDItem::GEDItem()
     QString GEDItem::getDELTAS(){return this->DELTAS;}
     QString GEDItem::getPath(){return this->Path;}
     bool GEDItem::isUseable(){return this->Useable;}
+
+    float GEDItem::distance(float x1, float x2, float y1, float y2) { // this method calcs the distance between two points
+        float result = sqrt(pow(x1-x2, 2)+pow(y1-y2,2));
+        return result;
+    }
 
