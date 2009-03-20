@@ -47,6 +47,7 @@ public:
      void on_IRECOA2lineEdit_textEdited(QString );
      void on_SEPLAlineEdit_textEdited(QString );
      void on_ISECTlineEdit_textEdited(QString );
+     void on_UseCheckBox_clicked(bool);
  //    void on_picLabel_mousePressEvent( QMouseEvent * event );
 
 private:

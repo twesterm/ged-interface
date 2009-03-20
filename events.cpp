@@ -64,6 +64,11 @@ void MainWindowClass::on_actionOpenFile_triggered()
   }
 }
 
+void MainWindowClass::on_UseCheckBox_clicked(bool state) {
+     GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
+     link->setUseable(state);
+}
+
 
 void MainWindowClass::on_listWidget_itemClicked(QListWidgetItem *item) {
     GEDItem *link = dynamic_cast <GEDItem*>(item);
@@ -92,6 +97,7 @@ void MainWindowClass::on_listWidget_itemClicked(QListWidgetItem *item) {
     ui->DELTASlineEdit->setText(link->getDELTAS());
     ui->SEPLAlineEdit->setText(link->getSEPLA());
     ui->ISECTlineEdit->setText(link->getISECT());
+    ui->UseCheckBox->setChecked(link->isUseable());
 
     QString newbildtext = link->getPath();
     QFile file(newbildtext);

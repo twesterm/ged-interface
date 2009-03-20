@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1234</width>
-    <height>691</height>
+    <width>1208</width>
+    <height>714</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,9 +17,9 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>970</x>
+      <x>980</x>
       <y>30</y>
-      <width>200</width>
+      <width>191</width>
       <height>491</height>
      </rect>
     </property>
@@ -313,6 +313,19 @@
       </property>
       <property name="text">
        <string>Angel-Scale:</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="UseCheckBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>430</y>
+        <width>87</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Usable</string>
       </property>
      </widget>
     </widget>
@@ -674,13 +687,74 @@
      </rect>
     </property>
    </widget>
+   <widget class="QRadioButton" name="StartRadioButton">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>650</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start Sector</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string>buttonGroup</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="EndRadioButton">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>650</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>End Sector</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string>buttonGroup</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="centerRadioButton">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>650</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Center</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string>buttonGroup</string>
+    </attribute>
+   </widget>
+   <widget class="QLabel" name="infoLabel">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>650</y>
+      <width>351</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Info here</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1234</width>
+     <width>1208</width>
      <height>22</height>
     </rect>
    </property>
@@ -701,4 +775,7 @@
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroup"/>
+ </buttongroups>
 </ui>

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Wed Mar 18 15:00:07 2009
+** Created: Fri Mar 20 14:51:28 2009
 **      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -14,6 +14,7 @@
 #include <QtGui/QAction>
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
+#include <QtGui/QCheckBox>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
@@ -21,6 +22,7 @@
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
+#include <QtGui/QRadioButton>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
 #include <QtGui/QWidget>
@@ -58,6 +60,7 @@ public:
     QLabel *label_17;
     QLineEdit *ANGLElineEdit;
     QLabel *label_6;
+    QCheckBox *UseCheckBox;
     QWidget *Beam;
     QLineEdit *DELTASlineEdit;
     QLabel *label_13;
@@ -89,22 +92,27 @@ public:
     QLineEdit *ISECTlineEdit;
     QLabel *picLabel;
     QListWidget *listWidget;
+    QRadioButton *StartRadioButton;
+    QRadioButton *EndRadioButton;
+    QRadioButton *centerRadioButton;
+    QLabel *infoLabel;
     QMenuBar *menubar;
     QMenu *menuFile;
     QStatusBar *statusbar;
+    QButtonGroup *buttonGroup;
 
     void setupUi(QMainWindow *MainWindowClass)
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QString::fromUtf8("MainWindowClass"));
-        MainWindowClass->resize(1234, 691);
+        MainWindowClass->resize(1208, 714);
         actionOpenFile = new QAction(MainWindowClass);
         actionOpenFile->setObjectName(QString::fromUtf8("actionOpenFile"));
         centralwidget = new QWidget(MainWindowClass);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        tabWidget->setGeometry(QRect(970, 30, 200, 491));
+        tabWidget->setGeometry(QRect(980, 30, 191, 491));
         tabWidget->setTabPosition(QTabWidget::North);
         tabWidget->setUsesScrollButtons(false);
         tab = new QWidget();
@@ -181,6 +189,9 @@ public:
         label_6 = new QLabel(tab);
         label_6->setObjectName(QString::fromUtf8("label_6"));
         label_6->setGeometry(QRect(0, 380, 81, 17));
+        UseCheckBox = new QCheckBox(tab);
+        UseCheckBox->setObjectName(QString::fromUtf8("UseCheckBox"));
+        UseCheckBox->setGeometry(QRect(10, 430, 87, 21));
         tabWidget->addTab(tab, QString());
         Beam = new QWidget();
         Beam->setObjectName(QString::fromUtf8("Beam"));
@@ -278,10 +289,27 @@ public:
         listWidget = new QListWidget(centralwidget);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
         listWidget->setGeometry(QRect(20, 30, 121, 341));
+        StartRadioButton = new QRadioButton(centralwidget);
+        buttonGroup = new QButtonGroup(MainWindowClass);
+        buttonGroup->setObjectName(QString::fromUtf8("buttonGroup"));
+        buttonGroup->addButton(StartRadioButton);
+        StartRadioButton->setObjectName(QString::fromUtf8("StartRadioButton"));
+        StartRadioButton->setGeometry(QRect(380, 650, 101, 21));
+        EndRadioButton = new QRadioButton(centralwidget);
+        buttonGroup->addButton(EndRadioButton);
+        EndRadioButton->setObjectName(QString::fromUtf8("EndRadioButton"));
+        EndRadioButton->setGeometry(QRect(490, 650, 101, 21));
+        centerRadioButton = new QRadioButton(centralwidget);
+        buttonGroup->addButton(centerRadioButton);
+        centerRadioButton->setObjectName(QString::fromUtf8("centerRadioButton"));
+        centerRadioButton->setGeometry(QRect(300, 650, 101, 21));
+        infoLabel = new QLabel(centralwidget);
+        infoLabel->setObjectName(QString::fromUtf8("infoLabel"));
+        infoLabel->setGeometry(QRect(610, 650, 351, 20));
         MainWindowClass->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindowClass);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1234, 22));
+        menubar->setGeometry(QRect(0, 0, 1208, 22));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         MainWindowClass->setMenuBar(menubar);
@@ -317,6 +345,7 @@ public:
         label_18->setText(QApplication::translate("MainWindowClass", "YSCAT:", 0, QApplication::UnicodeUTF8));
         label_17->setText(QApplication::translate("MainWindowClass", "XSCAT:", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("MainWindowClass", "Angel-Scale:", 0, QApplication::UnicodeUTF8));
+        UseCheckBox->setText(QApplication::translate("MainWindowClass", "Usable", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindowClass", "Parameter", 0, QApplication::UnicodeUTF8));
         label_13->setText(QApplication::translate("MainWindowClass", "CADIST", 0, QApplication::UnicodeUTF8));
         label_15->setText(QApplication::translate("MainWindowClass", "DELTAS", 0, QApplication::UnicodeUTF8));
@@ -336,6 +365,10 @@ public:
         label_28->setText(QApplication::translate("MainWindowClass", "ISECT:", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(bla), QApplication::translate("MainWindowClass", "Adv.", 0, QApplication::UnicodeUTF8));
         picLabel->setText(QString());
+        StartRadioButton->setText(QApplication::translate("MainWindowClass", "Start Sector", 0, QApplication::UnicodeUTF8));
+        EndRadioButton->setText(QApplication::translate("MainWindowClass", "End Sector", 0, QApplication::UnicodeUTF8));
+        centerRadioButton->setText(QApplication::translate("MainWindowClass", "Center", 0, QApplication::UnicodeUTF8));
+        infoLabel->setText(QApplication::translate("MainWindowClass", "Info here", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindowClass", "File", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

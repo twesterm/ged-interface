@@ -30,7 +30,7 @@ GEDItem::GEDItem()
      this->setSEPLA("4.24");
      this->setISECT("3");
 
-     setUseable(false);
+     this->setUseable(false);
 }
     void GEDItem::setPath(QString text)
     {

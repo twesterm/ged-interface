@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Thu Mar 19 16:26:53 2009
+** Created: Fri Mar 20 15:15:13 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindowClass[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      25,   12, // methods
+      26,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -54,6 +54,7 @@ static const uint qt_meta_data_MainWindowClass[] = {
      835,   16,   16,   16, 0x0a,
      874,   16,   16,   16, 0x0a,
      911,   16,   16,   16, 0x0a,
+     948,   16,   16,   16, 0x0a,
 
        0        // eod
 };
@@ -84,6 +85,7 @@ static const char qt_meta_stringdata_MainWindowClass[] = {
     "on_IRECOA2lineEdit_textEdited(QString)\0"
     "on_SEPLAlineEdit_textEdited(QString)\0"
     "on_ISECTlineEdit_textEdited(QString)\0"
+    "on_UseCheckBox_clicked(bool)\0"
 };
 
 const QMetaObject MainWindowClass::staticMetaObject = {
@@ -136,9 +138,10 @@ int MainWindowClass::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 22: on_IRECOA2lineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 23: on_SEPLAlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 24: on_ISECTlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 25: on_UseCheckBox_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 25;
+        _id -= 26;
     }
     return _id;
 }
