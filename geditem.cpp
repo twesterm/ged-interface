@@ -2,6 +2,7 @@
 #include "qstring.h"
 #include <iostream.h>
 #include <math.h>
+#define PI 3.14159265
 
 GEDItem::GEDItem()
 {
@@ -33,6 +34,7 @@ GEDItem::GEDItem()
      this->setISECT("3");
 
      this->setUseable(false);
+     this->setMode("none");
 }
     void GEDItem::setPath(QString text)
     {
@@ -348,6 +350,23 @@ GEDItem::GEDItem()
         this->Useable=value;
     }
 
+    void GEDItem::setMode(QString mode) {
+        this->Mode=mode;
+    }
+    void GEDItem::setxRMAXT(QString x) {
+        this->xRMAXT=x;
+    }
+    void GEDItem::setyRMAXT(QString y) {
+        this->yRMAXT=y;
+    }
+
+    void GEDItem::setyAngle(QString y) {
+        this->yAngle=y;
+    }
+    void GEDItem::setxAngle(QString x) {
+        this->xAngle=x;
+    }
+
     QString GEDItem::getIPLA(){return this->IPLA;}
     QString GEDItem::getIXMA(){return this->IXMA;}
     QString GEDItem::getJYMA(){return this->JYMA;}
@@ -375,10 +394,52 @@ GEDItem::GEDItem()
     QString GEDItem::getWAVE(){return this->WAVE;}
     QString GEDItem::getDELTAS(){return this->DELTAS;}
     QString GEDItem::getPath(){return this->Path;}
+    QString GEDItem::getMode(){return this->Mode;}
     bool GEDItem::isUseable(){return this->Useable;}
+    QString GEDItem::getxAngle(){return this->xAngle;}
+    QString GEDItem::getyAngle(){return this->yAngle;}
+    QString GEDItem::getxRMAXT(){return this->xRMAXT;}
+    QString GEDItem::getyRMAXT(){return this->yRMAXT;}
+
+
 
     float GEDItem::distance(float x1, float x2, float y1, float y2) { // this method calcs the distance between two points
         float result = sqrt(pow(x1-x2, 2)+pow(y1-y2,2));
         return result;
     }
+
+    float GEDItem::scalePixel(int pixel, QString mode) {
+        // get a pixel and returns the value in mm
+        // mode: x, y
+        if (mode == "x") {
+            float scaled = pixel* this->XPIXFA.toFloat() * this->PIXEL.toFloat();
+            return scaled;
+        } else {
+            float scaled = pixel * this->YPIXFA.toFloat() * this->PIXEL.toFloat();
+            return scaled;
+        }
+    }
+
+    float GEDItem::calcAngle(float x1, float y1, float x2, float y2, float x3, float y3) {
+        //std::cout.setf(0,ios::floatfield);
+      /*  std::cout.precision(5);
+        std::cout<< x1<< std::endl;
+        std::cout<< y1<< std::endl;
+        std::cout<< x2<< std::endl;
+        std::cout<< y2<< std::endl;
+        std::cout<< x3<< std::endl;
+        std::cout<< y3<< std::endl;*/
+
+        float c = this->distance(x1, x2, y1, y2);
+        float b = this->distance(x1, x3, y1, y3);
+        float a = this->distance(x2, x3, y2, y3);
+
+        float angle = 0.0;
+        if (b > 0.0 && c > 0.0) {
+           angle = acos((b*b+c*c - a*a)/(2*b*c))* 180.0/PI;
+       }
+        return angle;
+    }
+
+
 

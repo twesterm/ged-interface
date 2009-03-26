@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Fri Mar 20 16:58:03 2009
+** Created: Thu Mar 26 15:40:18 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindowClass[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      28,   12, // methods
+      29,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -35,28 +35,29 @@ static const uint qt_meta_data_MainWindowClass[] = {
      133,   16,   16,   16, 0x0a,
      171,   16,   16,   16, 0x0a,
      209,   16,   16,   16, 0x0a,
-     246,   16,   16,   16, 0x0a,
-     283,   16,   16,   16, 0x0a,
-     320,   16,   16,   16, 0x0a,
-     358,   16,   16,   16, 0x0a,
-     396,   16,   16,   16, 0x0a,
-     432,   16,   16,   16, 0x0a,
-     468,   16,   16,   16, 0x0a,
-     502,   16,   16,   16, 0x0a,
-     540,   16,   16,   16, 0x0a,
-     578,   16,   16,   16, 0x0a,
-     613,   16,   16,   16, 0x0a,
-     651,   16,   16,   16, 0x0a,
-     687,   16,   16,   16, 0x0a,
-     725,   16,   16,   16, 0x0a,
-     761,   16,   16,   16, 0x0a,
-     799,   16,   16,   16, 0x0a,
-     837,   16,   16,   16, 0x0a,
-     876,   16,   16,   16, 0x0a,
-     913,   16,   16,   16, 0x0a,
-     950,   16,   16,   16, 0x0a,
-     979,   16,   16,   16, 0x0a,
-    1009,   16,   16,   16, 0x0a,
+     247,   16,   16,   16, 0x0a,
+     285,   16,   16,   16, 0x0a,
+     323,   16,   16,   16, 0x0a,
+     361,   16,   16,   16, 0x0a,
+     399,   16,   16,   16, 0x0a,
+     435,   16,   16,   16, 0x0a,
+     471,   16,   16,   16, 0x0a,
+     505,   16,   16,   16, 0x0a,
+     543,   16,   16,   16, 0x0a,
+     581,   16,   16,   16, 0x0a,
+     616,   16,   16,   16, 0x0a,
+     654,   16,   16,   16, 0x0a,
+     690,   16,   16,   16, 0x0a,
+     728,   16,   16,   16, 0x0a,
+     764,   16,   16,   16, 0x0a,
+     802,   16,   16,   16, 0x0a,
+     840,   16,   16,   16, 0x0a,
+     879,   16,   16,   16, 0x0a,
+     916,   16,   16,   16, 0x0a,
+     953,   16,   16,   16, 0x0a,
+     982,   16,   16,   16, 0x0a,
+    1012,   16,   16,   16, 0x0a,
+    1040,   16,   16,   16, 0x0a,
 
        0        // eod
 };
@@ -67,9 +68,9 @@ static const char qt_meta_stringdata_MainWindowClass[] = {
     "on_PIXELlineEdit_textEdited(QString)\0"
     "on_XPIXFAlineEdit_textEdited(QString)\0"
     "on_YPIXFAlineEdit_textEdited(QString)\0"
-    "on_XSCATlineEdit_textEdited(QString)\0"
-    "on_YSCATlineEdit_textEdited(QString)\0"
-    "on_ANGLElineEdit_textEdited(QString)\0"
+    "on_XSCATlineEdit_textChanged(QString)\0"
+    "on_YSCATlineEdit_textChanged(QString)\0"
+    "on_ANGLElineEdit_textChanged(QString)\0"
     "on_XNULLlineEdit_textChanged(QString)\0"
     "on_YNULLlineEdit_textChanged(QString)\0"
     "on_RMINlineEdit_textEdited(QString)\0"
@@ -90,6 +91,7 @@ static const char qt_meta_stringdata_MainWindowClass[] = {
     "on_UseCheckBox_clicked(bool)\0"
     "on_StartRadioButton_clicked()\0"
     "on_EndRadioButton_clicked()\0"
+    "on_comboBox_currentIndexChanged(QString)\0"
 };
 
 const QMetaObject MainWindowClass::staticMetaObject = {
@@ -122,9 +124,9 @@ int MainWindowClass::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 2: on_PIXELlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 3: on_XPIXFAlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 4: on_YPIXFAlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 5: on_XSCATlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 6: on_YSCATlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 7: on_ANGLElineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 5: on_XSCATlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 6: on_YSCATlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 7: on_ANGLElineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 8: on_XNULLlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 9: on_YNULLlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 10: on_RMINlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
@@ -145,9 +147,10 @@ int MainWindowClass::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 25: on_UseCheckBox_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 26: on_StartRadioButton_clicked(); break;
         case 27: on_EndRadioButton_clicked(); break;
+        case 28: on_comboBox_currentIndexChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
         default: ;
         }
-        _id -= 28;
+        _id -= 29;
     }
     return _id;
 }

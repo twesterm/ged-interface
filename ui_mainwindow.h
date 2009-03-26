@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Fri Mar 20 16:55:54 2009
+** Created: Wed Mar 25 14:11:05 2009
 **      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -15,6 +15,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QCheckBox>
+#include <QtGui/QComboBox>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
 #include <QtGui/QLineEdit>
@@ -61,6 +62,8 @@ public:
     QLineEdit *ANGLElineEdit;
     QLabel *label_6;
     QCheckBox *UseCheckBox;
+    QComboBox *comboBox;
+    QLabel *label_29;
     QWidget *Beam;
     QLineEdit *DELTASlineEdit;
     QLabel *label_13;
@@ -95,7 +98,13 @@ public:
     QRadioButton *StartRadioButton;
     QRadioButton *EndRadioButton;
     QRadioButton *centerRadioButton;
-    QLabel *infoLabel;
+    QLabel *label_30;
+    QLabel *label_31;
+    QLabel *XPIXlabel;
+    QLabel *YPIXlabel;
+    QLabel *XMMlabel;
+    QLabel *YMMlabel;
+    QRadioButton *AngleRadioButton;
     QMenuBar *menubar;
     QMenu *menuFile;
     QStatusBar *statusbar;
@@ -105,14 +114,14 @@ public:
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QString::fromUtf8("MainWindowClass"));
-        MainWindowClass->resize(1208, 714);
+        MainWindowClass->resize(1197, 733);
         actionOpenFile = new QAction(MainWindowClass);
         actionOpenFile->setObjectName(QString::fromUtf8("actionOpenFile"));
         centralwidget = new QWidget(MainWindowClass);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        tabWidget->setGeometry(QRect(980, 30, 191, 491));
+        tabWidget->setGeometry(QRect(980, 30, 191, 601));
         tabWidget->setTabPosition(QTabWidget::North);
         tabWidget->setUsesScrollButtons(false);
         tab = new QWidget();
@@ -173,25 +182,36 @@ public:
         label_21->setGeometry(QRect(10, 210, 61, 17));
         YSCATlineEdit = new QLineEdit(tab);
         YSCATlineEdit->setObjectName(QString::fromUtf8("YSCATlineEdit"));
-        YSCATlineEdit->setGeometry(QRect(90, 350, 80, 20));
+        YSCATlineEdit->setGeometry(QRect(90, 400, 80, 20));
+        YSCATlineEdit->setReadOnly(true);
         label_18 = new QLabel(tab);
         label_18->setObjectName(QString::fromUtf8("label_18"));
-        label_18->setGeometry(QRect(10, 350, 61, 17));
+        label_18->setGeometry(QRect(10, 400, 61, 17));
         XSCATlineEdit = new QLineEdit(tab);
         XSCATlineEdit->setObjectName(QString::fromUtf8("XSCATlineEdit"));
-        XSCATlineEdit->setGeometry(QRect(92, 320, 80, 20));
+        XSCATlineEdit->setGeometry(QRect(92, 370, 80, 20));
+        XSCATlineEdit->setReadOnly(true);
         label_17 = new QLabel(tab);
         label_17->setObjectName(QString::fromUtf8("label_17"));
-        label_17->setGeometry(QRect(10, 320, 61, 17));
+        label_17->setGeometry(QRect(10, 370, 61, 17));
         ANGLElineEdit = new QLineEdit(tab);
         ANGLElineEdit->setObjectName(QString::fromUtf8("ANGLElineEdit"));
-        ANGLElineEdit->setGeometry(QRect(90, 380, 80, 20));
+        ANGLElineEdit->setGeometry(QRect(90, 430, 80, 20));
         label_6 = new QLabel(tab);
         label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setGeometry(QRect(0, 380, 81, 17));
+        label_6->setGeometry(QRect(10, 430, 41, 17));
         UseCheckBox = new QCheckBox(tab);
         UseCheckBox->setObjectName(QString::fromUtf8("UseCheckBox"));
-        UseCheckBox->setGeometry(QRect(10, 430, 87, 21));
+        UseCheckBox->setGeometry(QRect(10, 500, 87, 21));
+        comboBox = new QComboBox(tab);
+        comboBox->setObjectName(QString::fromUtf8("comboBox"));
+        comboBox->setEnabled(false);
+        comboBox->setGeometry(QRect(30, 330, 151, 26));
+        comboBox->setAcceptDrops(false);
+        comboBox->setEditable(false);
+        label_29 = new QLabel(tab);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
+        label_29->setGeometry(QRect(20, 300, 111, 17));
         tabWidget->addTab(tab, QString());
         Beam = new QWidget();
         Beam->setObjectName(QString::fromUtf8("Beam"));
@@ -283,7 +303,8 @@ public:
         picLabel = new QLabel(centralwidget);
         picLabel->setObjectName(QString::fromUtf8("picLabel"));
         picLabel->setGeometry(QRect(160, 30, 800, 600));
-        picLabel->setCursor(QCursor(Qt::ArrowCursor));
+        picLabel->setCursor(QCursor(Qt::CrossCursor));
+        picLabel->setMouseTracking(true);
         picLabel->setFrameShape(QFrame::Box);
         picLabel->setScaledContents(true);
         listWidget = new QListWidget(centralwidget);
@@ -304,13 +325,36 @@ public:
         centerRadioButton->setObjectName(QString::fromUtf8("centerRadioButton"));
         centerRadioButton->setGeometry(QRect(300, 650, 101, 21));
         centerRadioButton->setChecked(true);
-        infoLabel = new QLabel(centralwidget);
-        infoLabel->setObjectName(QString::fromUtf8("infoLabel"));
-        infoLabel->setGeometry(QRect(610, 650, 351, 20));
+        label_30 = new QLabel(centralwidget);
+        label_30->setObjectName(QString::fromUtf8("label_30"));
+        label_30->setGeometry(QRect(740, 650, 81, 17));
+        label_31 = new QLabel(centralwidget);
+        label_31->setObjectName(QString::fromUtf8("label_31"));
+        label_31->setGeometry(QRect(740, 670, 81, 17));
+        XPIXlabel = new QLabel(centralwidget);
+        XPIXlabel->setObjectName(QString::fromUtf8("XPIXlabel"));
+        XPIXlabel->setGeometry(QRect(830, 650, 61, 17));
+        XPIXlabel->setFrameShape(QFrame::Box);
+        YPIXlabel = new QLabel(centralwidget);
+        YPIXlabel->setObjectName(QString::fromUtf8("YPIXlabel"));
+        YPIXlabel->setGeometry(QRect(830, 670, 61, 17));
+        YPIXlabel->setFrameShape(QFrame::Box);
+        XMMlabel = new QLabel(centralwidget);
+        XMMlabel->setObjectName(QString::fromUtf8("XMMlabel"));
+        XMMlabel->setGeometry(QRect(900, 650, 61, 17));
+        XMMlabel->setFrameShape(QFrame::Box);
+        YMMlabel = new QLabel(centralwidget);
+        YMMlabel->setObjectName(QString::fromUtf8("YMMlabel"));
+        YMMlabel->setGeometry(QRect(900, 670, 61, 17));
+        YMMlabel->setFrameShape(QFrame::Box);
+        AngleRadioButton = new QRadioButton(centralwidget);
+        buttonGroup->addButton(AngleRadioButton);
+        AngleRadioButton->setObjectName(QString::fromUtf8("AngleRadioButton"));
+        AngleRadioButton->setGeometry(QRect(590, 650, 101, 21));
         MainWindowClass->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindowClass);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1208, 22));
+        menubar->setGeometry(QRect(0, 0, 1197, 22));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         MainWindowClass->setMenuBar(menubar);
@@ -345,8 +389,17 @@ public:
         label_21->setText(QApplication::translate("MainWindowClass", "RMINT", 0, QApplication::UnicodeUTF8));
         label_18->setText(QApplication::translate("MainWindowClass", "YSCAT:", 0, QApplication::UnicodeUTF8));
         label_17->setText(QApplication::translate("MainWindowClass", "XSCAT:", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("MainWindowClass", "Angel-Scale:", 0, QApplication::UnicodeUTF8));
+        label_6->setText(QApplication::translate("MainWindowClass", "Angle:", 0, QApplication::UnicodeUTF8));
         UseCheckBox->setText(QApplication::translate("MainWindowClass", "Usable", 0, QApplication::UnicodeUTF8));
+        comboBox->clear();
+        comboBox->insertItems(0, QStringList()
+         << QApplication::translate("MainWindowClass", "Set points first", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindowClass", "Whole area", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindowClass", "Top-Down", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindowClass", "Right-Left", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindowClass", "Selected area", 0, QApplication::UnicodeUTF8)
+        );
+        label_29->setText(QApplication::translate("MainWindowClass", "Integration Style", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindowClass", "Parameter", 0, QApplication::UnicodeUTF8));
         label_13->setText(QApplication::translate("MainWindowClass", "CADIST", 0, QApplication::UnicodeUTF8));
         label_15->setText(QApplication::translate("MainWindowClass", "DELTAS", 0, QApplication::UnicodeUTF8));
@@ -369,7 +422,13 @@ public:
         StartRadioButton->setText(QApplication::translate("MainWindowClass", "Start Point", 0, QApplication::UnicodeUTF8));
         EndRadioButton->setText(QApplication::translate("MainWindowClass", "End Point", 0, QApplication::UnicodeUTF8));
         centerRadioButton->setText(QApplication::translate("MainWindowClass", "Center", 0, QApplication::UnicodeUTF8));
-        infoLabel->setText(QApplication::translate("MainWindowClass", "Info here", 0, QApplication::UnicodeUTF8));
+        label_30->setText(QApplication::translate("MainWindowClass", "x [pix], [mm]:", 0, QApplication::UnicodeUTF8));
+        label_31->setText(QApplication::translate("MainWindowClass", "y [pix], [mm]:", 0, QApplication::UnicodeUTF8));
+        XPIXlabel->setText(QString());
+        YPIXlabel->setText(QString());
+        XMMlabel->setText(QString());
+        YMMlabel->setText(QString());
+        AngleRadioButton->setText(QApplication::translate("MainWindowClass", "Angle Point", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindowClass", "File", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

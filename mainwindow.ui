@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1208</width>
-    <height>714</height>
+    <width>1197</width>
+    <height>733</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <x>980</x>
       <y>30</y>
       <width>191</width>
-      <height>491</height>
+      <height>601</height>
      </rect>
     </property>
     <property name="tabPosition">
@@ -250,17 +250,20 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>350</y>
+        <y>400</y>
         <width>80</width>
         <height>20</height>
        </rect>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="label_18">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>350</y>
+        <y>400</y>
         <width>61</width>
         <height>17</height>
        </rect>
@@ -273,17 +276,20 @@
       <property name="geometry">
        <rect>
         <x>92</x>
-        <y>320</y>
+        <y>370</y>
         <width>80</width>
         <height>20</height>
        </rect>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="label_17">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>320</y>
+        <y>370</y>
         <width>61</width>
         <height>17</height>
        </rect>
@@ -296,7 +302,7 @@
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>380</y>
+        <y>430</y>
         <width>80</width>
         <height>20</height>
        </rect>
@@ -305,27 +311,84 @@
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>380</y>
-        <width>81</width>
+        <x>10</x>
+        <y>430</y>
+        <width>41</width>
         <height>17</height>
        </rect>
       </property>
       <property name="text">
-       <string>Angel-Scale:</string>
+       <string>Angle:</string>
       </property>
      </widget>
      <widget class="QCheckBox" name="UseCheckBox">
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>430</y>
+        <y>500</y>
         <width>87</width>
         <height>21</height>
        </rect>
       </property>
       <property name="text">
        <string>Usable</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>330</y>
+        <width>151</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="acceptDrops">
+       <bool>false</bool>
+      </property>
+      <property name="editable">
+       <bool>false</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string>Set points first</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Whole area</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Top-Down</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Right-Left</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Selected area</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label_29">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>300</y>
+        <width>111</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Integration Style</string>
       </property>
      </widget>
     </widget>
@@ -665,7 +728,10 @@
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
+     <cursorShape>CrossCursor</cursorShape>
+    </property>
+    <property name="mouseTracking">
+     <bool>true</bool>
     </property>
     <property name="frameShape">
      <enum>QFrame::Box</enum>
@@ -738,18 +804,111 @@
      <string>buttonGroup</string>
     </attribute>
    </widget>
-   <widget class="QLabel" name="infoLabel">
+   <widget class="QLabel" name="label_30">
     <property name="geometry">
      <rect>
-      <x>610</x>
+      <x>740</x>
       <y>650</y>
-      <width>351</width>
-      <height>20</height>
+      <width>81</width>
+      <height>17</height>
      </rect>
     </property>
     <property name="text">
-     <string>Info here</string>
+     <string>x [pix], [mm]:</string>
     </property>
+   </widget>
+   <widget class="QLabel" name="label_31">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>670</y>
+      <width>81</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>y [pix], [mm]:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="XPIXlabel">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>650</y>
+      <width>61</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="YPIXlabel">
+    <property name="geometry">
+     <rect>
+      <x>830</x>
+      <y>670</y>
+      <width>61</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="XMMlabel">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>650</y>
+      <width>61</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="YMMlabel">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>670</y>
+      <width>61</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="AngleRadioButton">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>650</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Angle Point</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string>buttonGroup</string>
+    </attribute>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -757,7 +916,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1208</width>
+     <width>1197</width>
      <height>22</height>
     </rect>
    </property>

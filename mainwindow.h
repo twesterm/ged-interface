@@ -17,6 +17,7 @@ public:
     MainWindowClass(QWidget *parent = 0);
     ~MainWindowClass();
     bool eventFilter ( QObject * watched, QEvent * event );
+    void setValuesByMethod(QString method);
 
 
     // all Callbacks are in events.cpp
@@ -27,9 +28,9 @@ public:
      void on_PIXELlineEdit_textEdited(QString );
      void on_XPIXFAlineEdit_textEdited(QString );
      void on_YPIXFAlineEdit_textEdited(QString );
-     void on_XSCATlineEdit_textEdited(QString );
-     void on_YSCATlineEdit_textEdited(QString );
-     void on_ANGLElineEdit_textEdited(QString );
+     void on_XSCATlineEdit_textChanged(QString );
+     void on_YSCATlineEdit_textChanged(QString );
+     void on_ANGLElineEdit_textChanged(QString );
      void on_XNULLlineEdit_textChanged(QString );
      void on_YNULLlineEdit_textChanged(QString );
      void on_RMINlineEdit_textEdited(QString );
@@ -50,6 +51,7 @@ public:
      void on_UseCheckBox_clicked(bool);
      void on_StartRadioButton_clicked();
      void on_EndRadioButton_clicked();
+     void on_comboBox_currentIndexChanged(QString);
  //    void on_picLabel_mousePressEvent( QMouseEvent * event );
 
 private:

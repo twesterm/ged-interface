@@ -11,32 +11,70 @@
 //      ui->XNULLlineEdit->setText(QString::number(event->x()));
 //}
 
-bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) {
+void MainWindowClass::on_comboBox_currentIndexChanged(QString text) {
+    this->setValuesByMethod(text);
+
+ }
+
+
+
+bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) { // this eventfilter handels the clicking on the picture
     if (watched != ui->picLabel) return false;
                 QMouseEvent *e = dynamic_cast<QMouseEvent*> (event);
                 if (e != 0 && e->type() == QEvent::MouseButtonPress) {
                     if (ui->listWidget->count()>0) {
                      GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
+                     // x/yscale scales it back to original res.
                      float xscale = (link->getIXMA().toInt())/(ui->picLabel->width());
                      float yscale = (link->getJYMA().toInt())/ui->picLabel->height();
-                      float x1 = e->x()*xscale;
-                      float y1 = e->y()*yscale;
+                      float x1 = e->x()*xscale*link->getPIXEL().toFloat();
+                      float y1 = e->y()*yscale*link->getPIXEL().toFloat();
+                      std::cout.precision(5);
+                      std::cout<< x1<< std::endl;
+                      std::cout<< y1<< std::endl;
                      if (ui->centerRadioButton->isChecked()) {
-
                         ui->XNULLlineEdit->setText(QString::number(x1));
                         ui->YNULLlineEdit->setText(QString::number(y1));
+                        ui->StartRadioButton->setChecked(true);
                      } else if (ui->StartRadioButton->isChecked()) {
-                         float x2 = link->getXNULL().toFloat();;
+                         float x2 = link->getXNULL().toFloat();
                          float y2 = link->getYNULL().toFloat();
                          ui->RMINTlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)));
+                         ui->EndRadioButton->setChecked(true);
                      } else if (ui->EndRadioButton->isChecked()) {
-                         float x2 = link->getXNULL().toFloat();;
+                         float x2 = link->getXNULL().toFloat();
                          float y2 = link->getYNULL().toFloat();
                          ui->RMAXTlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)));
+                         ui->XSCATlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)));
+                         ui->YSCATlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)));
+                         link->setxRMAXT(QString::number(x1));
+                         link->setyRMAXT(QString::number(y1));
+                         ui->AngleRadioButton->setChecked(true);
+
+                     } else if (ui->AngleRadioButton->isChecked()){
+                         link->setxAngle(QString::number(x1));
+                         link->setyAngle(QString::number(y1));
+                         if (link->getMode() == "none") {
+                             ui->comboBox->setItemText(0, "Choose method");
+                             ui->comboBox->setEnabled(true);
+                         }
+                         this->setValuesByMethod(ui->comboBox->currentText());
                      }
 
                  }
                 }
+                if (e!=0 && ui->listWidget->count()>0 && ui->listWidget->currentRow() != -1 && e->type() == QEvent::MouseMove ) {
+                          GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
+                          float xscale = (link->getIXMA().toInt())/(ui->picLabel->width());
+                          float yscale = (link->getJYMA().toInt())/ui->picLabel->height();
+                          float x1 = e->x()*xscale;
+                          float y1 = e->y()*yscale;
+                          ui->XPIXlabel->setText(QString::number(x1));
+                          ui->YPIXlabel->setText(QString::number(y1));
+                          ui->XMMlabel->setText(QString::number(link->scalePixel(x1, "x")));
+                          ui->YMMlabel->setText(QString::number(link->scalePixel(y1, "y")));
+
+                      }
                 return false;
 
 
@@ -115,7 +153,7 @@ void MainWindowClass::on_listWidget_itemClicked(QListWidgetItem *item) {
     QFile file(newbildtext);
     if (!file.open(QIODevice::ReadWrite))
     {
-        QMessageBox::information( this, "Info", QString("Bild konnte nicht geöffnet werden."), "&Ok" );
+        QMessageBox::information( this, "Info", QString("Not able to open picture."), "&Ok" );
        return;
     }
 
@@ -123,8 +161,23 @@ void MainWindowClass::on_listWidget_itemClicked(QListWidgetItem *item) {
     link->setJYMA(QString::number(image.height()));
     link->setIXMA(QString::number(image.width()));
     ui->picLabel->setPixmap(QPixmap::fromImage(image));
+    std::cout << link->getMode().toStdString() << std::endl;
+    if (link->getMode() != "none") {
 
+        for ( int i = 0; i< ui->comboBox->count(); i++) {
+            std::cout << ui->comboBox->itemText(i).toStdString() << std::endl;
 
+            if (ui->comboBox->itemText(i) == link->getMode()) {
+                ui->comboBox->setEnabled(true);
+                ui->comboBox->setCurrentIndex(i);
+            }
+        }
+    } else {
+        ui->comboBox->setEnabled(false);
+        ui->comboBox->setItemText(0, "Set Points first");
+        ui->comboBox->setCurrentIndex(0);
+    }
+    ui->centerRadioButton->setChecked(true);
 }
 
 void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
@@ -169,7 +222,7 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
         } //of ifisEmpty
    }
 }
-     void MainWindowClass::on_XSCATlineEdit_textEdited(QString text){
+     void MainWindowClass::on_XSCATlineEdit_textChanged(QString text){
          if (ui->listWidget->count()>0)  {
        GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
         if (text.length()>0){
@@ -179,7 +232,7 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
         } //of ifisEmpty
    }
 }
-     void MainWindowClass::on_YSCATlineEdit_textEdited(QString text){
+     void MainWindowClass::on_YSCATlineEdit_textChanged(QString text){
          if (ui->listWidget->count()>0)  {
        GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
         if (text.length()>0){
@@ -189,7 +242,7 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
         } //of ifisEmpty
    }
 }
-     void MainWindowClass::on_ANGLElineEdit_textEdited(QString text){
+     void MainWindowClass::on_ANGLElineEdit_textChanged(QString text){
          if (ui->listWidget->count()>0)  {
        GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
         if (text.length()>0){

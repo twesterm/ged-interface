@@ -12,7 +12,8 @@ private:
       QString PIXEL, XPIXFA, YPIXFA, XSCAT, YSCAT, XNULL, YNULL, RMIN, RMAX, DR, RMINT, RMAXT, DRT, TUNEXP, RADI, CADIST;
       QString WAVE, DELTAS, SEPLA, ISECT, IRECOA, IRECOA2, ANGLE;
       bool Useable;
-      QString Path;
+      QString Path, Mode;
+      QString xRMAXT, yRMAXT, xAngle, yAngle;
   public:
     bool setIPLA(QString);
     bool setIXMA(QString);
@@ -42,6 +43,14 @@ private:
     bool setDELTAS(QString);
     void setPath(QString);
     void setUseable(bool);
+    float scalePixel(int, QString);
+    float calcAngle(float x1, float y1, float x2, float y2, float x3, float y3);
+    QString getMode();
+    void setMode(QString);
+    void setxRMAXT(QString x);
+    void setyRMAXT(QString y);
+    void setxAngle(QString x);
+    void setyAngle(QString y);
 
     QString getIPLA();
     QString getIXMA();
@@ -71,7 +80,11 @@ private:
     QString getWAVE();
     QString getDELTAS();
     bool isUseable();
-    float distance(float,  float,  float,  float);
+    float distance(float x1, float x2, float y1, float y2);
+    QString getxRMAXT();
+    QString getyRMAXT();
+    QString getxAngle();
+    QString getyAngle();
 
 };
 
