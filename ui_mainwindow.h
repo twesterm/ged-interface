@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Wed Mar 25 14:11:05 2009
+** Created: Tue Mar 31 14:42:50 2009
 **      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -23,6 +23,7 @@
 #include <QtGui/QMainWindow>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
+#include <QtGui/QPushButton>
 #include <QtGui/QRadioButton>
 #include <QtGui/QStatusBar>
 #include <QtGui/QTabWidget>
@@ -72,6 +73,7 @@ public:
     QLabel *label_12;
     QLabel *label_14;
     QLineEdit *WAVElineEdit;
+    QPushButton *BeamPushButton;
     QWidget *bla;
     QLabel *label_3;
     QLabel *label;
@@ -93,6 +95,7 @@ public:
     QLineEdit *SEPLAlineEdit;
     QLabel *label_28;
     QLineEdit *ISECTlineEdit;
+    QPushButton *AdvPushButton;
     QLabel *picLabel;
     QListWidget *listWidget;
     QRadioButton *StartRadioButton;
@@ -105,16 +108,21 @@ public:
     QLabel *XMMlabel;
     QLabel *YMMlabel;
     QRadioButton *AngleRadioButton;
+    QPushButton *IntegratePushButton;
+    QRadioButton *IntegrateAllRadioButton;
+    QRadioButton *IntegrteUsableRadioButton;
+    QRadioButton *IntegrateSelectedRadioButton;
     QMenuBar *menubar;
     QMenu *menuFile;
     QStatusBar *statusbar;
     QButtonGroup *buttonGroup;
+    QButtonGroup *buttonGroup_2;
 
     void setupUi(QMainWindow *MainWindowClass)
     {
         if (MainWindowClass->objectName().isEmpty())
             MainWindowClass->setObjectName(QString::fromUtf8("MainWindowClass"));
-        MainWindowClass->resize(1197, 733);
+        MainWindowClass->resize(1186, 733);
         actionOpenFile = new QAction(MainWindowClass);
         actionOpenFile->setObjectName(QString::fromUtf8("actionOpenFile"));
         centralwidget = new QWidget(MainWindowClass);
@@ -236,6 +244,9 @@ public:
         WAVElineEdit = new QLineEdit(Beam);
         WAVElineEdit->setObjectName(QString::fromUtf8("WAVElineEdit"));
         WAVElineEdit->setGeometry(QRect(90, 80, 91, 22));
+        BeamPushButton = new QPushButton(Beam);
+        BeamPushButton->setObjectName(QString::fromUtf8("BeamPushButton"));
+        BeamPushButton->setGeometry(QRect(40, 160, 113, 32));
         tabWidget->addTab(Beam, QString());
         bla = new QWidget();
         bla->setObjectName(QString::fromUtf8("bla"));
@@ -299,6 +310,9 @@ public:
         ISECTlineEdit = new QLineEdit(bla);
         ISECTlineEdit->setObjectName(QString::fromUtf8("ISECTlineEdit"));
         ISECTlineEdit->setGeometry(QRect(80, 320, 91, 22));
+        AdvPushButton = new QPushButton(bla);
+        AdvPushButton->setObjectName(QString::fromUtf8("AdvPushButton"));
+        AdvPushButton->setGeometry(QRect(70, 360, 113, 32));
         tabWidget->addTab(bla, QString());
         picLabel = new QLabel(centralwidget);
         picLabel->setObjectName(QString::fromUtf8("picLabel"));
@@ -351,10 +365,27 @@ public:
         buttonGroup->addButton(AngleRadioButton);
         AngleRadioButton->setObjectName(QString::fromUtf8("AngleRadioButton"));
         AngleRadioButton->setGeometry(QRect(590, 650, 101, 21));
+        IntegratePushButton = new QPushButton(centralwidget);
+        IntegratePushButton->setObjectName(QString::fromUtf8("IntegratePushButton"));
+        IntegratePushButton->setGeometry(QRect(20, 490, 113, 32));
+        IntegrateAllRadioButton = new QRadioButton(centralwidget);
+        buttonGroup_2 = new QButtonGroup(MainWindowClass);
+        buttonGroup_2->setObjectName(QString::fromUtf8("buttonGroup_2"));
+        buttonGroup_2->addButton(IntegrateAllRadioButton);
+        IntegrateAllRadioButton->setObjectName(QString::fromUtf8("IntegrateAllRadioButton"));
+        IntegrateAllRadioButton->setGeometry(QRect(20, 390, 101, 21));
+        IntegrteUsableRadioButton = new QRadioButton(centralwidget);
+        buttonGroup_2->addButton(IntegrteUsableRadioButton);
+        IntegrteUsableRadioButton->setObjectName(QString::fromUtf8("IntegrteUsableRadioButton"));
+        IntegrteUsableRadioButton->setGeometry(QRect(20, 420, 101, 21));
+        IntegrateSelectedRadioButton = new QRadioButton(centralwidget);
+        buttonGroup_2->addButton(IntegrateSelectedRadioButton);
+        IntegrateSelectedRadioButton->setObjectName(QString::fromUtf8("IntegrateSelectedRadioButton"));
+        IntegrateSelectedRadioButton->setGeometry(QRect(20, 450, 111, 21));
         MainWindowClass->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindowClass);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1197, 22));
+        menubar->setGeometry(QRect(0, 0, 1186, 22));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         MainWindowClass->setMenuBar(menubar);
@@ -367,7 +398,7 @@ public:
 
         retranslateUi(MainWindowClass);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindowClass);
@@ -405,6 +436,7 @@ public:
         label_15->setText(QApplication::translate("MainWindowClass", "DELTAS", 0, QApplication::UnicodeUTF8));
         label_12->setText(QApplication::translate("MainWindowClass", "Electron Beam Settings", 0, QApplication::UnicodeUTF8));
         label_14->setText(QApplication::translate("MainWindowClass", "Wavelenght", 0, QApplication::UnicodeUTF8));
+        BeamPushButton->setText(QApplication::translate("MainWindowClass", "Set for all ", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(Beam), QApplication::translate("MainWindowClass", "Beam", 0, QApplication::UnicodeUTF8));
         label_3->setText(QApplication::translate("MainWindowClass", "Y-Scale:", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("MainWindowClass", "Resolution:", 0, QApplication::UnicodeUTF8));
@@ -417,6 +449,7 @@ public:
         label_26->setText(QApplication::translate("MainWindowClass", "RADI:", 0, QApplication::UnicodeUTF8));
         label_27->setText(QApplication::translate("MainWindowClass", "SEPLA:", 0, QApplication::UnicodeUTF8));
         label_28->setText(QApplication::translate("MainWindowClass", "ISECT:", 0, QApplication::UnicodeUTF8));
+        AdvPushButton->setText(QApplication::translate("MainWindowClass", "Set for all", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(bla), QApplication::translate("MainWindowClass", "Adv.", 0, QApplication::UnicodeUTF8));
         picLabel->setText(QString());
         StartRadioButton->setText(QApplication::translate("MainWindowClass", "Start Point", 0, QApplication::UnicodeUTF8));
@@ -429,6 +462,10 @@ public:
         XMMlabel->setText(QString());
         YMMlabel->setText(QString());
         AngleRadioButton->setText(QApplication::translate("MainWindowClass", "Angle Point", 0, QApplication::UnicodeUTF8));
+        IntegratePushButton->setText(QApplication::translate("MainWindowClass", "Integrate", 0, QApplication::UnicodeUTF8));
+        IntegrateAllRadioButton->setText(QApplication::translate("MainWindowClass", "All", 0, QApplication::UnicodeUTF8));
+        IntegrteUsableRadioButton->setText(QApplication::translate("MainWindowClass", "All usable", 0, QApplication::UnicodeUTF8));
+        IntegrateSelectedRadioButton->setText(QApplication::translate("MainWindowClass", "Selected one", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindowClass", "File", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

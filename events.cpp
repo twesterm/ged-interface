@@ -1,3 +1,9 @@
+/* Written by Till Westermann
+   If you like this Software and we meet in person one day you can buy me a beer in return
+   This Software is LGPL. See http://www.gnu.org/licenses/lgpl.html for further information */
+
+ /* this File handles most of the signals from the main program, exept the integration(output.cpp) and the calc of the angle
+    (mainwindow.cpp) */
 #include "geditem.h"
 #include "ui_mainwindow.h"
 #include "qmessagebox.h"
@@ -431,6 +437,41 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
                ui->centerRadioButton->setChecked(true);
            }
        }
+    }
+
+
+      void MainWindowClass::on_BeamPushButton_pressed(){
+      if (ui->listWidget->count()>0) {
+          GEDItem *ref = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
+          for (int i=0; i<ui->listWidget->count(); i++) {
+              GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->item(i));
+              link->setCADIST(ref->getCADIST());
+              link->setWAVE(ref->getWAVE());
+              link->setDELTAS(ref->getDELTAS());
+          }
+
+
+      }
+    }
+
+      void MainWindowClass::on_AdvPushButton_pressed(){
+      if (ui->listWidget->count()>0) {
+          GEDItem *ref = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
+          for (int i=0; i<ui->listWidget->count()-1; i++) {
+              GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->item(i));
+              link->setPIXEL(ref->getPIXEL());
+              link->setXPIXFA(ref->getXPIXFA());
+              link->setYPIXFA(ref->getYPIXFA());
+              link->setIRECOA(ref->getIRECOA());
+              link->setIRECOA2(ref->getIRECOA2());
+              link->setTUNEXP(ref->getTUNEXP());
+              link->setRADI(ref->getRADI());
+              link->setSEPLA(ref->getSEPLA());
+              link->setISECT(ref->getISECT());
+          }
+
+
+      }
     }
 
 

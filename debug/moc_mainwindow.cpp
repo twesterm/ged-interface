@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Thu Mar 26 15:40:18 2009
+** Created: Tue Mar 31 14:45:20 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindowClass[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      29,   12, // methods
+      31,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -58,6 +58,8 @@ static const uint qt_meta_data_MainWindowClass[] = {
      982,   16,   16,   16, 0x0a,
     1012,   16,   16,   16, 0x0a,
     1040,   16,   16,   16, 0x0a,
+    1081,   16,   16,   16, 0x0a,
+    1109,   16,   16,   16, 0x0a,
 
        0        // eod
 };
@@ -92,6 +94,8 @@ static const char qt_meta_stringdata_MainWindowClass[] = {
     "on_StartRadioButton_clicked()\0"
     "on_EndRadioButton_clicked()\0"
     "on_comboBox_currentIndexChanged(QString)\0"
+    "on_BeamPushButton_pressed()\0"
+    "on_AdvPushButton_pressed()\0"
 };
 
 const QMetaObject MainWindowClass::staticMetaObject = {
@@ -148,9 +152,11 @@ int MainWindowClass::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 26: on_StartRadioButton_clicked(); break;
         case 27: on_EndRadioButton_clicked(); break;
         case 28: on_comboBox_currentIndexChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 29: on_BeamPushButton_pressed(); break;
+        case 30: on_AdvPushButton_pressed(); break;
         default: ;
         }
-        _id -= 29;
+        _id -= 31;
     }
     return _id;
 }

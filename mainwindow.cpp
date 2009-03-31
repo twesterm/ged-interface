@@ -29,6 +29,8 @@ void MainWindowClass::setValuesByMethod(QString method) {
          ui->XSCATlineEdit->setReadOnly(false);
          ui->YSCATlineEdit->setReadOnly(false);
          link->setMode(method);
+         ui->XSCATlineEdit->setText(ui->RMAXTlineEdit->text());
+         ui->YSCATlineEdit->setText(ui->RMAXTlineEdit->text());
          ui->ANGLElineEdit->setText(QString::number(0.0));
      } else if (method == "Right-Left") {
          ui->XSCATlineEdit->setText("0.0");

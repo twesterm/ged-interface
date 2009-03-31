@@ -52,6 +52,9 @@ public:
      void on_StartRadioButton_clicked();
      void on_EndRadioButton_clicked();
      void on_comboBox_currentIndexChanged(QString);
+     void on_BeamPushButton_pressed();
+     void on_AdvPushButton_pressed();
+  //   void on_integratePushButton_pressed();
  //    void on_picLabel_mousePressEvent( QMouseEvent * event );
 
 private:
