@@ -1,0 +1,78 @@
+\documentclass[german,a4paper,12pt,oneside]{paper}
+% $Id: notes.tex,v 1.33 2005/03/09 14:16:39 thoss Exp $
+\usepackage[scale={0.7,0.8}]{geometry}
+\usepackage[english]{babel}   
+\usepackage[latin1]{inputenc}   % use the babel multi-languages macros and 
+%\usepackage[applemac]{inputenc} %!! For Umlauts!!1!
+\usepackage{color}
+\usepackage[centertags]{amsmath} 
+\usepackage{upref,theorem}
+\usepackage{minitoc}
+\usepackage{graphicx}
+\usepackage{array,cite}
+\usepackage{pifont}
+\usepackage{type1cm}
+\usepackage[psamsfonts]{amssymb}
+\usepackage{xspace}
+\usepackage{rcs,calc}
+\usepackage{pstricks,pst-node}
+\usepackage[small,indent]{caption2}
+%table stuff
+\usepackage{rotating}
+\usepackage{multicol}
+\usepackage{longtable}
+
+%\input{setup.tex}
+\linespread{1.5}
+
+\begin{document}
+
+\bibliographystyle{nsf}
+
+
+\title{\Huge GED ready - a graphical user Interface for GED data reduction }
+\author{Till Westermann}
+\date{Sommersemester 2008}
+\thispagestyle{empty}
+\begin{center}
+\Large Bachelor Thesis \\  \vspace{3.0cm}
+\Huge\sffamily\bfseries GED ready - a graphical user Interface for GED data reduction  \normalsize  \\ 
+\vspace{10.0cm}
+Till Westermann 
+\end{center}
+
+\newpage\thispagestyle{empty}
+
+% \clearpage\newpage
+
+
+%\dominitoc
+\tableofcontents
+ \newpage\thispagestyle{plain}
+% \vfill
+% \begin{center}
+% \mbox{}
+% \end{center}
+% \vfill
+% \clearpage\newpage
+
+\pagestyle{plain}
+%\addcontentsline{toc}{chapter}{\numberline{}GNU Free Documentation License}
+%\input{fdl}
+\clearpage\newpage
+\setcounter{section}{0}
+%\pagestyle{fancy}
+%\renewcommand{\figurename}{Abb.}
+
+%introduction 
+   \include{intro}
+% graphical user interface howto 
+   \include{graphical}
+% techstuff
+   \include{tech}   
+%results
+ %  \include{appendix}
+
+\section{References} 
+\bibliography{till}
+\end{document}

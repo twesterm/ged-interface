@@ -32,7 +32,7 @@ void MainWindowClass::setValuesByMethod(QString method) {
          ui->XSCATlineEdit->setText(ui->RMAXTlineEdit->text());
          ui->YSCATlineEdit->setText(ui->RMAXTlineEdit->text());
          ui->ANGLElineEdit->setText(QString::number(0.0));
-     } else if (method == "Right-Left") {
+     } else if (method == "Right-Left" || method == "Left" || method == "Right") {
          ui->XSCATlineEdit->setText("0.0");
          ui->XSCATlineEdit->setReadOnly(true);
          ui->YSCATlineEdit->setReadOnly(false);
@@ -48,7 +48,7 @@ void MainWindowClass::setValuesByMethod(QString method) {
          float y3 = y1;
          float angle = link->calcAngle(x1, y1, x2, y2, x3, y3);
          ui->ANGLElineEdit->setText(QString::number(angle));
-     } else if (method == "Top-Down") {
+     } else if (method == "Top-Down"|| method == "Top" || method == "Down") {
          ui->XSCATlineEdit->setReadOnly(false);
          ui->XSCATlineEdit->setText(ui->RMAXTlineEdit->text());
          ui->YSCATlineEdit->setText("0.0");

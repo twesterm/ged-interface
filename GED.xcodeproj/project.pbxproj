@@ -16,7 +16,7 @@
 			neededFileNames = (
 				);
 			shellPath = "/bin/sh";
-			shellScript = "make\ -C\ /Users/tillwestermann/GED/GED\ -f\ GED.xcodeproj/qt_makeqmake.mak";
+			shellScript = "make\ -C\ /Users/tillwestermann/Documents/chemie/GED/GED\ -f\ GED.xcodeproj/qt_makeqmake.mak";
 		};
 		118FCBAABA162BA17933C789 = {
 			isa = PBXFileReference;
@@ -57,6 +57,21 @@
 		};
 		84FA229BB70F967635902481 = {
 			fileRef = "DBAEE8207DC6C33359D50F16";
+			isa = PBXBuildFile;
+			settings = {
+				ATTRIBUTES = (
+					);
+			};
+		};
+		5AEC16F39A46B967EE86BCAC = {
+			isa = PBXFileReference;
+			name = "output.cpp";
+			path = "output.cpp";
+			refType = 4;
+			lastKnownFileType = "sourcecode.cpp.cpp";
+		};
+		713EAA3D4FF846512FA08D46 = {
+			fileRef = "5AEC16F39A46B967EE86BCAC";
 			isa = PBXBuildFile;
 			settings = {
 				ATTRIBUTES = (
@@ -129,7 +144,8 @@
 			children = (
 				"118FCBAABA162BA17933C789",
 				"EA177DE95BF7D3EF58EE43F7",
-				"DBAEE8207DC6C33359D50F16");
+				"DBAEE8207DC6C33359D50F16",
+				"5AEC16F39A46B967EE86BCAC");
 			name = "Sources";
 			refType = 4;
 		};
@@ -163,6 +179,7 @@
 				"2B093CA6F071B023A473CED0",
 				"462C0F34BBEF2375A9469BB5",
 				"84FA229BB70F967635902481",
+				"713EAA3D4FF846512FA08D46",
 				"26C2BED6C570C95F5243C556");
 			isa = PBXShellScriptBuildPhase;
 			name = "Qt Preprocessors";
@@ -170,9 +187,10 @@
 				"2B093CA6F071B023A473CED0",
 				"462C0F34BBEF2375A9469BB5",
 				"84FA229BB70F967635902481",
+				"713EAA3D4FF846512FA08D46",
 				"26C2BED6C570C95F5243C556");
 			shellPath = "/bin/sh";
-			shellScript = "make\ -C\ /Users/tillwestermann/GED/GED\ -f\ GED.xcodeproj/qt_preprocess.mak";
+			shellScript = "make\ -C\ /Users/tillwestermann/Documents/chemie/GED/GED\ -f\ GED.xcodeproj/qt_preprocess.mak";
 		};
 		C29B8785722055ED95EF7B57 = {
 			buildActionMask = 2147483647;
@@ -180,6 +198,7 @@
 				"2B093CA6F071B023A473CED0",
 				"462C0F34BBEF2375A9469BB5",
 				"84FA229BB70F967635902481",
+				"713EAA3D4FF846512FA08D46",
 				"26C2BED6C570C95F5243C556");
 			isa = PBXSourcesBuildPhase;
 			name = "Build Sources";
@@ -277,7 +296,7 @@
 		F6069D5A5DA8AA28EDB8B3C6 = {
 			name = "Project Copy";
 			buildActionMask = 2147483647;
-			dstPath = "/Users/tillwestermann/GED/GED";
+			dstPath = "/Users/tillwestermann/Documents/chemie/GED/GED";
 			dstSubfolderSpec = 0;
 			files = (
 "07E0DFA73EB56DCB9E28CDD9");
@@ -285,7 +304,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		07E0DFA73EB56DCB9E28CDD9 = {
-			fileRef = "DCFCED387B9F1BCB7259EC72";
+			fileRef = "13910221CDAE551ED214FA1E";
 			isa = PBXBuildFile;
 			settings = {
 			};
@@ -303,7 +322,7 @@
 			path = "";
 			refType = 4;
 		};
-		DCFCED387B9F1BCB7259EC72 = {
+		13910221CDAE551ED214FA1E = {
 			isa = PBXFileReference;
 			explicitFileType = "wrapper.application";
 			path = "GED.app";
@@ -312,12 +331,12 @@
 		};
 		068F80C7519D0528FB08E821 = {
 			children = (
-				"DCFCED387B9F1BCB7259EC72");
+				"13910221CDAE551ED214FA1E");
 			isa = PBXGroup;
 			name = "Products";
 			refType = 4;
 		};
-		87856E314BA60045E6F5C62D = {
+		FCD3B5E9BB6313397A2E41BC = {
 			buildPhases = (
 				"D7BA7D76DAB5DD13389D6332",
 				"A0A52A2ADF7A1E2A99738674",
@@ -365,7 +384,7 @@
 				WARNING_CFLAGS = "";
 				PREBINDING = NO;
 				INFOPLIST_FILE = "Info.plist";
-				BUILD_ROOT = "/Users/tillwestermann/GED/GED";
+				BUILD_ROOT = "/Users/tillwestermann/Documents/chemie/GED/GED";
 				OTHER_LDFLAGS = (
 						"-headerpad_max_install_names",
 						"-L/Library/Frameworks",
@@ -381,7 +400,7 @@
 			};
 			dependencies = (
 				);
-			productReference = "DCFCED387B9F1BCB7259EC72";
+			productReference = "13910221CDAE551ED214FA1E";
 			shouldUseHeadermap = 1;
 			isa = PBXNativeTarget;
 			productType = "com.apple.product-type.application";
@@ -466,7 +485,7 @@
 			buildConfigurationList = "2A951308CDB28F104D0A4BD2";
 			projectDirPath = "";
 			targets = (
-				"87856E314BA60045E6F5C62D");
+				"FCD3B5E9BB6313397A2E41BC");
 		};
 	};
 	rootObject = "91B15E841AA80083484172DE";

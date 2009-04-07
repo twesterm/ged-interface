@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Tue Mar 31 14:42:50 2009
+** Created: Mon Apr 6 13:10:34 2009
 **      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -115,8 +115,8 @@ public:
     QMenuBar *menubar;
     QMenu *menuFile;
     QStatusBar *statusbar;
-    QButtonGroup *buttonGroup;
     QButtonGroup *buttonGroup_2;
+    QButtonGroup *buttonGroup;
 
     void setupUi(QMainWindow *MainWindowClass)
     {
@@ -398,7 +398,7 @@ public:
 
         retranslateUi(MainWindowClass);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindowClass);
@@ -426,9 +426,12 @@ public:
         comboBox->insertItems(0, QStringList()
          << QApplication::translate("MainWindowClass", "Set points first", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindowClass", "Whole area", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindowClass", "Top", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindowClass", "Down", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindowClass", "Top-Down", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("MainWindowClass", "Right-Left", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindowClass", "Selected area", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindowClass", "Right", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindowClass", "Left", 0, QApplication::UnicodeUTF8)
         );
         label_29->setText(QApplication::translate("MainWindowClass", "Integration Style", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindowClass", "Parameter", 0, QApplication::UnicodeUTF8));

@@ -12,6 +12,7 @@
  #include <QMouseEvent>
 #include <QPixmap>
 #include <iostream>
+#include <Magick++.h>
 
 //void QLabel::mousePressEvent( QMouseEvent * event ) {
 //      ui->XNULLlineEdit->setText(QString::number(event->x()));
@@ -86,15 +87,19 @@ bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) { // this
 
 
 }
+using namespace std;
+using namespace Magick;
 
 void MainWindowClass::on_actionOpenFile_triggered()
 {
   QStringList fileNames;
   QStringList tmpList;
   QFileDialog dialog(this);
+  QString tmpString;
   dialog.setFileMode(QFileDialog::AnyFile);
   dialog.setFileMode(QFileDialog::ExistingFiles);
   dialog.setDirectory("/User/tillwestermann/GED/images/");
+  Image *image;
   if (dialog.exec())
   {
      fileNames = dialog.selectedFiles();
@@ -104,6 +109,11 @@ void MainWindowClass::on_actionOpenFile_triggered()
           tmpList =  fileNames.at(i).split("/");
           if (tmpList.size()>1) { // true for all *nix systems
               newItem->setText(tmpList.at(tmpList.size()-1));
+
+              tmpString = fileNames.at(i);
+
+              image->read(tmpString.toStdString());
+              image->write("x.gif");
           } else { // here come the M$-World (prob. never tested)
               tmpList =  fileNames.at(i).split("\\");
               newItem->setText(tmpList.at(tmpList.size()-1));
@@ -171,11 +181,10 @@ void MainWindowClass::on_listWidget_itemClicked(QListWidgetItem *item) {
     if (link->getMode() != "none") {
 
         for ( int i = 0; i< ui->comboBox->count(); i++) {
-            std::cout << ui->comboBox->itemText(i).toStdString() << std::endl;
-
             if (ui->comboBox->itemText(i) == link->getMode()) {
                 ui->comboBox->setEnabled(true);
                 ui->comboBox->setCurrentIndex(i);
+                this->setValuesByMethod(link->getMode());
             }
         }
     } else {

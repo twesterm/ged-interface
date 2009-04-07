@@ -27,7 +27,7 @@
      <enum>QTabWidget::North</enum>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <property name="usesScrollButtons">
      <bool>false</bool>
@@ -364,6 +364,16 @@
       </item>
       <item>
        <property name="text">
+        <string>Top</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Down</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
         <string>Top-Down</string>
        </property>
       </item>
@@ -374,7 +384,12 @@
       </item>
       <item>
        <property name="text">
-        <string>Selected area</string>
+        <string>Right</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Left</string>
        </property>
       </item>
      </widget>
@@ -1025,7 +1040,7 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
   <buttongroup name="buttonGroup_2"/>
+  <buttongroup name="buttonGroup"/>
  </buttongroups>
 </ui>
