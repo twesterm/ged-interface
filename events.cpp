@@ -12,7 +12,10 @@
  #include <QMouseEvent>
 #include <QPixmap>
 #include <iostream>
-#include <Magick++.h>
+#include <fstream>
+#include <QFileDialog>
+#include <QStringList>
+#include <QList>
 
 //void QLabel::mousePressEvent( QMouseEvent * event ) {
 //      ui->XNULLlineEdit->setText(QString::number(event->x()));
@@ -36,9 +39,7 @@ bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) { // this
                      float yscale = (link->getJYMA().toInt())/ui->picLabel->height();
                       float x1 = e->x()*xscale*link->getPIXEL().toFloat();
                       float y1 = e->y()*yscale*link->getPIXEL().toFloat();
-                      std::cout.precision(5);
-                      std::cout<< x1<< std::endl;
-                      std::cout<< y1<< std::endl;
+
                      if (ui->centerRadioButton->isChecked()) {
                         ui->XNULLlineEdit->setText(QString::number(x1));
                         ui->YNULLlineEdit->setText(QString::number(y1));
@@ -56,9 +57,14 @@ bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) { // this
                          ui->YSCATlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)));
                          link->setxRMAXT(QString::number(x1));
                          link->setyRMAXT(QString::number(y1));
-                         ui->AngleRadioButton->setChecked(true);
+                         if (link->getMode() == "none") {
+                             ui->comboBox->setItemText(0, "Choose method");
+                             ui->comboBox->setEnabled(true);
+                         }
+                         this->setValuesByMethod(ui->comboBox->currentText());
+                       //  ui->AngleRadioButton->setChecked(true);
 
-                     } else if (ui->AngleRadioButton->isChecked()){
+                     } /*else if (ui->AngleRadioButton->isChecked()){
                          link->setxAngle(QString::number(x1));
                          link->setyAngle(QString::number(y1));
                          if (link->getMode() == "none") {
@@ -66,7 +72,7 @@ bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) { // this
                              ui->comboBox->setEnabled(true);
                          }
                          this->setValuesByMethod(ui->comboBox->currentText());
-                     }
+                     } */
 
                  }
                 }
@@ -87,8 +93,33 @@ bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) { // this
 
 
 }
-using namespace std;
-using namespace Magick;
+
+bool MainWindowClass::isIn(QString name) {
+    if (ui->listWidget->count()>0) {
+    for (int i=0; i<ui->listWidget->count()-1;i++) {
+                          GEDItem *ref = dynamic_cast <GEDItem*>(ui->listWidget->item(i));
+                          if (ref->text() == name) {
+                              return true;
+                          }
+    }
+
+    }
+    return false;
+}
+void MainWindowClass::on_SECFIpushButton_pressed() {
+    QStringList fileName;
+    QFileDialog dialog(this);
+    dialog.setFileMode(QFileDialog::AnyFile);
+    dialog.setFileMode(QFileDialog::ExistingFile);
+    dialog.setDirectory(".");
+    if (dialog.exec()) {
+        fileName = dialog.selectedFiles();
+        ui->SECFIlineEdit->setText(fileName.at(0));
+    }
+}
+
+
+
 
 void MainWindowClass::on_actionOpenFile_triggered()
 {
@@ -96,10 +127,13 @@ void MainWindowClass::on_actionOpenFile_triggered()
   QStringList tmpList;
   QFileDialog dialog(this);
   QString tmpString;
+  QString tmp2String;
+  QStringList tmpList2;
+  int j;
+  bool test;
   dialog.setFileMode(QFileDialog::AnyFile);
   dialog.setFileMode(QFileDialog::ExistingFiles);
-  dialog.setDirectory("/User/tillwestermann/GED/images/");
-  Image *image;
+  dialog.setDirectory(".");
   if (dialog.exec())
   {
      fileNames = dialog.selectedFiles();
@@ -108,19 +142,29 @@ void MainWindowClass::on_actionOpenFile_triggered()
           GEDItem *newItem = new GEDItem;
           tmpList =  fileNames.at(i).split("/");
           if (tmpList.size()>1) { // true for all *nix systems
-              newItem->setText(tmpList.at(tmpList.size()-1));
-
-              tmpString = fileNames.at(i);
-
-              image->read(tmpString.toStdString());
-              image->write("x.gif");
-          } else { // here come the M$-World (prob. never tested)
-              tmpList =  fileNames.at(i).split("\\");
-              newItem->setText(tmpList.at(tmpList.size()-1));
+              tmpList2 = tmpList.at(tmpList.size()-1).split(".");
+              if (tmpList2.size()>1) {
+                  if (ui->listWidget->count()>0) {
+                      test = true;
+                      j = 0;
+                      tmp2String = tmpList2.at(tmpList2.size()-2);
+                      do {
+                          test = this->isIn(tmp2String);
+                          if (test) {
+                              j++;
+                              tmp2String = tmpList2.at(tmpList2.size()-2) + "_" + QString::number(j);
+                          }
+                      } while (test);
+                  } else {
+                      tmp2String = tmpList2.at(tmpList2.size()-2);
+                  }
+                  newItem->setText(tmp2String);
+              }
           }
        //   newItem->setText(fileNames.at(i));
        //   newItem->setIPLA(fileNames.at(i));
           newItem->setPath(fileNames.at(i));
+
           ui->listWidget->insertItem(ui->listWidget->count(), newItem);
      }
    /*  if (ui->listWidget->count()>0) {
@@ -177,7 +221,6 @@ void MainWindowClass::on_listWidget_itemClicked(QListWidgetItem *item) {
     link->setJYMA(QString::number(image.height()));
     link->setIXMA(QString::number(image.width()));
     ui->picLabel->setPixmap(QPixmap::fromImage(image));
-    std::cout << link->getMode().toStdString() << std::endl;
     if (link->getMode() != "none") {
 
         for ( int i = 0; i< ui->comboBox->count(); i++) {
@@ -466,7 +509,7 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
       void MainWindowClass::on_AdvPushButton_pressed(){
       if (ui->listWidget->count()>0) {
           GEDItem *ref = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
-          for (int i=0; i<ui->listWidget->count()-1; i++) {
+          for (int i=0; i<ui->listWidget->count(); i++) {
               GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->item(i));
               link->setPIXEL(ref->getPIXEL());
               link->setXPIXFA(ref->getXPIXFA());
@@ -477,10 +520,47 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
               link->setRADI(ref->getRADI());
               link->setSEPLA(ref->getSEPLA());
               link->setISECT(ref->getISECT());
+              link->setSECFI(ref->getSECFI());
           }
 
 
       }
+    }
+
+      void MainWindowClass::on_SECFIlineEdit_textChanged(QString text){
+         if (ui->listWidget->count()>0)  {
+       GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
+        if (text.length()>0){
+            link->setSECFI(text);
+
+        } //of ifisEmpty
+   }
+}
+
+    void MainWindowClass::on_IntegratePushButton_pressed() {
+        if (ui->listWidget->count()>0) {
+            if (ui->IntegrateAllRadioButton->isChecked()) {
+                for (int i=0; i<ui->listWidget->count();i++) {
+                    GEDItem *ref = dynamic_cast <GEDItem*>(ui->listWidget->item(i));
+                    this->fileList.append(ref->writeInputFile());
+                }
+            } else if (ui->IntegrteUsableRadioButton->isChecked()) {
+                for (int i=0; i<ui->listWidget->count();i++) {
+                    GEDItem *ref = dynamic_cast <GEDItem*>(ui->listWidget->item(i));
+                    if (ref->isUseable()) {
+                       this->fileList.append(ref->writeInputFile());
+                   }
+                }
+            } else if (ui->IntegrateSelectedRadioButton->isChecked()) {
+                QList<QListWidgetItem*> list = ui->listWidget->selectedItems();
+                for (int i=0; i<list.length(); i++) {
+                    GEDItem *ref = dynamic_cast <GEDItem*>(list.at(i));
+                    this->fileList.append(ref->writeInputFile());
+                }
+            }
+
+
+        }
     }
 
 

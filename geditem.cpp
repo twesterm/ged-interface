@@ -1,7 +1,11 @@
 #include "geditem.h"
 #include "qstring.h"
-#include <iostream.h>
+#include <iostream>
+#include <fstream>
 #include <math.h>
+#include <QStringList>
+#include <QTextStream>
+#include <QFile>
 #define PI 3.14159265
 
 GEDItem::GEDItem()
@@ -366,6 +370,9 @@ GEDItem::GEDItem()
     void GEDItem::setxAngle(QString x) {
         this->xAngle=x;
     }
+    void GEDItem::setSECFI(QString path) {
+        this->SECFI=path ;
+    }
 
     QString GEDItem::getIPLA(){return this->IPLA;}
     QString GEDItem::getIXMA(){return this->IXMA;}
@@ -400,6 +407,7 @@ GEDItem::GEDItem()
     QString GEDItem::getyAngle(){return this->yAngle;}
     QString GEDItem::getxRMAXT(){return this->xRMAXT;}
     QString GEDItem::getyRMAXT(){return this->yRMAXT;}
+    QString GEDItem::getSECFI(){return this->SECFI;}
 
 
 
@@ -421,15 +429,6 @@ GEDItem::GEDItem()
     }
 
     float GEDItem::calcAngle(float x1, float y1, float x2, float y2, float x3, float y3) {
-        //std::cout.setf(0,ios::floatfield);
-      /*  std::cout.precision(5);
-        std::cout<< x1<< std::endl;
-        std::cout<< y1<< std::endl;
-        std::cout<< x2<< std::endl;
-        std::cout<< y2<< std::endl;
-        std::cout<< x3<< std::endl;
-        std::cout<< y3<< std::endl;*/
-
         float c = this->distance(x1, x2, y1, y2);
         float b = this->distance(x1, x3, y1, y3);
         float a = this->distance(x2, x3, y2, y3);
@@ -440,6 +439,55 @@ GEDItem::GEDItem()
        }
         return angle;
     }
+
+   using namespace std;
+   QString GEDItem::writeInputFile() { // writes  input file and retunr the path of the input file.
+       QStringList list = this->getPath().split("/");
+       QString SECFIfile,  curveFile, plotFile, inputFile, dataFile;
+       QString baseName = "/";
+       for ( int i =0; i<list.size()-1; i++) {
+           baseName = baseName +list.at(i) + "/";
+       }
+       dataFile = this->getPath();
+       dataFile.chop(4); // removes .tif
+       dataFile.append(".img");
+       curveFile = baseName + this->text() + ".curv";
+       plotFile = baseName + this->text() + ".plot";
+       inputFile = baseName + this->text() + ".txt";
+       //this->inputFiles.append(inputFile);
+
+       QFile myfile(inputFile);
+       if (!myfile.open(QIODevice::WriteOnly | QIODevice::Text))
+         return "";
+
+       QTextStream out(&myfile);
+ //      out << "The magic number is: " << 49 << "\n";
+       out <<  this->getIXMA() << " " <<  this->getJYMA()<< "\n";
+       out << this->getPIXEL()<< "\n";
+       out <<  this->getXPIXFA() << " " <<  this->getYPIXFA()<< "\n";
+       out <<  this->getXSCAT() << " " <<  this->getYSCAT() <<  " " <<  this->getANGLE() << "\n";
+       out <<  this->getXNULL()<< " " <<  this->getYNULL() << "\n";
+       out <<  this->getRMIN() << " " <<  this->getRMAX() <<  " " <<  this->getDR() << "\n";
+       out <<  this->getRMINT() << " " <<  this->getRMAXT() <<  " " <<  this->getDRT() << "\n";
+       out <<  this->getIRECOA() << " " <<  this->getIRECOA2()<< "\n";
+       out << this->getTUNEXP()<< "\n";
+       out << this->getRADI()<< "\n";
+       out <<  this->getCADIST() << " " <<  this->getWAVE() <<  " " <<  this->getDELTAS() << "\n";
+       out <<  this->getSEPLA() << " " <<  this->getISECT()<< "\n";
+       out << dataFile<< "\n";
+       out << curveFile << "\n";
+       out << plotFile << "\n";
+       out << this->getSECFI() << "\n";
+       out << this->getMode().toInt() << "\n";
+       myfile.close();
+       return inputFile;
+   }
+
+
+
+
+
+
 
 
 

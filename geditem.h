@@ -2,6 +2,7 @@
 #define GEDITEM_H
 
 #include <QListWidgetItem>
+#include <QStringList>
 
 class GEDItem : public QListWidgetItem
 {
@@ -10,7 +11,7 @@ public:
 private:
       QString IPLA, IXMA, JYMA;
       QString PIXEL, XPIXFA, YPIXFA, XSCAT, YSCAT, XNULL, YNULL, RMIN, RMAX, DR, RMINT, RMAXT, DRT, TUNEXP, RADI, CADIST;
-      QString WAVE, DELTAS, SEPLA, ISECT, IRECOA, IRECOA2, ANGLE;
+      QString WAVE, DELTAS, SEPLA, ISECT, IRECOA, IRECOA2, ANGLE, SECFI;
       bool Useable;
       QString Path, Mode;
       QString xRMAXT, yRMAXT, xAngle, yAngle;
@@ -42,6 +43,7 @@ private:
     bool setWAVE(QString);
     bool setDELTAS(QString);
     void setPath(QString);
+    void setSECFI(QString);
     void setUseable(bool);
     float scalePixel(int, QString);
     float calcAngle(float x1, float y1, float x2, float y2, float x3, float y3);
@@ -51,6 +53,7 @@ private:
     void setyRMAXT(QString y);
     void setxAngle(QString x);
     void setyAngle(QString y);
+
 
     QString getIPLA();
     QString getIXMA();
@@ -79,12 +82,15 @@ private:
     QString getPath();
     QString getWAVE();
     QString getDELTAS();
+    QString getSECFI();
     bool isUseable();
     float distance(float x1, float x2, float y1, float y2);
     QString getxRMAXT();
     QString getyRMAXT();
     QString getxAngle();
     QString getyAngle();
+    QString writeInputFile();
+
 
 };
 

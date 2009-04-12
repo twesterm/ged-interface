@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Mon Apr 6 13:10:34 2009
+** Created: Sun Apr 12 23:08:52 2009
 **      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -96,6 +96,8 @@ public:
     QLabel *label_28;
     QLineEdit *ISECTlineEdit;
     QPushButton *AdvPushButton;
+    QPushButton *SECFIpushButton;
+    QLineEdit *SECFIlineEdit;
     QLabel *picLabel;
     QListWidget *listWidget;
     QRadioButton *StartRadioButton;
@@ -107,7 +109,6 @@ public:
     QLabel *YPIXlabel;
     QLabel *XMMlabel;
     QLabel *YMMlabel;
-    QRadioButton *AngleRadioButton;
     QPushButton *IntegratePushButton;
     QRadioButton *IntegrateAllRadioButton;
     QRadioButton *IntegrteUsableRadioButton;
@@ -312,7 +313,13 @@ public:
         ISECTlineEdit->setGeometry(QRect(80, 320, 91, 22));
         AdvPushButton = new QPushButton(bla);
         AdvPushButton->setObjectName(QString::fromUtf8("AdvPushButton"));
-        AdvPushButton->setGeometry(QRect(70, 360, 113, 32));
+        AdvPushButton->setGeometry(QRect(70, 430, 113, 32));
+        SECFIpushButton = new QPushButton(bla);
+        SECFIpushButton->setObjectName(QString::fromUtf8("SECFIpushButton"));
+        SECFIpushButton->setGeometry(QRect(32, 400, 151, 32));
+        SECFIlineEdit = new QLineEdit(bla);
+        SECFIlineEdit->setObjectName(QString::fromUtf8("SECFIlineEdit"));
+        SECFIlineEdit->setGeometry(QRect(10, 360, 161, 22));
         tabWidget->addTab(bla, QString());
         picLabel = new QLabel(centralwidget);
         picLabel->setObjectName(QString::fromUtf8("picLabel"));
@@ -323,7 +330,8 @@ public:
         picLabel->setScaledContents(true);
         listWidget = new QListWidget(centralwidget);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
-        listWidget->setGeometry(QRect(20, 30, 121, 341));
+        listWidget->setGeometry(QRect(20, 30, 121, 211));
+        listWidget->setSelectionMode(QAbstractItemView::MultiSelection);
         StartRadioButton = new QRadioButton(centralwidget);
         buttonGroup = new QButtonGroup(MainWindowClass);
         buttonGroup->setObjectName(QString::fromUtf8("buttonGroup"));
@@ -361,27 +369,25 @@ public:
         YMMlabel->setObjectName(QString::fromUtf8("YMMlabel"));
         YMMlabel->setGeometry(QRect(900, 670, 61, 17));
         YMMlabel->setFrameShape(QFrame::Box);
-        AngleRadioButton = new QRadioButton(centralwidget);
-        buttonGroup->addButton(AngleRadioButton);
-        AngleRadioButton->setObjectName(QString::fromUtf8("AngleRadioButton"));
-        AngleRadioButton->setGeometry(QRect(590, 650, 101, 21));
         IntegratePushButton = new QPushButton(centralwidget);
         IntegratePushButton->setObjectName(QString::fromUtf8("IntegratePushButton"));
-        IntegratePushButton->setGeometry(QRect(20, 490, 113, 32));
+        IntegratePushButton->setGeometry(QRect(20, 360, 131, 32));
         IntegrateAllRadioButton = new QRadioButton(centralwidget);
         buttonGroup_2 = new QButtonGroup(MainWindowClass);
         buttonGroup_2->setObjectName(QString::fromUtf8("buttonGroup_2"));
         buttonGroup_2->addButton(IntegrateAllRadioButton);
         IntegrateAllRadioButton->setObjectName(QString::fromUtf8("IntegrateAllRadioButton"));
-        IntegrateAllRadioButton->setGeometry(QRect(20, 390, 101, 21));
+        IntegrateAllRadioButton->setGeometry(QRect(20, 260, 101, 21));
+        IntegrateAllRadioButton->setChecked(false);
         IntegrteUsableRadioButton = new QRadioButton(centralwidget);
         buttonGroup_2->addButton(IntegrteUsableRadioButton);
         IntegrteUsableRadioButton->setObjectName(QString::fromUtf8("IntegrteUsableRadioButton"));
-        IntegrteUsableRadioButton->setGeometry(QRect(20, 420, 101, 21));
+        IntegrteUsableRadioButton->setGeometry(QRect(20, 290, 101, 21));
+        IntegrteUsableRadioButton->setChecked(true);
         IntegrateSelectedRadioButton = new QRadioButton(centralwidget);
         buttonGroup_2->addButton(IntegrateSelectedRadioButton);
         IntegrateSelectedRadioButton->setObjectName(QString::fromUtf8("IntegrateSelectedRadioButton"));
-        IntegrateSelectedRadioButton->setGeometry(QRect(20, 450, 111, 21));
+        IntegrateSelectedRadioButton->setGeometry(QRect(20, 320, 121, 21));
         MainWindowClass->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindowClass);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -453,6 +459,7 @@ public:
         label_27->setText(QApplication::translate("MainWindowClass", "SEPLA:", 0, QApplication::UnicodeUTF8));
         label_28->setText(QApplication::translate("MainWindowClass", "ISECT:", 0, QApplication::UnicodeUTF8));
         AdvPushButton->setText(QApplication::translate("MainWindowClass", "Set for all", 0, QApplication::UnicodeUTF8));
+        SECFIpushButton->setText(QApplication::translate("MainWindowClass", "Open sectorfile", 0, QApplication::UnicodeUTF8));
         tabWidget->setTabText(tabWidget->indexOf(bla), QApplication::translate("MainWindowClass", "Adv.", 0, QApplication::UnicodeUTF8));
         picLabel->setText(QString());
         StartRadioButton->setText(QApplication::translate("MainWindowClass", "Start Point", 0, QApplication::UnicodeUTF8));
@@ -464,11 +471,10 @@ public:
         YPIXlabel->setText(QString());
         XMMlabel->setText(QString());
         YMMlabel->setText(QString());
-        AngleRadioButton->setText(QApplication::translate("MainWindowClass", "Angle Point", 0, QApplication::UnicodeUTF8));
-        IntegratePushButton->setText(QApplication::translate("MainWindowClass", "Integrate", 0, QApplication::UnicodeUTF8));
+        IntegratePushButton->setText(QApplication::translate("MainWindowClass", "write inputfiles", 0, QApplication::UnicodeUTF8));
         IntegrateAllRadioButton->setText(QApplication::translate("MainWindowClass", "All", 0, QApplication::UnicodeUTF8));
         IntegrteUsableRadioButton->setText(QApplication::translate("MainWindowClass", "All usable", 0, QApplication::UnicodeUTF8));
-        IntegrateSelectedRadioButton->setText(QApplication::translate("MainWindowClass", "Selected one", 0, QApplication::UnicodeUTF8));
+        IntegrateSelectedRadioButton->setText(QApplication::translate("MainWindowClass", "Selected one(s)", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindowClass", "File", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

@@ -64,7 +64,7 @@ void MainWindowClass::setValuesByMethod(QString method) {
          float x3 = x1;
          float angle = link->calcAngle(x1, y1, x2, y2, x3, y3);
          ui->ANGLElineEdit->setText(QString::number(angle));
-     } else if ( method == "Selected area" || method == "Set points first" || method == "Choose method") {
+     } /*else if ( method == "Selected area" || method == "Set points first" || method == "Choose method") {
          ui->XSCATlineEdit->setReadOnly(false);
          ui->YSCATlineEdit->setReadOnly(false);
          ui->XSCATlineEdit->setText(ui->RMAXTlineEdit->text());
@@ -72,6 +72,6 @@ void MainWindowClass::setValuesByMethod(QString method) {
          link->setMode(method);
          float angle = link->calcAngle(link->getXNULL().toFloat(), link->getYNULL().toFloat(), link->getxRMAXT().toFloat(), link->getyRMAXT().toFloat(), link->getxAngle().toFloat(), link->getyAngle().toFloat());
          ui->ANGLElineEdit->setText(QString::number(angle));
-     }
+     } */
  }
 

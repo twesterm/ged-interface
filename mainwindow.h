@@ -3,6 +3,7 @@
 
 #include <QtGui/QMainWindow>
 #include "ui_mainwindow.h"
+#include <QStringList>
 
 /*namespace Ui
 {
@@ -18,6 +19,7 @@ public:
     ~MainWindowClass();
     bool eventFilter ( QObject * watched, QEvent * event );
     void setValuesByMethod(QString method);
+    QStringList fileList;
 
 
     // all Callbacks are in events.cpp
@@ -54,6 +56,10 @@ public:
      void on_comboBox_currentIndexChanged(QString);
      void on_BeamPushButton_pressed();
      void on_AdvPushButton_pressed();
+     void on_IntegratePushButton_pressed();
+     bool isIn(QString name);
+     void on_SECFIlineEdit_textChanged(QString text);
+     void on_SECFIpushButton_pressed();
   //   void on_integratePushButton_pressed();
  //    void on_picLabel_mousePressEvent( QMouseEvent * event );
 

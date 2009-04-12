@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Mon Apr 6 13:10:41 2009
+** Created: Sun Apr 12 23:08:59 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_MainWindowClass[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      31,   12, // methods
+      35,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -60,6 +60,10 @@ static const uint qt_meta_data_MainWindowClass[] = {
     1040,   16,   16,   16, 0x0a,
     1081,   16,   16,   16, 0x0a,
     1109,   16,   16,   16, 0x0a,
+    1136,   16,   16,   16, 0x0a,
+    1179, 1174, 1169,   16, 0x0a,
+    1198, 1193,   16,   16, 0x0a,
+    1236,   16,   16,   16, 0x0a,
 
        0        // eod
 };
@@ -96,6 +100,10 @@ static const char qt_meta_stringdata_MainWindowClass[] = {
     "on_comboBox_currentIndexChanged(QString)\0"
     "on_BeamPushButton_pressed()\0"
     "on_AdvPushButton_pressed()\0"
+    "on_IntegratePushButton_pressed()\0bool\0"
+    "name\0isIn(QString)\0text\0"
+    "on_SECFIlineEdit_textChanged(QString)\0"
+    "on_SECFIpushButton_pressed()\0"
 };
 
 const QMetaObject MainWindowClass::staticMetaObject = {
@@ -154,9 +162,14 @@ int MainWindowClass::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 28: on_comboBox_currentIndexChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 29: on_BeamPushButton_pressed(); break;
         case 30: on_AdvPushButton_pressed(); break;
+        case 31: on_IntegratePushButton_pressed(); break;
+        case 32: { bool _r = isIn((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
+        case 33: on_SECFIlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 34: on_SECFIpushButton_pressed(); break;
         default: ;
         }
-        _id -= 31;
+        _id -= 35;
     }
     return _id;
 }

@@ -3,6 +3,7 @@
 # -------------------------------------------------
 TARGET = GED
 TEMPLATE = app
+
 SOURCES += main.cpp \
     mainwindow.cpp \
     geditem.cpp \
