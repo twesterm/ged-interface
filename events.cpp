@@ -572,7 +572,7 @@ using namespace std;
              if (myfile.open(QIODevice::WriteOnly | QIODevice::Text)){
                  QTextStream out(&myfile);
                  out <<"#/bin/sh" << "\n";
-                 out << "if [ -e pimag.exe ]; then \n";
+                 out << "if [ -e pimag ]; then \n";
                  out << "for each in ";
                  for (int i=0; i<this->fileList.size(); i++){
                      out << this->fileList.at(i) + " ";
@@ -580,7 +580,7 @@ using namespace std;
                  out << " \n do \n cp $each pimag.txt \n";
                  out << "./pimag \n";
                  out << "done \n else \n";
-                 out << "printf 'pimag.exe not found, plase copy it'";
+                 out << "printf 'pimag not found, plase copy it'";
                  out << "\n fi";
 
                  myfile.close();

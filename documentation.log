@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.1415926-1.40.9 (Web2C 7.5.7) (format=pdflatex 2008.11.21)  15 APR 2009 11:24
+This is pdfTeXk, Version 3.1415926-1.40.9 (Web2C 7.5.7) (format=pdflatex 2008.11.21)  15 APR 2009 13:54
 entering extended mode
 \write18 enabled.
  %&-line parsing enabled.
@@ -513,7 +513,7 @@ File: lstlang1.sty 2004/09/05 1.3 listings language file
 (/usr/local/texlive/2008/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 )
-(./documentation.aux)
+(./documentation.aux (./intro.aux) (./graphical.aux) (./tech.aux))
 \openout1 = `documentation.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
@@ -594,74 +594,86 @@ Non-PDF special ignored!
 Non-PDF special ignored!
 
 {/usr/local/texlive/2008/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./docu
-mentation.toc)
+mentation.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 2.
+
+Overfull \hbox (26.0696pt too wide) in paragraph at lines 15--15
+ [][] []\OT1/cmr/m/n/12 bool Main-Win-dow-Class::eventFilter( QOb-ject $\OMS/cm
+sy/m/n/12 ^^C$ \OT1/cmr/m/n/12 watched, QEvent 
+ []
+
+
+Overfull \hbox (4.67278pt too wide) in paragraph at lines 17--17
+ [][] [] \OT1/cmr/m/n/12 void Main-Win-dow-Class::on[]actionOpenFile[]triggered
+() [slot] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 17--17
+ [][]  
+ []
+
+
+Overfull \hbox (13.56825pt too wide) in paragraph at lines 18--18
+ [][] []\OT1/cmr/m/n/12 void Main-Win-dow-Class::setValuesByMethod(QString meth
+od) 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--18
+ [][]  
+ []
+
+)
 \tf@toc=\write4
 \openout4 = `documentation.toc'.
 
  [2]
 \openout2 = `intro.aux'.
 
- (./intro.tex
-
-LaTeX Warning: Reference `example' on page 3 undefined on input line 10.
-
-
-LaTeX Warning: Reference `exaple' on page 3 undefined on input line 10.
-
-
-LaTeX Warning: Reference `interface' on page 3 undefined on input line 11.
-
-
-LaTeX Warning: Reference `workflow' on page 3 undefined on input line 11.
-
-
-LaTeX Warning: Reference `tech' on page 3 undefined on input line 11.
-
-) [3
+ (./intro.tex [3
 
 
 ]
+
+LaTeX Warning: Reference `exaple' on page 4 undefined on input line 10.
+
+<example.jpg, id=15, 85.35826pt x 64.0187pt>
+File: example.jpg Graphic file (type jpg)
+ <use example.jpg>) [4 <./example.jpg>]
 \openout2 = `graphical.aux'.
 
- (./graphical.tex
-
-LaTeX Warning: Reference `ui' on page 4 undefined on input line 2.
-
-
-LaTeX Warning: Reference `ui' on page 4 undefined on input line 2.
-
-<ui.png, id=16, 1190.4475pt x 756.8275pt>
+ (./graphical.tex <ui.png, id=22, 1190.4475pt x 756.8275pt>
 File: ui.png Graphic file (type png)
  <use ui.png>
-
-LaTeX Warning: Reference `workflow' on page 4 undefined on input line 20.
-
-
-LaTeX Warning: Reference `workflow' on page 4 undefined on input line 20.
-
-<diagram.jpg, id=18, 591.20876pt x 684.5575pt>
+<diagram.jpg, id=24, 591.20876pt x 684.5575pt>
 File: diagram.jpg Graphic file (type jpg)
  <use diagram.jpg>
 Underfull \hbox (badness 10000) in paragraph at lines 29--32
 
  []
 
-[4
+[5
 
 
-] [5 <./ui.png>] [6 <./diagram.jpg>]
+] [6 <./ui.png>] [7 <./diagram.jpg>]
 
-LaTeX Warning: Citation `xmgr' on page 7 undefined on input line 43.
+LaTeX Warning: Citation `xmgr' on page 8 undefined on input line 43.
 
 
-LaTeX Warning: Citation `gnuplot' on page 7 undefined on input line 43.
+LaTeX Warning: Citation `gnuplot' on page 8 undefined on input line 43.
 
-) [7]
+) [8]
 \openout2 = `tech.aux'.
 
  (./tech.tex
 
-LaTeX Warning: Citation `qtdoc' on page 8 undefined on input line 3.
+LaTeX Warning: Citation `qtdoc' on page 9 undefined on input line 3.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 3--5
@@ -673,28 +685,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 12--13
 
  []
 
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 26.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 26.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 26.
-[8
+[9
 
 
 ]
 
-LaTeX Warning: Citation `pimag' on page 9 undefined on input line 32.
+LaTeX Warning: Citation `pimag' on page 10 undefined on input line 32.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 32--34
 
  []
 
-[9]
+[10]
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 45.
-) [10]
+) [11]
 No file documentation.bbl.
 Package minitoc Info: I0009
 (minitoc)             Listing minitoc auxiliary files. 
@@ -711,24 +717,21 @@ Package minitoc(hints) Warning: W0024
 (minitoc(hints))                Some hints have been written 
 (minitoc(hints))                in the documentation.log file.
 
-[11
+[12
 
 ] (./documentation.aux (./intro.aux) (./graphical.aux) (./tech.aux))
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 9285 strings out of 493886
- 121499 string characters out of 1151098
- 271474 words of memory out of 3000000
- 12192 multiletter control sequences out of 10000+50000
+ 9298 strings out of 493886
+ 121659 string characters out of 1151098
+ 272474 words of memory out of 3000000
+ 12199 multiletter control sequences out of 10000+50000
  11953 words of font info for 43 fonts, out of 3000000 for 5000
  714 hyphenation exceptions out of 8191
- 36i,8n,58p,846b,1663s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,8n,58p,838b,1663s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmbx12.pfb></usr/l
 ocal/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmmi12.pfb></usr/local/texl
 ive/2008/texmf-dist/fonts/type1/bluesky/cm/cmr10.pfb></usr/local/texlive/2008/t
@@ -739,9 +742,9 @@ m/cmr8.pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmssbx10.
 pfb></usr/local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmsy10.pfb></usr
 /local/texlive/2008/texmf-dist/fonts/type1/bluesky/cm/cmti12.pfb></usr/local/te
 xlive/2008/texmf-dist/fonts/type1/bluesky/ams/msbm10.pfb>
-Output written on documentation.pdf (11 pages, 390894 bytes).
+Output written on documentation.pdf (12 pages, 405782 bytes).
 PDF statistics:
- 86 PDF objects out of 1000 (max. 8388607)
+ 90 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 131072)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

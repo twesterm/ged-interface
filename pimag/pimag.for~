@@ -1,0 +1,670 @@
+c      subroutine pimag(IXMA, JYMA, PIXEL, XPIXFA, YPIXFA, XSCAT, 
+c     + YSCAT, ANGLE, XNULL, YNULL, RMIN, RMAX, DR, RMINT,RMAXT,DRT, 
+c     + IRECOA,FACOA, TUNEXP, RADI, CADIST,WAVLE,DELTAS, SEPLA,
+c     + MODE, FINAME, curvefile, outtxt, SECFI)
+C     Tor G. Strand 030210
+      program pimac
+C
+C     READS ONE 16 BITS *.IMG FILE FROM THE FUIJ IMAGE SCANNER.                
+C     REFINES CENTER COORDINATES FROM INPUT PIXEL VALUES OF CENTER.
+C     TRANSFERS TO S-SCALE, DOES SECTOR- AND PLANAR-PLATE-CORRECTIONS.
+C     MULTIPLIES BY S**4. SAVES LEFT AND RIGHT SIDES.
+C
+C     INPUT FROM PIMAG.TXT (SEE EXAMPLE) AND APDATi.IMG.
+C     MUST BE RUN FOR EACH PLATE i IN ORDER i = 1,2,3.... . ONLY
+C     i = IPLA AND COORDINATES OF CENTER SHOULD BE CHANGED IN
+C     PIMAG.TXT FOR DIFFERENT PLATES  OF THE SAME SET.
+C
+C     OUTPUT COLLECTED TO APDAT.TXT FOR RIGHT AND LEFT SIDES OF PLATES
+C     DEFINED BY
+C         WRITE(IFIL,'(1X,2I5,5F10.5,I5)')
+C     +           IPLA,NOS,SMIN,SMAX,DELTAS,CADIST,WAVLE,ISECT
+C         DO I = 1,NOS
+C            WRITE(IFIL,'(21(1X,E16.7))')
+C     +                S(I),(OPP(J,I),J=1,2*IPLA)
+C         ENDDO
+C
+C         ALSO TO APDATAV.TXT CORRESPONDINGLY FOR EACH PLATE. 
+C
+C     OUTPUT TO OUT.TXT. ON CUR.TXT THE 16 BITS "GREY" SCALE" VALUES
+C     OF IMAGE SCANNER ARE COLLECTED FOR ALL THE PLATES.
+C
+C     PIMAG.TXT:
+C
+CB001121                           (A7)    APDAT
+C    1                             (I5)    IPLA, plate no.
+C 4000 3000                        (2I5)   IXMA,JYMA max x and y of scan.
+C   0.050                          (F10.5) PIXEL, pixel mm.
+C   1.0       0.99013              (2F10.5)XPIXFA,YPIXFA,to scale pixels.
+C 145.0     110.0       0.0        (3F10.5)XSCAT,YSCAT mm, ANGLE deegrees.
+C  82.29070  83.97092              (2F10.5)XNULL,YNULL /mm center. 
+C  15.0      50.0       0.10       (3F10.5)RMIN,RMAX,DR to correct center mm.
+C   8.0      72.5       0.30       (3F10.5)RMINT,RMAXT,DRT for final result mm.
+C    1                             (I5,5X,F10.5)IRECOA=(1/0,rem./rem.not)coarse error,FACOA.
+C   0.0                            (F10.5) TUNEXP value set in middel.
+C   0.0                            (F10.5) RADI, points at RADI printet .NE.0.0.
+C 248.83    0.0582101   0.25       (3F10.5)CADIST/ mm, WAVLE /AA, DELTAS /AA-1.
+C   4.24            3              (F10.5,5X,I5) SEPLA /mm, ISECT.
+C
+C 010219: ADDED ANGLE TO INPUT LINE XSCAT AND YSCAT. IF ANGLE = 0.0,
+C         XSCAT AND YSCAT mm IS THE AREA OF THE PLATE APPLIED.
+C         IF XSCAT = 0.0 AND YSCAT AND ANGLE GT 0.0 THE SECTORS
+C         OF OPENING ANGLE 2.0*ANGLE SYMMETRICALLY AROUND THE X-AXIS ARE
+C         APPLIED. CORRESPONDINGLY FOR YSCAT=0.0,XSCAT AND ANGLE BOTH GT 0.0.
+C 010301: RE-INSERTED XPIXFA AND YPIXFA FOR PIXEL SCALING.
+C
+C 010817: BASED ON PIMAGA.FOR, BUT ->
+C         COLLECTS DIRECTLY TO S-INTERVALS OF WIDTH DRT (SCENTB.FOR).
+C         READS XNULL AND YNULL DIRECTLY FROM PIMAG.TXT. XNULL AND
+C         YNULL MAY OR MAY NOT BE REFINED.
+C 030124: AVERAGE LEFT AND RIGHT SIDE OF EACH PLATE TO APDATAV.TXT
+C         RECOMBILED BY COMPAQ FORTRAN.
+C 040827: READING OF *.IMAG FILES IMPROVED.
+C         WHOLE PLATE USED IN SCENT.FOR. CHANGE OF RMIN AND RMAX TO
+C         TAKE CARE OF TERMINAATION ERRORS IN SMOOFT.
+C     ************************************************************
+C     SUBROUTINES SWRTID90,SCENT,SMOOFT(REALFT(FOUR1)),SMIDPA,
+C     SCENTB, AND SWRASC(SORT2) ARE ON PIMAG.LIB.
+C     ************************************************************
+C
+      INTEGER*1 IBYTE1,IBYTE2,IMAG
+      integer mode
+C
+      PARAMETER ( IESE=8, IFIL=9, IOUT=10, IAGF=11)
+      PARAMETER (ICHA=9 ,IAMAX=10)
+C     USUALLY:
+C      PARAMETER (JMAMA=3001, IMAMA=4001)
+C     lONG AXIS Y:
+      PARAMETER (JMAMA=4501, IMAMA=4001)     
+      PARAMETER (IPAMA=10, MA=5)
+      PARAMETER (NOMA=50)
+      PARAMETER (IPLA=1)
+C
+      CHARACTER ANS*1, stringin*20
+      CHARACTER CHANO*1, CHASE*1,IN*4
+      CHARACTER CHPLA*1, FIOUT*11, FIOUT1*13
+      character(100) FINAME, curvefile, outtxt, secfi
+C
+      DIMENSION CHANO(ICHA)
+      DIMENSION ODEN(JMAMA,IMAMA)
+      DIMENSION RSIG(2000),RAVRA(2000),NORI(2000)
+      DIMENSION RAVY(2000), RAVX(2000), SCA(2000), TEMPA(1024),
+     +                                              TEMPB(1024)
+      DIMENSION S(400), ONS(2,400), OPP(20,400), ONSALL(20,400)
+      DIMENSION SECTOR(2000), SL(400), OPP1(10,400),OPP_AVE(400)
+      REAL*8 OPP_AVE
+      DIMENSION IMAG(2*JMAMA*IMAMA)
+C 
+
+      DATA CHANO/'1','2','3','4','5','6','7','8','9'/
+      DATA PI/3.141592654/ 
+c      DATA BIN/'.bin'/ 
+c      DATA ISEC/'/raid/home/twesterm/ged/oslo/fran_Tor_Strand/isect'/
+C
+C     OPENING AND READING PIMAG.TXT.
+C
+510   format(100a)
+      OPEN(IAGF,FILE='pimag.txt',ACCESS='SEQUENTIAL')
+      REWIND(IAGF)
+      READ(IAGF,'(I5)')IXMA
+      READ(IAGF,'(I5)')JYMA
+      READ(IAGF,'(F10.5)')PIXEL
+      READ(IAGF,'(F10.1)') XPIXFA
+      READ(IAGF,'(F10.1)') YPIXFA
+      
+      READ(IAGF,'(F10.5)')XSCAT
+      READ(IAGF,'(F10.5)')YSCAT
+      READ(IAGF,'(F10.5)')ANGLE
+      
+      READ(IAGF,'(F10.5)')XNULL
+      READ(IAGF,'(F10.5)')YNULL
+      
+      READ(IAGF,'(F10.5)')RMIN
+      READ(IAGF,'(F10.5)')RMAX
+      READ(IAGF,'(F10.5)')DR
+      
+      READ(IAGF,'(F10.5)')RMINT
+      READ(IAGF,'(F10.5)')RMAXT
+      READ(IAGF,'(F10.5)')DRT
+      READ(IAGF,'(I5,5X)')IRECOA
+      READ(IAGF,'(F10.5)')FACOA
+      IF (IRECOA.EQ.1 .AND. FACOA.EQ.0.0) THEN
+         WRITE(*,*) 'Inconsistent IRECOA and/or FACOA.'
+23         STOP 2
+      ENDIF
+      READ(IAGF,'(F10.5)')TUNEXP
+      READ(IAGF,'(F10.5)') RADI
+      READ(IAGF,'(F10.5)')CADIST
+      READ(IAGF,'(F10.5)')WAVLE
+      READ(IAGF,'(F10.5)')DELTAS
+      READ(IAGF,'(F10.5)')SEPLA
+      READ(IAGF,'(I5)')ISECT
+      READ(IAGF,'(I5)') mode
+      READ(IAGF,510, err=5, end=5 ) FINAME
+5     READ(IAGF,510, err=6, end=6 ) curvefile
+6     READ(IAGF,510, err=7, end=7 ) outtxt
+7     READ(IAGF,510, err=8, end=8 ) secfi
+
+8     CLOSE (IAGF)
+c      write (*,*) finame, curvefile, outtxt, secfi, mode
+c      STOP 2
+      
+c &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+c      mode = 1
+C
+      DO I = 1,9
+         IF (I.EQ.IPLA) THEN
+            CHPLA = CHANO(I)
+         ENDIF
+      END DO
+c      FINAME='/raid/home/twesterm/ged/oslo/fran_Tor_Strand/02b.img'
+c      curvefile='/raid/home/twesterm/ged/oslo/fran_Tor_Strand/m.cu'
+C
+      WRITE(*,'(/1X,A/)') '*** PIMAG of 040827, Tor G. Strand ***'
+      write(*,*) '*** modified by Till Westermman ***'
+C
+c      outtxt='/raid/home/twesterm/ged/oslo/fran_Tor_Strand/myoutput.txt'
+      OPEN(IOUT,FILE='infofile',ACCESS='SEQUENTIAL')
+      REWIND IOUT
+      CALL SWRTID90(IOUT)
+      WRITE(IOUT,'(1X,A/)') '*** PIMAG of 040827, Tor G.Strand ***'
+      WRITE(IOUT,'(1X,A,A12,A,I2)')
+     +    'File ',FINAME,' was processed for plate',IPLA
+      WRITE(IOUT,'(/1X,A,I5,A,I5,A)')
+     +   'IXMA = ',IXMA,' and JYMA = ',JYMA,' are max x and y of scan.'
+      WRITE(IOUT,'(1X,A,F10.5,A)')
+     +                     'PIXEL = ',PIXEL, ' /mm.'
+      WRITE(IOUT,'(1X,A,F8.5,A,F8.5)')
+     +        'To scale: XPIXFA = ',XPIXFA,' YPIXFA = ',YPIXFA 
+      WRITE(IOUT,'(1X,A,F6.1,A,F6.1,A)')
+     +     'XSCAT = ',XSCAT,'  and YSCAT = ',YSCAT,
+     +     ' are applied x and y size of pattern /mm.'
+      WRITE(IOUT,'(1X,A,F6.1,A)')
+     +     'ANGLE = ',ANGLE,' is half sector angle, degrees.'
+      WRITE(IOUT,'(1X,A,F10.5,A,F10.5,A/)')
+     +   'XNULL = ',XNULL,'  and YNULL = ',YNULL,
+     +   'center on *.IMG.'
+      WRITE(IOUT,'(1X,A)')
+     +       'Input RMIN, RMAX ,DR to correct center coordinates:'
+      WRITE(IOUT,'(1X,3F10.5,A,/)') RMIN,RMAX,DR,' mm.'
+      WRITE(IOUT,'(1X,A)')
+     +       ' RMIN, RMAX ,DR actually used:'
+      TEMP1 = RMIN + (RMAX - RMIN)/10.0
+      TEMP2 = RMAX - (RMAX - RMIN)/10.0
+      WRITE(IOUT,'(1X,3F10.5,A,/)') TEMP1,TEMP2,DR,' mm.'
+      WRITE(IOUT,'(1X,A)')
+     +      'RMINT, RMAXT ,DRT, XMAXT, YMAXT, for final result:'
+      YMAXT = YSCAT/2.0
+      XMAXT = XSCAT/2.0
+      WRITE(IOUT,'(1X,5F10.5,A)') RMINT,RMAXT,DRT,XMAXT,YMAXT,' mm.'
+      WRITE(IOUT,'(1X,A,F10.3,A,/)')
+     +           'TUNEXP =',TUNEXP,' value set for unexposed plate.'
+      WRITE(IOUT,'(1X,A,F7.2,A,F10.7,A,F6.3,A)')
+     +   'Camera dist. ',CADIST,'mm. Wave length ',WAVLE,'AA. Delta s '
+     +   ,DELTAS,' AA-1.'
+      WRITE(IOUT,'(1X,A,F5.2,A,I2)')
+     + 'Sector-to plate ',SEPLA,'mm. Sector correction no. ',ISECT
+C
+C     SMIN AND SMAX
+C
+      SMIN = 4.0*PI*SIN(0.5*ATAN(RMINT/CADIST))/WAVLE
+      SMIN = FLOAT(IFIX((SMIN + DELTAS)/DELTAS))*DELTAS
+      SMAX = 4.0*PI*SIN(0.5*ATAN(RMAXT/CADIST))/WAVLE
+      SMAX = FLOAT(IFIX((SMAX - DELTAS)/DELTAS))*DELTAS
+      WRITE(IOUT,'(/1X,A,F6.3,A,F7.3,A/)')
+     +       'SMIN = ',SMIN,' SMAX = ',SMAX,' AA-1'
+C
+      IWIDTH = IXMA
+      ILENG  = JYMA
+C
+      IXCEN = 1.001 + XNULL/(PIXEL*XPIXFA)
+      JYCEN = 1.001 + YNULL/(PIXEL*YPIXFA)
+C
+      XNULLO = XNULL
+      YNULLO = YNULL
+C
+      XRES = PIXEL*XPIXFA
+      YRES = PIXEL*YPIXFA
+C
+C
+      IWRLC = 0
+      WRITE(*,'(1X,A)')'Write middel line and column to improve first' 
+      WRITE(*,'(1X,A)') 'middelpoint and leave the program (Y/N)?'
+      WRITE(*,*) 'N'
+
+C RJF Abfrage raus
+C      READ(*,'(A1)')ANS
+C      IF (ANS.EQ.'Y' .OR. ANS.EQ.'y') THEN
+C         IWRLC = 1
+C      ENDIF
+C
+C
+      IRECEN = 0
+      WRITE(*,'(1X,A)') 'Refine input XNULL, YNULL (Y/N)?'
+      WRITE(*,*) 'Y'
+
+C RJF Abfrage raus
+C      READ(*,'(A1)') ANS
+C      IF (ANS.EQ.'Y'.OR.ANS.EQ.'y') THEN
+         IRECEN = 1
+C      ENDIF
+
+C
+C     READING FINAME; SETTING TO ODEN:
+C
+      OPEN(IFIL,FILE=FINAME,ACCESS='SEQUENTIAL',
+     +       FORM='BINARY')
+      REWIND(IFIL)
+      READ(IFIL) (IMAG(I),I=1,2*IXMA*JYMA)
+      CLOSE(IFIL)
+      ITEMP = 1
+      DO JJ = 1,JYMA 
+         DO II = 1,IXMA
+            IBYTE1 = IMAG(ITEMP)
+            IBYTE2 = IMAG(ITEMP +1)
+            ITEMP = ITEMP + 2
+C            READ (IFIL) IBYTE1,IBYTE2
+            TEMP1 = IBYTE1
+            IF (TEMP1.LT.0) THEN
+               TEMP1 = TEMP1 + 256.0
+            ENDIF
+            TEMP2 = IBYTE2
+            IF (TEMP2.LT.0) THEN
+               TEMP2 = TEMP2 +256.0
+            ENDIF
+            TEMP  =  256.0*TEMP1 + TEMP2
+            ODEN(JJ,II) = TEMP
+         ENDDO
+      ENDDO
+      WRITE(*,'(1X,A,A12,A)') 'The file ',FINAME,' was read.'
+C
+C
+      IF (IWRLC.EQ.1) THEN   
+         IXNULL = 1.001 + XNULL/(PIXEL*XPIXFA)
+         JYNULL = 1.001 + YNULL/(PIXEL*YPIXFA)
+
+C
+C        WRITING MIDDEL LINE AND MIDDEL COLUMN:
+C
+         OPEN(IFIL,FILE='colum.txt',ACCESS='SEQUENTIAL')
+         REWIND(IFIL)
+         DO J = 1,JYMA
+            WRITE(IFIL,'(1X,I5,2X,E13.7)')
+     +          J,ODEN(J,IXNULL) 
+         ENDDO
+         CLOSE (IFIL)
+         OPEN(IFIL,FILE='line.txt',ACCESS='SEQUENTIAL')
+         REWIND(IFIL)
+         DO I = 1,IXMA
+            WRITE(IFIL,'(1X,I5,2X,E13.7)')
+     +         I,ODEN(JYNULL,I) 
+         ENDDO
+         CLOSE (IFIL)
+C
+         GO TO 999 
+      ENDIF 
+C       
+      IF (RMAX.GT.XNULL) THEN
+         RMAX = IFIX(XNULL/DR)*DR - 2.0
+      ENDIF
+C
+      IF (IRECEN.EQ.1) THEN
+         GO TO 998
+      ELSE
+         GO TO 997
+      ENDIF
+C
+  998 CONTINUE
+      WRITE(*,'(1X,A,F10.5,A,F10.5,A,/)')
+     +         'XNULL= ',XNULL,' YNULL = ',YNULL,' mm.'
+      WRITE(*,'(1X,A)') 'Changes: '
+C
+C     *****************************************************
+C
+            ICYCLE = 1
+  777       CONTINUE
+C
+            CALL SCENT(JMAMA,IMAMA,
+     +              IWIDTH,ILENG,ODEN,XRES,YRES,DR,RMIN,
+     +              RMAX,XNULL,YNULL,RAVX,RAVY)
+            ITEMP1 = 1.001 + (RMAX-RMIN)/DR
+            NOR = 1.001 +(2.0*RMAX)/DR
+            PTS = 0.03*ITEMP1
+            PTS2= 0.40*ITEMP1
+            DO I= 1,ITEMP1
+               TEMPA(I) = RAVX(I)
+               TEMPB(I) = RAVX(I)
+            ENDDO
+            CALL SMOOFT(TEMPA,ITEMP1,PTS)
+            CALL SMOOFT(TEMPB,ITEMP1,PTS2)
+            DO I= 1,ITEMP1
+               RAVX(I) = TEMPA(I) - TEMPB(I)
+            ENDDO
+            DO I= 1,ITEMP1
+               TEMPA(I) = RAVX(NOR+1-I)
+               TEMPB(I) = RAVX(NOR+1-I)
+            ENDDO
+            CALL SMOOFT(TEMPA,ITEMP1,PTS)
+            CALL SMOOFT(TEMPB,ITEMP1,PTS2)
+            DO I= 1,ITEMP1
+               RAVX(NOR+1-I) = TEMPA(I) - TEMPB(I)
+            ENDDO
+            DO I= 1,ITEMP1
+               TEMPA(I) = RAVY(I)
+               TEMPB(I) = RAVY(I)
+            ENDDO
+            CALL SMOOFT(TEMPA,ITEMP1,PTS)
+            CALL SMOOFT(TEMPB,ITEMP1,PTS2)
+            DO I= 1,ITEMP1
+               RAVY(I) = TEMPA(I) - TEMPB(I)
+            ENDDO
+            DO I= 1,ITEMP1
+               TEMPA(I) = RAVY(NOR+1-I)
+               TEMPB(I) = RAVY(NOR+1-I)
+            ENDDO
+            CALL SMOOFT(TEMPA,ITEMP1,PTS)
+            CALL SMOOFT(TEMPB,ITEMP1,PTS2)
+            DO I= 1,ITEMP1
+               RAVY(NOR+1-I) = TEMPA(I) - TEMPB(I)
+            ENDDO
+C
+             
+            CALL SMIDPA(DR,RAVX,RMIN,RMAX,SENX)
+            CALL SMIDPA(DR,RAVY,RMIN,RMAX,SENY)
+C
+            DSENX = SENX - RMAX
+            XNUNY = XNULL + DSENX
+            DSENY = SENY - RMAX
+            WRITE(*,*)DSENX,DSENY
+            YNUNY = YNULL + DSENY
+            IF (ABS(DSENX).GT.0.05*DR .OR. ABS(DSENY).GT.0.05*DR) THEN
+               XNULL = XNUNY
+               YNULL = YNUNY
+               ICYCLE = ICYCLE +1
+               IF (ICYCLE.GE.10) THEN
+                  WRITE(IOUT,'(1X,A)')
+     +                    'The iteration did not converge!!'
+                  GO TO 778
+               ENDIF
+               GO TO 777
+            ENDIF
+C
+C     *********************************************************
+C
+  778       CONTINUE
+      WRITE(IOUT,'(/1X,A,F7.3,A,F7.3,A)')
+     +     'XNULL = ',XNULLO,'  and YNULL = ',YNULLO,
+     +     ' are center coordinates in new array /mm.'
+            WRITE(IOUT,'(1X,A,I3,A)') 'After ',ICYCLE,' cycles:'
+            WRITE(IOUT,'(1X,A)') 'x dir, SENX, DSENX, XNULL, XNUNY:'
+            WRITE(IOUT,'(1X,4F10.5,A)') SENX,DSENX,XNULL,XNUNY,' mm.'
+            WRITE(IOUT,'(1X,A)') 'y dir, SENY, DSENY, YNULL, YNUNY:'
+            WRITE(IOUT,'(1X,4F10.5,A)') SENY,DSENY,YNULL,YNUNY,' mm.'
+            XNULL = XNUNY
+            YNULL = YNUNY
+C
+  997       CONTINUE
+C           AND COLLECTING AND FILING:
+C
+            WRITE(*,*) XMAXT,YMAXT,ANGLE
+            CALL SCENTC(IMAMA,JMAMA,
+     +              IWIDTH,ILENG,ODEN,XRES,YRES,DRT,RMINT,
+     +              RMAXT,XMAXT,YMAXT,ANGLE,XNULL,YNULL,RSIG,
+     +              RAVRA,IRECOA,FACOA,NOTOT,NOECOA,NORI,RUNAV,
+     +              SMIN,SMAX,DELTAS,CADIST,WAVLE)
+C
+            ISTOT = 1.001 + (2.0*SMAX)/DELTAS
+            DO I = 1,ISTOT
+               SCA(I) = -SMAX + FLOAT(I-1)*DELTAS
+            ENDDO
+C
+            WRITE(IOUT,'(/1X,A,I7,A)')
+     +              'Applied alltogether ',NOTOT,' points.'
+            WRITE(IOUT,'(1X,A,I7,A)')
+     +              'Removed alltogether ',NOECOA,' coars errors for'
+            WRITE(IOUT,'(1X,A,F10.5,A)')
+     +              'FACOA = ',FACOA,' .'
+            WRITE(IOUT,'(/1X,A)')
+     +         'Average and std."s for grey scale:'
+            WRITE(IOUT,'(/1X,A,3X,A)')
+     +          '   I   S     N   AVER    STDV   NORI',
+     +          '   I   S     N   AVER    STDV   NORI'
+            WRITE(IOUT,'(2(1X,I5,F6.1,3X,F8.1,F8.1,I6,1X))')
+     +       (I,SCA(I),RAVRA(I),RSIG(I),NORI(I),
+     +                                  I=1,ISTOT,10)
+C
+      WRITE(IOUT,'(/1X,A,F7.3,A,/)') 'Average R-factor',RUNAV,'%.'
+C
+      ISTART = 2.001 + (SMAX - SMIN)/DELTAS
+      ISTOP = 0.001 + (SMAX + SMIN)/DELTAS
+      DO I = ISTART,ISTOP
+         RAVRA(I) = TUNEXP
+      ENDDO
+C
+C     TO REL INT:
+C
+      FF = 2.0**15
+      GG = 2.0**16/5.0
+C
+C
+      NOS = 1.001 + (SMAX - SMIN)/DELTAS
+      ILE = 2.001 + (SMAX - SMIN)/DELTAS
+      IRI = 0.001 + (SMAX + SMIN)/DELTAS
+      DO I = 1,NOS
+         S(I) = SMIN + FLOAT(I-1)*DELTAS
+         SL(I) = CADIST*TAN(2.0*ASIN(S(I)*WAVLE/(4.0*PI)))
+C        LEFT:
+         ILE = ILE - 1
+         ONS(1,I) = 0.25*10.0**((RAVRA(ILE)-FF)/GG)
+C        AND RIGHT:
+         IRI = IRI + 1
+         ONS(2,I) = 0.25*10.0**((RAVRA(IRI)-FF)/GG)
+      ENDDO
+C
+C     SECTOR CORRECTION
+C
+      NOFIL = 2*(IPLA-1) + 1
+      write (*,*) ISECT
+      IF (ISECT.NE.0) THEN
+         DO I = 1,9
+            IF (I.EQ.ISECT) THEN
+               CHASE = CHANO(I)
+            ENDIF
+         ENDDO
+c         SECFI = ISEC//CHASE//BIN hier noch
+         write (*,*) 'secfi:', secfi
+         OPEN(IESE,FILE=SECFI,ACCESS='SEQUENTIAL',FORM=
+     +         'UNFORMATTED')
+         REWIND IESE
+C         READ(IESE) NOPO,XMIN,XMAX,DX,(SECTOR(I),I=1,NOPO)
+C RJF for Norwegian Sektor:
+c         write(*,*) "Test"
+         READ(IESE) NOPO,XMIN,XMAX,DX,(SECTOR(I),I=1,NOPO)
+         CLOSE(IESE)
+C         WRITE(*,*) 'Jetz kommts:'ls
+C
+C         OPEN(IFIL,FILE='muenster.sec',ACCESS='SEQUENTIAL',
+C     +        FORM='UNFORMATTED')
+C         REWIND(IFIL)
+C         WRITE(*,*) NOPO,XMIN,XMAX,DX,(SECTOR(I),I=1,NOPO)
+C	 WRITE(IFIL) NOPO,XMIN,XMAX,DX,(SECTOR(I),I=1,NOPO)
+C         CLOSE(IFIL)
+C         WRITE(*,*) 'geschafft!'
+
+C
+         DO I = 1,NOS
+            SS = SMIN + FLOAT(I-1)*DELTAS
+            TETA = 2.0*ASIN(SS*WAVLE/(4.0*PI))
+C     RJF
+C     DISEC sind Sektorradien
+C
+            DISEC = (CADIST - SEPLA)*TAN(TETA) 
+            IF (DISEC.LT.XMIN) THEN
+               OPP(NOFIL,I) = 0.0
+               OPP(NOFIL+1,I) = 0.0
+               GO TO 887
+            ENDIF
+            IF (DISEC.GT.XMAX) THEN
+               OPP(NOFIL,I) = 0.0
+               OPP(NOFIL+1,I) = 0.0
+               GO TO 887
+            ENDIF
+            ITOR = 1 + IFIX((DISEC - XMIN)/DX)
+            IF (ITOR.EQ.NOPO) THEN
+               ITOR = ITOR - 1
+            ENDIF
+            AA = (SECTOR(ITOR+1) - SECTOR(ITOR))/DX
+            BB = SECTOR(ITOR) - AA*(XMIN + FLOAT(ITOR-1)*DX)
+            SECCOR = AA*DISEC + BB
+C
+C     RJF Ausgabe der Sektorrkorrektur in Sektorradien in File Sektor.xy
+C
+C            WRITE (*,*) DISEC, SECCOR, 'TESTUNG'
+            OPP(NOFIL,I) = ONS(1,I)*SS**4/SECCOR
+            OPP(NOFIL+1,I) = ONS(2,I)*SS**4/SECCOR
+C           PLANAR PLATES:
+            OPP(NOFIL,I) = OPP(NOFIL,I)/(COS(TETA)**3)
+            OPP(NOFIL+1,I) = OPP(NOFIL+1,I)/(COS(TETA)**3)
+  887       CONTINUE
+         ENDDO
+      ELSE
+         DO I = 1,NOS
+            OPP(NOFIL,I) = ONS(1,I)
+            OPP(NOFIL+1,I) = ONS(2,I)
+         ENDDO
+      ENDIF
+      DO I = 1,NOS
+      
+c     RJF
+c     Mittelung ueber beide Haelften des scans:
+c     Mode: 
+c     1: Use all
+c     2: TOP
+c     3: Button
+c     4: Top-Down
+c     5: Right-Left
+c     6: Right
+c     7: Left
+      if (mode.eq.1) then  
+           OPP1(IPLA,I) = (OPP(NOFIL,I) + OPP(NOFIL+1,I))/2.0
+      else if (mode.eq.2) then 
+           OPP1(IPLA,I) = (OPP(NOFIL+1,I) )
+      else if (mode.eq.3) then 
+           OPP1(IPLA,I) = (OPP(NOFIL,I) )
+      endif 
+           
+
+c     nur "untere" Haelfte 
+c          OPP1(IPLA,I) = (OPP(NOFIL,I) )
+c     nur "obere" Haelfte 
+c          OPP1(IPLA,I) = (OPP(NOFIL+1,I) )
+      ENDDO
+
+
+      FIOUT = 'tmp.txt'
+c outtxt is for plotting
+      OPEN(IFIL,FILE=outtxt,ACCESS='SEQUENTIAL')
+      REWIND(IFIL)
+      IF (IPLA.EQ.1)THEN
+c         WRITE(IFIL,'(1X,2I5,4F10.5,F10.7,I5)')
+c      +      IPLA,NOS,SMIN,SMAX,DELTAS,CADIST,WAVLE,ISECT
+         DO I = 1,NOS
+            WRITE(IFIL,'(21(1X,E16.7))')
+     +                       S(I),OPP(1,I),OPP(2,I)
+         ENDDO
+      ELSE
+         READ(IFIL,'(1X,2I5,4F10.5,F10.7,I5)')
+     +           NOPLA,NOS,SMIN,SMAX,DELTAS,CADIST,WAVLE,ISECT
+         DO I = 1,NOS
+            READ(IFIL,'(21(1X,E16.7))')
+     +                S(I),(OPP(J,I),J=1,2*(IPLA-1))
+         ENDDO
+         REWIND(IFIL)
+         WRITE(IFIL,'(1X,2I5,4F10.5,F10.7,I5)')
+     +           IPLA,NOS,SMIN,SMAX,DELTAS,CADIST,WAVLE,ISECT
+         DO I = 1,NOS
+            WRITE(IFIL,'(21(1X,E16.7))')
+     +                S(I),(OPP(J,I),J=1,2*IPLA)
+         ENDDO
+      ENDIF   
+      CLOSE(IFIL)
+      WRITE(*,'(/1X,A,A11,A)')'Result on ',FIOUT,'.'
+      WRITE(IOUT,'(/1X,A,A11,A)')'Result on ',FIOUT,'.'
+C
+C
+C
+      FIOUT1 = 'tmp.txt'
+      OPEN(IFIL,FILE=FIOUT1,ACCESS='SEQUENTIAL')
+      REWIND(IFIL)
+      IF (IPLA.EQ.1)THEN
+         WRITE(IFIL,'(1X,2I5,5F10.5,I5)')
+     +        IPLA,NOS,SMIN,SMAX,DELTAS,CADIST,WAVLE,ISECT
+         DO I = 1,NOS
+            WRITE(IFIL,'(21(1X,E16.7))')
+     +           S(I),OPP1(1,I)
+         ENDDO
+      ELSE
+         READ(IFIL,'(1X,2I5,4F10.5,F10.7,I5)')
+     +           NOPLA,NOS,SMIN,SMAX,DELTAS,CADIST,WAVLE,ISECT
+         DO I = 1,NOS
+            READ(IFIL,'(21(1X,E16.7))')
+     +                S(I),(OPP1(J,I),J=1,IPLA-1)
+         ENDDO
+         REWIND(IFIL)
+         WRITE(IFIL,'(1X,2I5,4F10.5,F10.7,I5)')
+     +           IPLA,NOS,SMIN,SMAX,DELTAS,CADIST,WAVLE,ISECT
+         DO I = 1,NOS
+            WRITE(IFIL,'(21(1X,E16.7))')
+     +                S(I),(OPP1(J,I),J=1,IPLA)
+         ENDDO
+      ENDIF   
+      CLOSE(IFIL)
+      WRITE(*,'(/1X,A,A13,A)')'Result on ',FIOUT1,'.'
+      WRITE(IOUT,'(/1X,A,A13,A)')'Result on ',FIOUT1,'.'
+
+C     RJF 25.08.06
+C     OUTPUT OF REDUCED+SECTORCORR. SCATTERING DATA, I(S) 
+C     IN NEW ED@ED .XML  FORMAT 
+      write (*,*) CURVEFILE
+      CALL       XMLOUT(S,OPP1,NOS,IPLA,SMIN,SMAX,DELTAS,WAVLE,CADIST,
+     +                  ISECT, CURVEFILE)
+C
+C     ONS SAVED TO ONSALL:      
+C
+      DO I = 1,NOS
+         ONSALL(2*IPLA-1,I) = ONS(1,I)
+         ONSALL(2*IPLA,I)   = ONS(2,I) 
+      ENDDO
+      OPEN(IFIL,FILE='cur.txt',ACCESS='SEQUENTIAL')
+      REWIND(IFIL)
+      IF (IPLA.EQ.1)THEN
+         DO I = 1,NOS
+            WRITE(IFIL,'(1X,F7.3,2X,20(1X,E16.7))')
+     +                SL(I),ONSALL(1,I),ONSALL(2,I)
+         ENDDO
+      ELSE
+         DO I = 1,NOS
+            READ(IFIL,'(1X,F7.3,2X,20(1X,E16.7))')
+     +            SL(I),(ONSALL(J,I),J=1,2*(IPLA-1))
+         ENDDO
+         REWIND(IFIL)
+         DO I = 1,NOS
+            WRITE(IFIL,'(1X,F7.3,2X,20(1X,E16.7))')
+     +             SL(I),(ONSALL(J,I),J=1,2*IPLA)
+         ENDDO
+      ENDIF
+      CLOSE(IFIL)
+      IF (RADI.NE.0.0) THEN
+         CALL SWRASC(JMAMA,IMAMA,XMAXT,YMAXT,
+     +            ODEN,IXMA,JYMA,XNULL,YNULL,XRES,YRES,RADI)
+         WRITE(IOUT,'(/1X,A)')
+     +        'Result middel on LINE.TXT and COLUMN.TXT'
+         WRITE(IOUT,'(/1X,A,F6.1,A)')
+     +      'Points at R= ',RADI,' /mm within PIXEL'
+         WRITE(IOUT,'(1X,A)') 'at increasing angles are at RADI.TXT.' 
+      ENDIF
+      CLOSE (IOUT)
+C
+  999 CONTINUE
+C
+      END

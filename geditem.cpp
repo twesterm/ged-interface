@@ -462,6 +462,7 @@ GEDItem::GEDItem()
        curveFile = baseName + this->text() + ".curv";
        plotFile = baseName + this->text() + ".plot";
        inputFile = baseName + this->text() + ".txt";
+       QString infoFile = baseName + this->text() + ".info";
        //this->inputFiles.append(inputFile);
 
        QFile myfile(inputFile);
@@ -500,6 +501,7 @@ GEDItem::GEDItem()
        out << curveFile << "\n";
        out << plotFile << "\n";
        out << this->getSECFI() << "\n";
+       out << infoFile << "\n";
        myfile.close();
        return inputFile;
    }

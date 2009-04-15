@@ -1,0 +1,9 @@
+#/bin/bash
+export OBJECT=$PWD/object
+for i in swrtid90 sort2 smooft  Scentb scentc swrasc smidpa realft four1 scent xmlout pimag
+	do 
+		ifort -c $i.for -o $OBJECT/$i.o
+	done
+ifort -o pimag $OBJECT/scent.o $OBJECT/scentc.o $OBJECT/Scentb.o $OBJECT/four1.o $OBJECT/realft.o $OBJECT/smidpa.o $OBJECT/smooft.o $OBJECT/sort2.o $OBJECT/swrasc.o $OBJECT/swrtid90.o $OBJECT/xmlout.o $OBJECT/pimag.o
+rm $OBJECT/*.o
+
