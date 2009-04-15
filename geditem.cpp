@@ -390,7 +390,7 @@ GEDItem::GEDItem()
     QString GEDItem::getDR(){return this->DR;}
     QString GEDItem::getRMINT(){return this->RMINT;}
     QString GEDItem::getRMAXT(){return this->RMAXT;}
-    QString GEDItem::getDRT(){return this->RMAXT;}
+    QString GEDItem::getDRT(){return this->DRT;}
     QString GEDItem::getTUNEXP(){return this->TUNEXP;}
     QString GEDItem::getRADI(){return this->RADI;}
     QString GEDItem::getCADIST(){return this->CADIST;}
@@ -445,6 +445,14 @@ GEDItem::GEDItem()
        QStringList list = this->getPath().split("/");
        QString SECFIfile,  curveFile, plotFile, inputFile, dataFile;
        QString baseName = "/";
+       int mode;
+       if (this->getMode() == "Whole area" || this->getMode() == "Top-Down" || this->getMode() == "Right-Left") {
+           mode = 1;
+       } else if (this->getMode() == "Top" || this->getMode() == "Left") {
+           mode = 2;
+       } else if (this->getMode() == "Right" || this->getMode() == "Down") {
+           mode = 3;
+       } else return "";
        for ( int i =0; i<list.size()-1; i++) {
            baseName = baseName +list.at(i) + "/";
        }
@@ -462,27 +470,49 @@ GEDItem::GEDItem()
 
        QTextStream out(&myfile);
  //      out << "The magic number is: " << 49 << "\n";
-       out <<  this->getIXMA() << " " <<  this->getJYMA()<< "\n";
-       out << this->getPIXEL()<< "\n";
-       out <<  this->getXPIXFA() << " " <<  this->getYPIXFA()<< "\n";
-       out <<  this->getXSCAT() << " " <<  this->getYSCAT() <<  " " <<  this->getANGLE() << "\n";
-       out <<  this->getXNULL()<< " " <<  this->getYNULL() << "\n";
-       out <<  this->getRMIN() << " " <<  this->getRMAX() <<  " " <<  this->getDR() << "\n";
-       out <<  this->getRMINT() << " " <<  this->getRMAXT() <<  " " <<  this->getDRT() << "\n";
-       out <<  this->getIRECOA() << " " <<  this->getIRECOA2()<< "\n";
-       out << this->getTUNEXP()<< "\n";
-       out << this->getRADI()<< "\n";
-       out <<  this->getCADIST() << " " <<  this->getWAVE() <<  " " <<  this->getDELTAS() << "\n";
-       out <<  this->getSEPLA() << " " <<  this->getISECT()<< "\n";
+       out <<  this->getIXMA() << "\n";
+       out <<  this->getJYMA()<< "\n";
+       out <<  this->torealFLoat(this->getPIXEL())<< "\n";
+       out <<  this->torealFLoat(this->getXPIXFA()) << "\n";
+       out <<  this->torealFLoat(this->getYPIXFA())<< "\n";
+       out <<  this->torealFLoat(this->getXSCAT()) << "\n";
+       out <<  this->torealFLoat(this->getYSCAT()) <<  "\n";
+       out <<  this->torealFLoat(this->getANGLE()) << "\n";
+       out <<  this->torealFLoat(this->getXNULL()) << "\n";
+       out <<  this->torealFLoat(this->getYNULL()) << "\n";
+       out <<  this->torealFLoat(this->getRMIN()) << "\n";
+       out <<  this->torealFLoat(this->getRMAX()) <<  "\n";
+       out <<  this->torealFLoat(this->getDR()) << "\n";
+       out <<  this->torealFLoat(this->getRMINT()) << "\n";
+       out <<  this->torealFLoat(this->getRMAXT()) <<  "\n";
+       out <<  this->torealFLoat(this->getDRT()) << "\n";
+       out <<  this->getIRECOA() << "\n";
+       out <<  this->torealFLoat(this->getIRECOA2())<< "\n";
+       out <<  this->torealFLoat(this->getTUNEXP())<< "\n";
+       out << this->torealFLoat(this->getRADI())<< "\n";
+       out << this->torealFLoat( this->getCADIST()) << "\n";
+       out <<  this->torealFLoat(this->getWAVE()) <<  "\n";
+       out <<  this->torealFLoat(this->getDELTAS()) << "\n";
+       out <<  this->torealFLoat(this->getSEPLA()) << "\n";
+       out <<  this->getISECT()<< "\n";
+       out << mode << "\n";
        out << dataFile<< "\n";
        out << curveFile << "\n";
        out << plotFile << "\n";
        out << this->getSECFI() << "\n";
-       out << this->getMode().toInt() << "\n";
        myfile.close();
        return inputFile;
    }
 
+
+   QString GEDItem::torealFLoat(QString value) {
+       if (value.contains(".", Qt::CaseInsensitive)) {
+           return value;
+       } else {
+           value.append(".0");
+           return value;
+       }
+   }
 
 
 

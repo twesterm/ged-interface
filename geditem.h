@@ -90,6 +90,7 @@ private:
     QString getxAngle();
     QString getyAngle();
     QString writeInputFile();
+    QString torealFLoat(QString value);
 
 
 };

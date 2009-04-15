@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'mainwindow.h'
 **
-** Created: Sun Apr 12 23:08:59 2009
+** Created: Tue Apr 14 23:21:37 2009
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.0)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,53 +23,55 @@ static const uint qt_meta_data_MainWindowClass[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      35,   12, // methods
+      36,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
 
  // slots: signature, parameters, type, tag, flags
       17,   16,   16,   16, 0x0a,
-      52,   47,   16,   16, 0x0a,
-      96,   16,   16,   16, 0x0a,
-     133,   16,   16,   16, 0x0a,
-     171,   16,   16,   16, 0x0a,
-     209,   16,   16,   16, 0x0a,
-     247,   16,   16,   16, 0x0a,
-     285,   16,   16,   16, 0x0a,
-     323,   16,   16,   16, 0x0a,
-     361,   16,   16,   16, 0x0a,
-     399,   16,   16,   16, 0x0a,
-     435,   16,   16,   16, 0x0a,
-     471,   16,   16,   16, 0x0a,
-     505,   16,   16,   16, 0x0a,
-     543,   16,   16,   16, 0x0a,
-     581,   16,   16,   16, 0x0a,
+      47,   16,   16,   16, 0x0a,
+      87,   82,   16,   16, 0x0a,
+     131,   16,   16,   16, 0x0a,
+     168,   16,   16,   16, 0x0a,
+     206,   16,   16,   16, 0x0a,
+     244,   16,   16,   16, 0x0a,
+     282,   16,   16,   16, 0x0a,
+     320,   16,   16,   16, 0x0a,
+     358,   16,   16,   16, 0x0a,
+     396,   16,   16,   16, 0x0a,
+     434,   16,   16,   16, 0x0a,
+     470,   16,   16,   16, 0x0a,
+     506,   16,   16,   16, 0x0a,
+     540,   16,   16,   16, 0x0a,
+     578,   16,   16,   16, 0x0a,
      616,   16,   16,   16, 0x0a,
-     654,   16,   16,   16, 0x0a,
-     690,   16,   16,   16, 0x0a,
-     728,   16,   16,   16, 0x0a,
-     764,   16,   16,   16, 0x0a,
-     802,   16,   16,   16, 0x0a,
-     840,   16,   16,   16, 0x0a,
-     879,   16,   16,   16, 0x0a,
-     916,   16,   16,   16, 0x0a,
-     953,   16,   16,   16, 0x0a,
-     982,   16,   16,   16, 0x0a,
-    1012,   16,   16,   16, 0x0a,
-    1040,   16,   16,   16, 0x0a,
-    1081,   16,   16,   16, 0x0a,
-    1109,   16,   16,   16, 0x0a,
-    1136,   16,   16,   16, 0x0a,
-    1179, 1174, 1169,   16, 0x0a,
-    1198, 1193,   16,   16, 0x0a,
-    1236,   16,   16,   16, 0x0a,
+     651,   16,   16,   16, 0x0a,
+     689,   16,   16,   16, 0x0a,
+     725,   16,   16,   16, 0x0a,
+     763,   16,   16,   16, 0x0a,
+     799,   16,   16,   16, 0x0a,
+     837,   16,   16,   16, 0x0a,
+     875,   16,   16,   16, 0x0a,
+     914,   16,   16,   16, 0x0a,
+     951,   16,   16,   16, 0x0a,
+     988,   16,   16,   16, 0x0a,
+    1017,   16,   16,   16, 0x0a,
+    1047,   16,   16,   16, 0x0a,
+    1075,   16,   16,   16, 0x0a,
+    1116,   16,   16,   16, 0x0a,
+    1144,   16,   16,   16, 0x0a,
+    1171,   16,   16,   16, 0x0a,
+    1214, 1209, 1204,   16, 0x0a,
+    1233, 1228,   16,   16, 0x0a,
+    1271,   16,   16,   16, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_MainWindowClass[] = {
     "MainWindowClass\0\0on_actionOpenFile_triggered()\0"
+    "on_actionLicenceAuthor_triggered()\0"
     "item\0on_listWidget_itemClicked(QListWidgetItem*)\0"
     "on_PIXELlineEdit_textEdited(QString)\0"
     "on_XPIXFAlineEdit_textEdited(QString)\0"
@@ -132,44 +134,45 @@ int MainWindowClass::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_c == QMetaObject::InvokeMetaMethod) {
         switch (_id) {
         case 0: on_actionOpenFile_triggered(); break;
-        case 1: on_listWidget_itemClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
-        case 2: on_PIXELlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 3: on_XPIXFAlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 4: on_YPIXFAlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 5: on_XSCATlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 6: on_YSCATlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 7: on_ANGLElineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 8: on_XNULLlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 9: on_YNULLlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 10: on_RMINlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 11: on_RMAXlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 12: on_DRlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 13: on_RMINTlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 14: on_RMAXTlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 15: on_DRTlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 16: on_TUNEXPlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 17: on_RADIlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 18: on_CADISTlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 19: on_WAVElineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 20: on_DELTASlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 21: on_IRECOAlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 22: on_IRECOA2lineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 23: on_SEPLAlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 24: on_ISECTlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 25: on_UseCheckBox_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 26: on_StartRadioButton_clicked(); break;
-        case 27: on_EndRadioButton_clicked(); break;
-        case 28: on_comboBox_currentIndexChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 29: on_BeamPushButton_pressed(); break;
-        case 30: on_AdvPushButton_pressed(); break;
-        case 31: on_IntegratePushButton_pressed(); break;
-        case 32: { bool _r = isIn((*reinterpret_cast< QString(*)>(_a[1])));
+        case 1: on_actionLicenceAuthor_triggered(); break;
+        case 2: on_listWidget_itemClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
+        case 3: on_PIXELlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 4: on_XPIXFAlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 5: on_YPIXFAlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 6: on_XSCATlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 7: on_YSCATlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 8: on_ANGLElineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 9: on_XNULLlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 10: on_YNULLlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 11: on_RMINlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 12: on_RMAXlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 13: on_DRlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 14: on_RMINTlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 15: on_RMAXTlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 16: on_DRTlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 17: on_TUNEXPlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 18: on_RADIlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 19: on_CADISTlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 20: on_WAVElineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 21: on_DELTASlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 22: on_IRECOAlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 23: on_IRECOA2lineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 24: on_SEPLAlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 25: on_ISECTlineEdit_textEdited((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 26: on_UseCheckBox_clicked((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 27: on_StartRadioButton_clicked(); break;
+        case 28: on_EndRadioButton_clicked(); break;
+        case 29: on_comboBox_currentIndexChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 30: on_BeamPushButton_pressed(); break;
+        case 31: on_AdvPushButton_pressed(); break;
+        case 32: on_IntegratePushButton_pressed(); break;
+        case 33: { bool _r = isIn((*reinterpret_cast< QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = _r; }  break;
-        case 33: on_SECFIlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 34: on_SECFIpushButton_pressed(); break;
+        case 34: on_SECFIlineEdit_textChanged((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 35: on_SECFIpushButton_pressed(); break;
         default: ;
         }
-        _id -= 35;
+        _id -= 36;
     }
     return _id;
 }

@@ -817,7 +817,7 @@
      </rect>
     </property>
     <property name="selectionMode">
-     <enum>QAbstractItemView::MultiSelection</enum>
+     <enum>QAbstractItemView::ContiguousSelection</enum>
     </property>
    </widget>
    <widget class="QRadioButton" name="StartRadioButton">
@@ -1044,12 +1044,24 @@
     </property>
     <addaction name="actionOpenFile"/>
    </widget>
+   <widget class="QMenu" name="menuLicence">
+    <property name="title">
+     <string>Licence</string>
+    </property>
+    <addaction name="actionLicenceAuthor"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuLicence"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpenFile">
    <property name="text">
     <string>Open File(s)</string>
+   </property>
+  </action>
+  <action name="actionLicenceAuthor">
+   <property name="text">
+    <string>Licence&amp;Author</string>
    </property>
   </action>
  </widget>

@@ -25,6 +25,7 @@ public:
     // all Callbacks are in events.cpp
  public slots:
      void on_actionOpenFile_triggered();
+     void on_actionLicenceAuthor_triggered();
      void on_listWidget_itemClicked(QListWidgetItem *item);
      //slots for the signals comming from the lineEdits
      void on_PIXELlineEdit_textEdited(QString );

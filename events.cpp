@@ -16,6 +16,8 @@
 #include <QFileDialog>
 #include <QStringList>
 #include <QList>
+#include <QFile>
+#include <QTextStream>
 
 //void QLabel::mousePressEvent( QMouseEvent * event ) {
 //      ui->XNULLlineEdit->setText(QString::number(event->x()));
@@ -57,6 +59,8 @@ bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) { // this
                          ui->YSCATlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)));
                          link->setxRMAXT(QString::number(x1));
                          link->setyRMAXT(QString::number(y1));
+                     //    link->setxAngle(QString::number(x1));
+                     //    link->setyAngle(QString::number(y1));
                          if (link->getMode() == "none") {
                              ui->comboBox->setItemText(0, "Choose method");
                              ui->comboBox->setEnabled(true);
@@ -94,7 +98,7 @@ bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) { // this
 
 }
 
-bool MainWindowClass::isIn(QString name) {
+bool MainWindowClass::isIn(QString name) { // tests if we already have a item with this name
     if (ui->listWidget->count()>0) {
     for (int i=0; i<ui->listWidget->count()-1;i++) {
                           GEDItem *ref = dynamic_cast <GEDItem*>(ui->listWidget->item(i));
@@ -536,7 +540,7 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
         } //of ifisEmpty
    }
 }
-
+using namespace std;
     void MainWindowClass::on_IntegratePushButton_pressed() {
         if (ui->listWidget->count()>0) {
             if (ui->IntegrateAllRadioButton->isChecked()) {
@@ -558,10 +562,41 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
                     this->fileList.append(ref->writeInputFile());
                 }
             }
+            QStringList list = this->fileList.at(0).split("/");
+            QString baseName = "/";
+            for ( int i =0; i<list.size()-1; i++) {
+                     baseName = baseName +list.at(i) + "/";
+            }
+            QString scriptFile = baseName + "reduce.sh";
+            QFile myfile(scriptFile);
+             if (myfile.open(QIODevice::WriteOnly | QIODevice::Text)){
+                 QTextStream out(&myfile);
+                 out <<"#/bin/sh" << "\n";
+                 out << "if [ -e pimag.exe ]; then \n";
+                 out << "for each in ";
+                 for (int i=0; i<this->fileList.size(); i++){
+                     out << this->fileList.at(i) + " ";
+                 }
+                 out << " \n do \n cp $each pimag.txt \n";
+                 out << "./pimag \n";
+                 out << "done \n else \n";
+                 out << "printf 'pimag.exe not found, plase copy it'";
+                 out << "\n fi";
 
+                 myfile.close();
+             }
+             this->fileList.clear();
 
         }
     }
+
+    void MainWindowClass::on_actionLicenceAuthor_triggered() {
+        QMessageBox msgBox;
+        msgBox.setText("This software is LGPL (see: http://www.gnu.org/copyleft/lesser.html). \n Written by Till Wesermann \n University of Bielefeld \n eMail: till@tillwestermann.de \n If we meet some day, you can buy me a drink.");
+         msgBox.exec();
+         //QMessageBox::information( this, "Info", QString("This software is LGPL (see: http://www.gnu.org/copyleft/lesser.html). \n Written by Till Wesermann \n University of Bielefeld \n eMail: till@tillwestermann.de \n If we meet some day, you can buy me a drink."), "&Ok" );
+     }
+
 
 
 

@@ -23,8 +23,8 @@ void MainWindowClass::setValuesByMethod(QString method) {
      // x1, y1 are the center coords, x2, y2 are the coords for the angle point
      float x1 = link->getXNULL().toFloat();
      float y1 = link->getYNULL().toFloat();
-     float x2 = link->getxAngle().toFloat();
-     float y2 = link->getyAngle().toFloat();
+     float x2 = link->getxRMAXT().toFloat();
+     float y2 = link->getyRMAXT().toFloat();
      if (method == "Whole area" ) {
          ui->XSCATlineEdit->setReadOnly(false);
          ui->YSCATlineEdit->setReadOnly(false);

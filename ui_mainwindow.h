@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'mainwindow.ui'
 **
-** Created: Sun Apr 12 23:08:52 2009
+** Created: Tue Apr 14 12:23:22 2009
 **      by: Qt User Interface Compiler version 4.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -35,6 +35,7 @@ class Ui_MainWindowClass
 {
 public:
     QAction *actionOpenFile;
+    QAction *actionLicenceAuthor;
     QWidget *centralwidget;
     QTabWidget *tabWidget;
     QWidget *tab;
@@ -115,6 +116,7 @@ public:
     QRadioButton *IntegrateSelectedRadioButton;
     QMenuBar *menubar;
     QMenu *menuFile;
+    QMenu *menuLicence;
     QStatusBar *statusbar;
     QButtonGroup *buttonGroup_2;
     QButtonGroup *buttonGroup;
@@ -126,6 +128,8 @@ public:
         MainWindowClass->resize(1186, 733);
         actionOpenFile = new QAction(MainWindowClass);
         actionOpenFile->setObjectName(QString::fromUtf8("actionOpenFile"));
+        actionLicenceAuthor = new QAction(MainWindowClass);
+        actionLicenceAuthor->setObjectName(QString::fromUtf8("actionLicenceAuthor"));
         centralwidget = new QWidget(MainWindowClass);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         tabWidget = new QTabWidget(centralwidget);
@@ -331,7 +335,7 @@ public:
         listWidget = new QListWidget(centralwidget);
         listWidget->setObjectName(QString::fromUtf8("listWidget"));
         listWidget->setGeometry(QRect(20, 30, 121, 211));
-        listWidget->setSelectionMode(QAbstractItemView::MultiSelection);
+        listWidget->setSelectionMode(QAbstractItemView::ContiguousSelection);
         StartRadioButton = new QRadioButton(centralwidget);
         buttonGroup = new QButtonGroup(MainWindowClass);
         buttonGroup->setObjectName(QString::fromUtf8("buttonGroup"));
@@ -394,13 +398,17 @@ public:
         menubar->setGeometry(QRect(0, 0, 1186, 22));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
+        menuLicence = new QMenu(menubar);
+        menuLicence->setObjectName(QString::fromUtf8("menuLicence"));
         MainWindowClass->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindowClass);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindowClass->setStatusBar(statusbar);
 
         menubar->addAction(menuFile->menuAction());
+        menubar->addAction(menuLicence->menuAction());
         menuFile->addAction(actionOpenFile);
+        menuLicence->addAction(actionLicenceAuthor);
 
         retranslateUi(MainWindowClass);
 
@@ -414,6 +422,7 @@ public:
     {
         MainWindowClass->setWindowTitle(QApplication::translate("MainWindowClass", "MainWindow", 0, QApplication::UnicodeUTF8));
         actionOpenFile->setText(QApplication::translate("MainWindowClass", "Open File(s)", 0, QApplication::UnicodeUTF8));
+        actionLicenceAuthor->setText(QApplication::translate("MainWindowClass", "Licence&Author", 0, QApplication::UnicodeUTF8));
         label_4->setText(QApplication::translate("MainWindowClass", "X-Null", 0, QApplication::UnicodeUTF8));
         label_5->setText(QApplication::translate("MainWindowClass", "Y-Null", 0, QApplication::UnicodeUTF8));
         label_7->setText(QApplication::translate("MainWindowClass", "RMIN", 0, QApplication::UnicodeUTF8));
@@ -476,6 +485,7 @@ public:
         IntegrteUsableRadioButton->setText(QApplication::translate("MainWindowClass", "All usable", 0, QApplication::UnicodeUTF8));
         IntegrateSelectedRadioButton->setText(QApplication::translate("MainWindowClass", "Selected one(s)", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindowClass", "File", 0, QApplication::UnicodeUTF8));
+        menuLicence->setTitle(QApplication::translate("MainWindowClass", "Licence", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

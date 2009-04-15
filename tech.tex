@@ -1,3 +1,58 @@
 \section{Technical documentation}
 \subsection{Program structure}
-The program is written in C++ using Qt 4.5 (documentation online: (ref)). Data management is done via a QListWidget using GEDItem as a custom class for the Items. GEDItem is inherited from QListWidgetItem 
+The program is written in C++ using Qt 4.5 (documentation online: \cite{qtdoc}).\\
+ Data management is done via a QListWidget using GEDItem as a custom class for the Items of the list. GEDItem is inherited from QListWidgetItem. Most explanations are written as comments in the source code, nevertheless the most important custom memberfunctions and properties will be discussed in detail. \\
+ 
+ 
+\subsection{The GEDItem class}
+The definition of the GEDItem class read as: 
+\begin{lstlisting}
+class GEDItem : public QListWidgetItem
+\end{lstlisting}
+All inherited functions, slots, signals and properties are documented online \cite{qtdoc}.     \\
+\subsubsection{Properties} 
+ The (private) properties of the GEDItem class are: 
+\begin{lstlisting}
+private: 
+      QString IPLA, IXMA, JYMA;
+      QString PIXEL, XPIXFA, YPIXFA, XSCAT, YSCAT, XNULL, YNULL, RMIN, RMAX, DR, RMINT, RMAXT, DRT, TUNEXP, RADI, CADIST;
+      QString WAVE, DELTAS, SEPLA, ISECT, IRECOA, IRECOA2, ANGLE, SECFI;
+      bool Useable;
+      QString Path, Mode;
+      QString xRMAXT, yRMAXT, xAngle, yAngle;
+\end{lstlisting}
+There are get- and setmethods for every private property of the class named getProperty and setProperty. 
+\subsubsection{float GEDItem::distance(float x1, float x2, float y1, float y2)} 
+Gets two points $p_1$ and $p_2$ in $\mathbb{R}^2$ and returns the distance between the points. 
+
+\subsubsection{float GEDItem::calcAngle(float x1, float y1, float x2, float y2, float x3, float y3)}
+Gets a triangle defined by points $p_1$, $p_2$ and $p_3$ in $\mathbb{R}^2$ and returns the angle in the defined triangle at $p_1$. 
+
+\subsubsection{QString GEDItem::writeInputFile()}
+Writes out an input file for PIMAG \cite{pimag} and returns a QString with the complete filename (including path) of the written file. \\
+The complete filename of the input file is the same then the selected .tif file, but with .txt instead of .tif.  The returned filename is used for a list in QMainWindow. \\
+
+\newpage
+
+\subsection{The QMainWindow Class} 
+This class handles the main window and all of it's slots and signals with the instance ui. The definition reads as:
+\begin{lstlisting}
+class MainWindowClass : public QMainWindow
+\end{lstlisting}
+The only notable property of QMainWindow is \lstinline$ QStringList fileList $ that contains the list of all inputfiles that have been written to hard drive. 
+
+\subsubsection{bool MainWindowClass::eventFilter( QObject $\ast$ watched, QEvent  $\ast$ event )[slot]}
+Is the primary eventfilter of the program. It handles all events coming from \lstinline$ ui->picLabel$ (the picture-frame of the program). \\
+Returns if the events was handled, always false (for internal reason). 
+
+\subsubsection{bool MainWindowClass::isIn(QString name)  [slot]  } 
+Returns true, if the name is already in the list of the listWidget. 
+
+\subsubsection{ void MainWindowClass::on\_actionOpenFile\_triggered()  [slot] }
+Executes if the user clicks on openfile. Handles all renaming of doubled items in the listWidget and ads the selected files to the listWidget as GEDItems. 
+
+\subsubsection{void MainWindowClass::setValuesByMethod(QString method) }
+When this function is called, it calculates the values for XSCAT, YSCAT and ANGLE and writes them to the corresponding lineEdits at the user interface.  
+
+\subsubsection{void MainWindowClass::on\_listWidget\_ itemClicked (QListWidgetItem  $\ast$ item) [ slot ] }
+Is called when the user clicks on an item at the listWidget. It sets all stored values to the lineEdit forms, sets the picture and calls  setValuesByMethod(). 
