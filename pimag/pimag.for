@@ -559,7 +559,7 @@ c          OPP1(IPLA,I) = (OPP(NOFIL+1,I) )
 
       FIOUT = 'tmp.txt'
 c outtxt is for plotting
-      OPEN(IFIL,FILE=outtxt,ACCESS='SEQUENTIAL')
+      OPEN(IFIL,FILE='tmp.txt',ACCESS='SEQUENTIAL')
       REWIND(IFIL)
       IF (IPLA.EQ.1)THEN
 c         WRITE(IFIL,'(1X,2I5,4F10.5,F10.7,I5)')
@@ -589,12 +589,12 @@ c      +      IPLA,NOS,SMIN,SMAX,DELTAS,CADIST,WAVLE,ISECT
 C
 C
 C
-      FIOUT1 = 'tmp.txt'
-      OPEN(IFIL,FILE=FIOUT1,ACCESS='SEQUENTIAL')
+c      FIOUT1 = 'tmp.txt'
+      OPEN(IFIL,FILE=outtxt,ACCESS='SEQUENTIAL')
       REWIND(IFIL)
       IF (IPLA.EQ.1)THEN
-         WRITE(IFIL,'(1X,2I5,5F10.5,I5)')
-     +        IPLA,NOS,SMIN,SMAX,DELTAS,CADIST,WAVLE,ISECT
+c         WRITE(IFIL,'(1X,2I5,5F10.5,I5)')
+c     +        IPLA,NOS,SMIN,SMAX,DELTAS,CADIST,WAVLE,ISECT
          DO I = 1,NOS
             WRITE(IFIL,'(21(1X,E16.7))')
      +           S(I),OPP1(1,I)

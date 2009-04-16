@@ -1,4 +1,21 @@
 \section{Technical documentation}\label{tech}
+\subsection{Installation}
+The program is available via a git repository \cite{git}. To get the program just clone the repository with typing in bash: 
+\begin{lstlisting}
+git clone git://github.com/twesterm/ged-interface.git
+\end{lstlisting}
+To compile the program Qt 4.5 \cite{qt} hast to be installed. There are packages available for every major Linux distribution, Mac OS X and Windows. Enter the get-interface directory and build with: 
+\begin{lstlisting}
+qmake
+make
+\end{lstlisting}
+A binary GED oder GED.app (Mac OS X) is created which can be used. \\
+The compile PIMAG, enter the ged-interface/pimag/ directory and run the compile script with: 
+\begin{lstlisting}
+./compile
+\end{lstlisting}
+Note that there is Intel FORTRAN compiler (ifort) \cite{ifort}  is necessary to compile pimag. A pimag binary is produced that have to be copied. 
+
 \subsection{Program structure}
 The program is written in C++ using Qt 4.5 (documentation online: \cite{qtdoc}).\\
  Data management is done via a QListWidget using GEDItem as a custom class for the Items of the list. GEDItem is inherited from QListWidgetItem. Most explanations are written as comments in the source code, nevertheless the most important custom memberfunctions and properties will be discussed in detail. \\
@@ -56,3 +73,19 @@ When this function is called, it calculates the values for XSCAT, YSCAT and ANGL
 
 \subsubsection{void MainWindowClass::on\_listWidget\_ itemClicked (QListWidgetItem  $\ast$ item) [ slot ] }
 Is called when the user clicks on an item at the listWidget. It sets all stored values to the lineEdit forms, sets the picture and calls  setValuesByMethod(). 
+
+\subsection{Porting to Windows} 
+In general it is possible to port \textit{GED ready} to windows. There are two main problems: \\
+1.: String processing. The following memberfunctions do string manipulation and would have to be carefully modified to take the difference in file names into account: 
+\begin{lstlisting}
+void MainWindowClass::on_actionOpenFile_triggered()
+void MainWindowClass::on_IntegratePushButton_pressed()
+QString GEDItem::writeInputFile() 
+\end{lstlisting}
+2.: The \lstinline! void MainWindowClass::on_IntegratePushButton_pressed() ! would have to be modified to produce scripts for Microsoft Power Shell. 
+
+
+
+
+
+
