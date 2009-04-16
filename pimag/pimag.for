@@ -538,13 +538,9 @@ C           PLANAR PLATES:
 c     RJF
 c     Mittelung ueber beide Haelften des scans:
 c     Mode: 
-c     1: Use all
-c     2: TOP
-c     3: Button
-c     4: Top-Down
-c     5: Right-Left
-c     6: Right
-c     7: Left
+c     1: Use all, Top-Down, Right-Left
+c     2: Top, Left
+c     3: Button, Right
       if (mode.eq.1) then  
            OPP1(IPLA,I) = (OPP(NOFIL,I) + OPP(NOFIL+1,I))/2.0
       else if (mode.eq.2) then 
