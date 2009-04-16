@@ -212,6 +212,7 @@ void MainWindowClass::on_listWidget_itemClicked(QListWidgetItem *item) {
     ui->SEPLAlineEdit->setText(link->getSEPLA());
     ui->ISECTlineEdit->setText(link->getISECT());
     ui->UseCheckBox->setChecked(link->isUseable());
+    ui->SECFIlineEdit->setText(link->getSECFI());
 
     QString newbildtext = link->getPath();
     QFile file(newbildtext);
