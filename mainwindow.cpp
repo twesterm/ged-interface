@@ -3,8 +3,8 @@
 #include "QFileDialog.h"
 #include "geditem.h"
 #include "events.cpp"
-#include "qfile.h"
-#include <qimage.h>
+#include <QFile>
+#include <QImage>
 
 MainWindowClass::MainWindowClass(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindowClass)

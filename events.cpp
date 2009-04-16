@@ -557,7 +557,7 @@ using namespace std;
                 }
             } else if (ui->IntegrateSelectedRadioButton->isChecked()) {
                 QList<QListWidgetItem*> list = ui->listWidget->selectedItems();
-                for (int i=0; i<list.length(); i++) {
+                for (int i=0; i<list.size(); i++) {
                     GEDItem *ref = dynamic_cast <GEDItem*>(list.at(i));
                     this->fileList.append(ref->writeInputFile());
                 }
