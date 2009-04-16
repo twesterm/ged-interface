@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QFileDialog.h"
+#include <QFileDialog>
 #include "geditem.h"
 #include "events.cpp"
 #include <QFile>
