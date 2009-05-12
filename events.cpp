@@ -100,7 +100,7 @@ bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) { // this
 
 bool MainWindowClass::isIn(QString name) { // tests if we already have a item with this name
     if (ui->listWidget->count()>0) {
-    for (int i=0; i<ui->listWidget->count()-1;i++) {
+    for (int i=0; i<=ui->listWidget->count()-1;i++) {
                           GEDItem *ref = dynamic_cast <GEDItem*>(ui->listWidget->item(i));
                           if (ref->text() == name) {
                               return true;
@@ -137,6 +137,7 @@ void MainWindowClass::on_actionOpenFile_triggered()
   bool test;
   dialog.setFileMode(QFileDialog::AnyFile);
   dialog.setFileMode(QFileDialog::ExistingFiles);
+  dialog.setNameFilter(tr("Images (*.tif)"));
   dialog.setDirectory(".");
   if (dialog.exec())
   {
@@ -544,45 +545,50 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
 using namespace std;
     void MainWindowClass::on_IntegratePushButton_pressed() {
         if (ui->listWidget->count()>0) {
+            if (this->outputDir=="none") {
+                     QFileDialog dialog(this);
+                     QString fileName;
+                     dialog.setFileMode(QFileDialog::Directory);
+                     dialog.setDirectory(".");
+                     if (dialog.exec())
+                      {
+                        this->outputDir = dialog.selectedFiles().at(0) + "/";
+                    }
+            }
             if (ui->IntegrateAllRadioButton->isChecked()) {
                 for (int i=0; i<ui->listWidget->count();i++) {
                     GEDItem *ref = dynamic_cast <GEDItem*>(ui->listWidget->item(i));
-                    this->fileList.append(ref->writeInputFile());
+                    this->fileList.append(ref->writeInputFile(this->outputDir));
                 }
             } else if (ui->IntegrteUsableRadioButton->isChecked()) {
                 for (int i=0; i<ui->listWidget->count();i++) {
                     GEDItem *ref = dynamic_cast <GEDItem*>(ui->listWidget->item(i));
                     if (ref->isUseable()) {
-                       this->fileList.append(ref->writeInputFile());
+                       this->fileList.append(ref->writeInputFile(this->outputDir));
                    }
                 }
             } else if (ui->IntegrateSelectedRadioButton->isChecked()) {
                 QList<QListWidgetItem*> list = ui->listWidget->selectedItems();
                 for (int i=0; i<list.size(); i++) {
                     GEDItem *ref = dynamic_cast <GEDItem*>(list.at(i));
-                    this->fileList.append(ref->writeInputFile());
+                    this->fileList.append(ref->writeInputFile(this->outputDir));
                 }
             }
-            QStringList list = this->fileList.at(0).split("/");
-            QString baseName = "/";
-            for ( int i =0; i<list.size()-1; i++) {
-                     baseName = baseName +list.at(i) + "/";
-            }
-            QString scriptFile = baseName + "reduce.sh";
+            QString scriptFile = this->outputDir + "reduce.sh";
             QFile myfile(scriptFile);
              if (myfile.open(QIODevice::WriteOnly | QIODevice::Text)){
                  QTextStream out(&myfile);
                  out <<"#/bin/sh" << "\n";
-                 out << "if [ -e pimag ]; then \n";
+         //        out << "if [ -e pimag ]; then \n";
                  out << "for each in ";
                  for (int i=0; i<this->fileList.size(); i++){
                      out << this->fileList.at(i) + " ";
                  }
                  out << " \n do \n cp $each pimag.txt \n";
-                 out << "./pimag \n";
-                 out << "done \n else \n";
-                 out << "printf 'pimag not found, plase copy it'";
-                 out << "\n fi";
+                 out << "pimag \n";
+                 out << "done \n";
+       //          out << "printf 'pimag not found, plase copy it'";
+      //           out << "\n fi";
 
                  myfile.close();
              }
@@ -597,6 +603,20 @@ using namespace std;
          msgBox.exec();
          //QMessageBox::information( this, "Info", QString("This software is LGPL (see: http://www.gnu.org/copyleft/lesser.html). \n Written by Till Wesermann \n University of Bielefeld \n eMail: till@tillwestermann.de \n If we meet some day, you can buy me a drink."), "&Ok" );
      }
+    void MainWindowClass::on_actionSet_output_directory_triggered() {
+          QFileDialog dialog(this);
+          QString fileName;
+
+           dialog.setFileMode(QFileDialog::Directory);
+      //    dialog.setOption(ShowDirsOnly, true);
+          dialog.setDirectory(".");
+          if (dialog.exec())
+             {
+               this->outputDir = dialog.selectedFiles().at(0) + "/";
+              // std::cout << this->outputDir.toStdString() << std::endl;
+           }
+   }
+
 
 
 

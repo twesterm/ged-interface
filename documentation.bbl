@@ -1,0 +1,47 @@
+\begin{thebibliography}{1}\setlength{\itemsep}{0.0cm}
+
+\bibitem{gedbook}
+Hargittai~I, H. M.~e.
+\newblock {\em Stereochemical Applications of Gas-Phase Electron Diffraction.
+  Part A. The Electron Diffraction Technique}.
+\newblock VCH Publishers, Inc., New York,  (1988).
+
+\bibitem{pimag}
+Gundersen, S., Samdal, S., Strand, T.~G., and Volden, H.~V.
+\newblock ``{Benzene; high level quantum chemical calculations, gas electron
+  diffraction pattern recorded on Fuji imaging plates and a method to explore
+  systematic discrepancies which was used to determine an improved sector
+  correction}'', {\em {JOURNAL OF MOLECULAR STRUCTURE}}{ \bf {832}}({1-3}),
+  {164--171}, {APR 30}  ({2007}).
+
+\bibitem{xmgr}
+Stambulchik, E.
+\newblock ``xmgr is a graphical plotting program''.
+\newblock http://plasma-gate.weizmann.ac.il/Grace/ (2009).
+
+\bibitem{gnuplot}
+Thomas~Williams, C.~K.
+\newblock ``GNUPLOT is a graphical plotting program''.
+\newblock http://www.gnuplot.info/ (2009).
+
+\bibitem{git}
+Linus~Torvalds, Shawn O.~Pearce, J. C.~H.
+\newblock ``git is a version control software''.
+\newblock http://www.git-scm.com (2009).
+
+\bibitem{qt}
+Corperation, N.
+\newblock ``Qt online documentation''.
+\newblock http://doc.trolltech.com/4.5/index.html (2009).
+
+\bibitem{opensuse}
+Cooperation, N.
+\newblock ``OpenSuse is a Linux distribution''.
+\newblock http://www.opensuse.org/ (2009).
+
+\bibitem{ifort}
+Cooperation, I.
+\newblock ``Intel FORTRAN Compiler''.
+\newblock http://software.intel.com/en-us/intel-compilers/ (2009).
+
+\end{thebibliography}

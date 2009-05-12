@@ -1,0 +1,38 @@
+\section*{Acknowledgment}
+I would like to thank Dr. Raphael Berger for giving me the opportunity to work on this interesting topic, for the introduction to the topic and all the helpful discussions. I also would like to thank Dr. Stuart Hayes for the discussions and the introduction to the topic. \\
+All staff of the chair of inorganic chemistry are acknowledged for the very good working  environment and supporting this work. \\
+The chair of theoretical chemistry is acknowledged for providing the computer resources for this work. 
+\newpage
+
+
+
+\section{Introduction}
+Gas phase Electron Diffraction  (GED) is powerful method for determining molecular structures in gas phase. Even though the method  was introduced in the 1930th, analysis of the experimental data is not trivial or automated as it is in X-Ray diffraction.\\ 
+GED is based on the diffraction of electron by randomly orientated molecules in the gas phase. The molecules are evaporated into high vacuum ($\approx 10^{-6}$ Torr) though a nozzle where an electron beam hits the molecules.\\
+The electrons are emitted thermally and accelerated by a potential of the anode.  This beam is focused by a magnetic lens and then brought into the diffraction chamber. The electron beam is well defined in therms of the wavelengths $\lambda$ with a fluctuation not bigger than 0.1 \%. \\
+When the electrons hit the molecules in the diffraction chamber there are several processes that may occur. Because of the low pressure the probability that an electron is not scattered is 99 \%. This directly leeds to the reasonable assumption that multiple scattering of one electron can be neglected. \\
+For the rest of the electrons scattering occurs. The elastic electron scattering intensity for a rigid molecule without vibration with $N$ atoms reads as: 
+\begin{equation*}
+I(s) = \frac{K^2I_0}{R^2}\left(  \underbrace{\sum_i^N |f_i(s)|^2}_{\textnormal{Atomic scattering}} +  \underbrace{\sum^N_{ \substack{i,j \\ i\neq j}}f_i(s)f_i^*(s) \frac{\sin sr_{ij}}{sr_{ij}}}_{\textnormal{Molecular scattering}} \right)
+\end{equation*}
+Where $s = 2 k_0 \sin \theta/2$, $\theta$ is the scattering angle, $K$ is a constant, $R$ is the distance of the observation point from the scattering center, $f(s)$ are the electron scattering amplitudes and $r_{ij}$ is the distance of $\vec{r_i}$ and $\vec{r_j}$. The atomic scattering is the dominant factor, but its intensity is not very interesting because it does not contain any information about the interatomic distances.  \\
+This model can be expanded to include vibration. In this approximation the molecular scattering intensity reads as: 
+\begin{equation*}
+I_m(s) = \frac{K^2I_0}{R^2} \sum^N_{ \substack{i,j \\ i\neq j}}g_{ij}(s) \exp \left( -\frac{1}{2} l_m^2s^2 \right) \frac{\sin( s(r_a - \kappa s^2))}{sr_e}
+\end{equation*}
+ Where $g_{ij}(s) = |f_i(s)||f_j(s)|\cos(\eta_i(s) - \eta_j(s))$, $r_e$ is a effective average internuclear distance, $l_m$ an effective mean vibrational amplitude and $\kappa$ a asymmetry constant, related to the morse potential. \\
+ Photographic or electron image plates are used to record the intensity of the scattered electron over a given time. In the Bielefeld Group Eu$^{2+}$ doped BaFBr plates are used. The plates store the electron intensity by an exited state of Eu$^{2+}$. The intensity is read out with a red laser, which stimulates the emission of a photon. This photon is detected.  \\
+An example of the experimental data is shown in Figure~\ref{example} (p. \pageref{example}).\\
+The experimental data has to be reduced by radial integration and corrected for various experimental factors, but is finally related to the distribution of inter atomic distances by fourier transform. \\
+To reduce the experimental data the PIMAG program was written by  T.G. Stand \textit{et al.} \cite{pimag}. Although PIMAG technically works fine, it is not very user friendly. PIMAG requires an input files with very cryptic and non intuitive input parameters.  To determine the limits or angle for the data reduction human intuition is still required and PIMAG is not capable of determining these parameters. The aim of the written program is to provide an convenient way to graphically determine all parameters (limits, angle etc.) for the data reduction and write out input files for PIMAG. For convenience, a bash-script is written out, that directly does the data reduction with PIMAG. Also some minor changes on the PIMAG program were made for compatibility reasons. \\
+The program runs on all Unix, Linux and Mac OS X systems( Windows support should be easy to implement). \\
+This documentation will first explain the graphical user interface of \textit{GED ready} and the workflow (Chapter \ref{interface}. In Chapter~\ref{tech} the technical details of the program itself will be discussed in detail. 
+ 
+\begin{figure}
+\includegraphics[width=12cm]{example}
+\caption{An example of the raw data from the GED experiment.}
+\label{example} 
+\end{figure} 
+
+
+ 

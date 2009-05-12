@@ -20,6 +20,7 @@ public:
     bool eventFilter ( QObject * watched, QEvent * event );
     void setValuesByMethod(QString method);
     QStringList fileList;
+    QString outputDir;
 
 
     // all Callbacks are in events.cpp
@@ -61,6 +62,7 @@ public:
      bool isIn(QString name);
      void on_SECFIlineEdit_textChanged(QString text);
      void on_SECFIpushButton_pressed();
+     void on_actionSet_output_directory_triggered();
   //   void on_integratePushButton_pressed();
  //    void on_picLabel_mousePressEvent( QMouseEvent * event );
 

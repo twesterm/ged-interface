@@ -11,6 +11,7 @@ MainWindowClass::MainWindowClass(QWidget *parent)
 {
     ui->setupUi(this);
     ui->picLabel->installEventFilter(this); //installs the eventhandler do get the mousclicks on the pic
+    this->outputDir="none";
 }
 
 MainWindowClass::~MainWindowClass()
@@ -32,6 +33,7 @@ void MainWindowClass::setValuesByMethod(QString method) {
          ui->XSCATlineEdit->setText(ui->RMAXTlineEdit->text());
          ui->YSCATlineEdit->setText(ui->RMAXTlineEdit->text());
          ui->ANGLElineEdit->setText(QString::number(0.0));
+         ui->ANGLElineEdit->setReadOnly(true);
      } else if (method == "Right-Left" || method == "Left" || method == "Right") {
          ui->XSCATlineEdit->setText("0.0");
          ui->XSCATlineEdit->setReadOnly(true);

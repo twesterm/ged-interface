@@ -4,21 +4,22 @@ The program is available via a git repository \cite{git}. To get the program jus
 \begin{lstlisting}
 git clone git://github.com/twesterm/ged-interface.git
 \end{lstlisting}
-To compile the program Qt 4.5 \cite{qt} hast to be installed. There are packages available for every major Linux distribution, Mac OS X and Windows. Enter the get-interface directory and build with: 
+To compile the program Qt 4.5 \cite{qt} has to be installed. There are packages available for every major Linux distribution, Mac OS X and Windows. On OpenSuse \cite{opensuse} libqt4-devel (shipped with OpenSuse 11.0)  is required for compiling. \\
+Enter the get-interface directory and build with: 
 \begin{lstlisting}
 qmake
 make
 \end{lstlisting}
-A binary GED oder GED.app (Mac OS X) is created which can be used. \\
-The compile PIMAG, enter the ged-interface/pimag/ directory and run the compile script with: 
+A binary GED or GED.app (Mac OS X) is created which can be used. \\
+The compile PIMAG, enter the ged-interface/PIMAG/ directory and run the compile script with: 
 \begin{lstlisting}
 ./compile
 \end{lstlisting}
-Note that there is Intel FORTRAN compiler (ifort) \cite{ifort}  is necessary to compile pimag. A pimag binary is produced that have to be copied. 
+Note that the Intel FORTRAN compiler (ifort) \cite{ifort}  is necessary to compile PIMAG. A PIMAG binary is produced that has to be copied or installed in a central location. . 
 
 \subsection{Program structure}
-The program is written in C++ using Qt 4.5 (documentation online: \cite{qtdoc}).\\
- Data management is done via a QListWidget using GEDItem as a custom class for the Items of the list. GEDItem is inherited from QListWidgetItem. Most explanations are written as comments in the source code, nevertheless the most important custom memberfunctions and properties will be discussed in detail. \\
+The program is written in C++ using Qt 4.5 (documentation online: \cite{qt}).\\
+ Data management is done via a QListWidget using GEDItem as a custom class for the Items of the list. GEDItem is inherited from QListWidgetItem. Most explanations are written as comments in the source code, nevertheless the most important custom memberfunctions and properties are mentioned. \\
  
  
 \subsection{The GEDItem class}
@@ -26,7 +27,7 @@ The definition of the GEDItem class read as:
 \begin{lstlisting}
 class GEDItem : public QListWidgetItem
 \end{lstlisting}
-All inherited functions, slots, signals and properties are documented online \cite{qtdoc}.     \\
+All inherited functions, slots, signals and properties are documented online \cite{qt}.     \\
 \subsubsection{Properties} 
  The (private) properties of the GEDItem class are: 
 \begin{lstlisting}
@@ -40,10 +41,10 @@ private:
 \end{lstlisting}
 There are get- and setmethods for every private property of the class named getProperty and setProperty. 
 \subsubsection{float GEDItem::distance(float x1, float x2, float y1, float y2)} 
-Gets two points $p_1$ and $p_2$ in $\mathbb{R}^2$ and returns the distance between the points. 
+Gets two points $p_1$ and $p_2$ and returns the distance between the points. 
 
 \subsubsection{float GEDItem::calcAngle(float x1, float y1, float x2, float y2, float x3, float y3)}
-Gets a triangle defined by points $p_1$, $p_2$ and $p_3$ in $\mathbb{R}^2$ and returns the angle in the defined triangle at $p_1$. 
+Gets a triangle defined by points $p_1$, $p_2$ and $p_3$ and returns the angle in the defined triangle at $p_1$. 
 
 \subsubsection{QString GEDItem::writeInputFile()}
 Writes out an input file for PIMAG \cite{pimag} and returns a QString with the complete filename (including path) of the written file. \\
@@ -52,7 +53,7 @@ The complete filename of the input file is the same then the selected .tif file,
 \newpage
 
 \subsection{The QMainWindow Class} 
-This class handles the main window and all of it's slots and signals with the instance ui. The definition reads as:
+This class handles the main window and all of its slots and signals with the instance ui. The definition reads as:
 \begin{lstlisting}
 class MainWindowClass : public QMainWindow
 \end{lstlisting}
@@ -60,10 +61,10 @@ The only notable property of QMainWindow is \lstinline$ QStringList fileList $ t
 
 \subsubsection{bool MainWindowClass::eventFilter( QObject $\ast$ watched, QEvent  $\ast$ event )[slot]}
 Is the primary eventfilter of the program. It handles all events coming from \lstinline$ ui->picLabel$ (the picture-frame of the program). \\
-Returns if the events was handled, always false (for internal reason). 
+Returns always false (for internal reason). 
 
 \subsubsection{bool MainWindowClass::isIn(QString name)  [slot]  } 
-Returns true, if the name is already in the list of the listWidget. 
+Returns true if the name is already in the list of the listWidget. 
 
 \subsubsection{ void MainWindowClass::on\_actionOpenFile\_triggered()  [slot] }
 Executes if the user clicks on openfile. Handles all renaming of doubled items in the listWidget and ads the selected files to the listWidget as GEDItems. 
@@ -85,7 +86,16 @@ QString GEDItem::writeInputFile()
 2.: The \lstinline! void MainWindowClass::on_IntegratePushButton_pressed() ! would have to be modified to produce scripts for Microsoft Power Shell. 
 
 
+\subsection{Further developments} 
+A number of features where are not yet implemented. A reasonable approach would be to implement automated rescaling of the image histogram to improve the contrast. That would make it easier see errors on the experimental data. \\
+An other convenient feature would be the integration of PIMAG in the graphical interface. This has been tried, but failed because there was no possibility to link the C++ code of \textit{GED ready} with the FORTRAN 77 if PIMAG. pimac does not compile with the g77 compiler and therefore fails to link with g++. A solution would be to use the Intel C++ Compiler for building an linking the whole project. \\
+If this is implemented it should be easy to implement plotting of the output files into the program.  
+\newpage
 
-
+\section*{Acknowledgment}
+I would like to thank Dr. Raphael Berger for giving me the opportunity to work on this interesting topic, for the introduction to the topic and all the helpful discussions. I also would like to thank Dr. Stuart Hayes for the discussions and the introduction to the topic. \\
+All staff of the chair of inorganic chemistry are acknowledged for the very good working  environment and supporting this work. \\
+The chair of theoretical chemistry is acknowledged for providing the computer resources for this work. 
+\newpage
 
 

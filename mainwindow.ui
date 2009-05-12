@@ -1043,6 +1043,7 @@
      <string>File</string>
     </property>
     <addaction name="actionOpenFile"/>
+    <addaction name="actionSet_output_directory"/>
    </widget>
    <widget class="QMenu" name="menuLicence">
     <property name="title">
@@ -1062,6 +1063,11 @@
   <action name="actionLicenceAuthor">
    <property name="text">
     <string>Licence&amp;Author</string>
+   </property>
+  </action>
+  <action name="actionSet_output_directory">
+   <property name="text">
+    <string>Set output directory</string>
    </property>
   </action>
  </widget>

@@ -36,6 +36,7 @@ GEDItem::GEDItem()
      this->setIRECOA2("3.0");
      this->setSEPLA("4.24");
      this->setISECT("3");
+     this->setSECFI("/usr/local/lib/GED/isect3.bin");
 
      this->setUseable(false);
      this->setMode("none");
@@ -441,7 +442,7 @@ GEDItem::GEDItem()
     }
 
    using namespace std;
-   QString GEDItem::writeInputFile() { // writes  input file and retunr the path of the input file.
+   QString GEDItem::writeInputFile(QString outDir) { // writes  input file and return the path of the input file.
        QStringList list = this->getPath().split("/");
        QString SECFIfile,  curveFile, plotFile, inputFile, dataFile;
        QString baseName = "/";
@@ -453,16 +454,13 @@ GEDItem::GEDItem()
        } else if (this->getMode() == "Right" || this->getMode() == "Down") {
            mode = 3;
        } else return "";
-       for ( int i =0; i<list.size()-1; i++) {
-           baseName = baseName +list.at(i) + "/";
-       }
        dataFile = this->getPath();
        dataFile.chop(4); // removes .tif
        dataFile.append(".img");
-       curveFile = baseName + this->text() + ".curv";
-       plotFile = baseName + this->text() + ".plot";
-       inputFile = baseName + this->text() + ".txt";
-       QString infoFile = baseName + this->text() + ".info";
+       curveFile = outDir + this->text() + ".curv";
+       plotFile = outDir + this->text() + ".plot";
+       inputFile = outDir + this->text() + ".txt";
+       QString infoFile = outDir + this->text() + ".info";
        //this->inputFiles.append(inputFile);
 
        QFile myfile(inputFile);

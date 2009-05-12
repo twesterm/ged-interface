@@ -89,7 +89,7 @@ private:
     QString getyRMAXT();
     QString getxAngle();
     QString getyAngle();
-    QString writeInputFile();
+    QString writeInputFile(QString outdir);
     QString torealFLoat(QString value);
 
 
