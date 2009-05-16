@@ -13,7 +13,7 @@ The the images can be opened with the OpenFile menu. \\
 The following should be considered:
 \begin{enumerate}
 \item The program assumes that the data files (.img) are in the same directory then the image files (.tif). 
-\item The PIMAG executable must be in the same directory then the .tif and .img files. Otherwise the data reduction (see later) will not work. 
+\item The executable must be in \$PATH. Otherwise the data reduction (see later) will not work. 
 \end{enumerate}
 
 \subsection{Workflow}
@@ -21,7 +21,7 @@ A complete workflow is described in Figure~\ref{workflow} (p. \pageref{workflow}
 
 \begin{figure}
 \includegraphics[width=12cm]{diagram}
-\caption{Workflow of the program. The "set usable"-step is optional, depending on the way the input files are written out later. If you decide to write out input files for every image, it is not necessary to set.  }
+\caption{Workflow of the program. The "set usable"-step is optional, depending on the way the input files are written out later. This is only necessary if the mode "only usable" is used.  }
 \label{workflow} 
 \end{figure} 
 The first click on the graphic sets the approximetly center, the second click sets the start point and the third click sets the endpoint for the integration and an angle. This is also indicated by the radiobuttons (See Figure~\ref{ui} (p. \pageref{ui}). The angle is calculated depending on the selected integration mode.

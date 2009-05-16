@@ -593,15 +593,16 @@ using namespace std;
                  myfile.close();
              }
              this->fileList.clear();
+             this->outputDir="none";
 
         }
     }
 
     void MainWindowClass::on_actionLicenceAuthor_triggered() {
         QMessageBox msgBox;
-        msgBox.setText("This software is LGPL (see: http://www.gnu.org/copyleft/lesser.html). \n Written by Till Wesermann \n University of Bielefeld \n eMail: till@tillwestermann.de \n If we meet some day, you can buy me a drink.");
+        msgBox.setText("This software is LGPL (see: http://www.gnu.org/copyleft/lesser.html). \n Written by Till Wesermann \n University of Bielefeld \n Group of Prof. Mitzel,Chair of Inorganic & Structural Chemistry \n eMail: till@tillwestermann.de \n If we meet some day, you can buy me a drink.");
          msgBox.exec();
-         //QMessageBox::information( this, "Info", QString("This software is LGPL (see: http://www.gnu.org/copyleft/lesser.html). \n Written by Till Wesermann \n University of Bielefeld \n eMail: till@tillwestermann.de \n If we meet some day, you can buy me a drink."), "&Ok" );
+         //QMessageBox::information( this, "Info", QString("This software is LGPL (see: http://www.gnu.org/copyleft/lesser.html). \n Written by Till Wesermann \n Group of Prof. Mitzel,Chair of Inorganic & Structural Chemistry \n University of Bielefeld \n eMail: till@tillwestermann.de \n Chair for  If we meet some day, you can buy me a drink."), "&Ok" );
      }
     void MainWindowClass::on_actionSet_output_directory_triggered() {
           QFileDialog dialog(this);
