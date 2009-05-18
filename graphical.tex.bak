@@ -3,7 +3,7 @@ The graphical user interface is very easy to use. An example is given in Figure~
 
 \begin{figure}
 \includegraphics[width=20cm, angle=90]{ui.png}
-\caption{Typical screen shot of the user interface. (1) The item list (listWidget), (2) Radiobuttons for selecting points, (3) Radiobuttons for selecting which input files to write out, (4) drop-down menu for selecting data reduction style, (5) main graphic, (6) tabs to set more parameters and (7) the Usable check box. }
+\caption{Typical screenshot of the user interface. (1) The itemlist (listWidget), (2) Radiobuttons for selecting points, (3) Radiobuttons for selecting which input files to write out, (4) drop-down menu for selecting data reduction style, (5) main graphic, (6) tabs to set more parameters and (7) the Usable checkbox. }
 \label{ui} 
 \end{figure} 
 
@@ -16,15 +16,15 @@ The following should be considered:
 \item The executable must be in \$PATH. Otherwise the data reduction (see later) will not work. 
 \end{enumerate}
 
-\subsection{Work-flow}
-A complete work-flow is described in Figure~\ref{workflow} (p. \pageref{workflow}). The work-flow describes one way to work with the program. Theoretically it is possible to go back at any point of the diagram. 
+\subsection{Workflow}
+A complete workflow is described in Figure~\ref{workflow} (p. \pageref{workflow}). The workflow describes one way to work with the program. Theoretically it is possible to go back at any point of the diagram. 
 
 \begin{figure}
 \includegraphics[width=12cm]{diagram}
-\caption{Work-flow of the program. The "set usable"-step is optional, depending on the way the input files are written out later. This is only necessary if the mode "only usable" is used.  }
+\caption{Workflow of the program. The "set usable"-step is optional, depending on the way the input files are written out later. This is only necessary if the mode "only usable" is used.  }
 \label{workflow} 
 \end{figure} 
-The first click on the graphic sets the approximetly center, the second click sets the start point and the third click sets the endpoint for the integration and an angle. This is also indicated by the radio buttons (See Figure~\ref{ui} (p. \pageref{ui}). The angle is calculated depending on the selected integration mode.
+The first click on the graphic sets the approximetly center, the second click sets the start point and the third click sets the endpoint for the integration and an angle. This is also indicated by the radiobuttons (See Figure~\ref{ui} (p. \pageref{ui}). The angle is calculated depending on the selected integration mode.
 
 \subsubsection{Integration mode selection}
 There are several integration modes available: 

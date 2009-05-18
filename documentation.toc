@@ -2,8 +2,8 @@
 \contentsline {section}{\numberline {1}Introduction}{3}
 \contentsline {section}{\numberline {2}Description of the user interface}{6}
 \contentsline {subsection}{\numberline {2.1}Input}{6}
-\contentsline {subsection}{\numberline {2.2}Workflow}{6}
-\contentsline {subsubsection}{\numberline {2.2.1}Selection integration mode}{6}
+\contentsline {subsection}{\numberline {2.2}Work-flow}{6}
+\contentsline {subsubsection}{\numberline {2.2.1}Integration mode selection}{6}
 \contentsline {subsection}{\numberline {2.3}Output}{12}
 \contentsline {section}{\numberline {3}Technical documentation}{14}
 \contentsline {subsection}{\numberline {3.1}Installation}{14}
