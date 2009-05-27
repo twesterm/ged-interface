@@ -593,7 +593,7 @@ using namespace std;
                  myfile.close();
              }
              this->fileList.clear();
-             this->outputDir="none";
+    //         this->outputDir="none";
 
         }
     }
