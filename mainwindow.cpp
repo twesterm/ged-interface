@@ -38,6 +38,7 @@ void MainWindowClass::setValuesByMethod(QString method) {
          ui->XSCATlineEdit->setText("0.0");
          ui->XSCATlineEdit->setReadOnly(true);
          ui->YSCATlineEdit->setReadOnly(false);
+         ui->ANGLElineEdit->setReadOnly(false);
          ui->YSCATlineEdit->setText(ui->RMAXTlineEdit->text());
          link->setMode(method);
          float x3 = 0.0; // stupid
@@ -55,6 +56,7 @@ void MainWindowClass::setValuesByMethod(QString method) {
          ui->XSCATlineEdit->setText(ui->RMAXTlineEdit->text());
          ui->YSCATlineEdit->setText("0.0");
          ui->YSCATlineEdit->setReadOnly(true);
+         ui->ANGLElineEdit->setReadOnly(false);
          link->setMode(method);
          float y3 = 0.0; // stupid
          //lets test if the user clicked under or above the center
