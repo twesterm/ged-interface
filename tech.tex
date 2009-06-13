@@ -1,6 +1,6 @@
 \section{Technical documentation}\label{tech}
 \subsection{Installation}
-The program is available via a git repository \cite{git}. To get the program just clone the repository with typing in bash: 
+The program is available via a git repository \cite{git}. To get the program just clone the repository by typing in bash: 
 \begin{lstlisting}
 git clone git://github.com/twesterm/ged-interface.git
 \end{lstlisting}
@@ -67,7 +67,7 @@ Returns always false (for internal reason).
 Returns true if the name is already in the list of the listWidget. 
 
 \subsubsection{ void MainWindowClass::on\_actionOpenFile\_triggered()  [slot] }
-Executes if the user clicks on openfile. Handles all renaming of doubled items in the listWidget and ads the selected files to the listWidget as GEDItems. 
+Executes if the user clicks on openfile. Handles all renaming of doubled items in the listWidget and adds the selected files to the listWidget as GEDItems. 
 
 \subsubsection{void MainWindowClass::setValuesByMethod(QString method) }
 When this function is called, it calculates the values for XSCAT, YSCAT and ANGLE and writes them to the corresponding lineEdits at the user interface.  
@@ -76,7 +76,7 @@ When this function is called, it calculates the values for XSCAT, YSCAT and ANGL
 Is called when the user clicks on an item at the listWidget. It sets all stored values to the lineEdit forms, sets the picture and calls  setValuesByMethod(). 
 
 \subsection{Porting to Windows} 
-In general it is possible to port \textit{GED ready} to windows. There are two main problems: \\
+In general it is possible to port xpimag to windows. There are two main problems: \\
 1.: String processing. The following memberfunctions do string manipulation and would have to be carefully modified to take the difference in file names into account: 
 \begin{lstlisting}
 void MainWindowClass::on_actionOpenFile_triggered()
@@ -88,7 +88,7 @@ QString GEDItem::writeInputFile()
 
 \subsection{Further developments} 
 A number of features where are not yet implemented. A reasonable approach would be to implement automated rescaling of the image histogram to improve the contrast. That would make it easier see errors on the experimental data. \\
-An other convenient feature would be the integration of PIMAG in the graphical interface. This has been tried, but failed because there was no possibility to link the C++ code of \textit{GED ready} with the FORTRAN 77 if PIMAG. pimac does not compile with the g77 compiler and therefore fails to link with g++. A solution would be to use the Intel C++ Compiler for building an linking the whole project. \\
+An other convenient feature would be the integration of PIMAG in the graphical interface. This has been tried, but failed because there was no possibility to link the C++ code of xpimag with the FORTRAN 77 of PIMAG. PIMAG does not compile with the g77 compiler and therefore fails to link with g++. A solution would be to use the Intel C++ Compiler for building and linking the whole project. \\
 If this is implemented it should be easy to implement plotting of the output files into the program.  
 \newpage
 

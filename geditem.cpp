@@ -458,7 +458,7 @@ GEDItem::GEDItem()
        dataFile.chop(4); // removes .tif
        dataFile.append(".img");
        curveFile = outDir + this->text() + ".curv";
-       plotFile = outDir + this->text() + ".plot";
+       plotFile = outDir + this->text() + ".dat";
        inputFile = outDir + this->text() + ".txt";
        QString infoFile = outDir + this->text() + ".info";
        //this->inputFiles.append(inputFile);

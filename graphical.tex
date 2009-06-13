@@ -8,11 +8,11 @@ The graphical user interface is very easy to use. An example is given in Figure~
 \end{figure} 
 
 \subsection{Input}
-The program can deal with all kind of image formats. It was tested with .tif files but should work with all other formats, as long as they are supported by Qt. \\
+The program can deal with all kinds of image formats. It was tested with .tif files but should work with all other formats, as long as they are supported by Qt. \\
 The the images can be opened with the OpenFile menu. \\
 The following should be considered:
 \begin{enumerate}
-\item The program assumes that the data files (.img) are in the same directory then the image files (.tif). 
+\item The program assumes that the data files (.img) are in the same directory as the image files (.tif). 
 \item The executable must be in \$PATH. Otherwise the data reduction (see later) will not work. 
 \end{enumerate}
 
@@ -31,7 +31,7 @@ There are several integration modes available:
 \begin{itemize}
 \item [Whole area] This means that a circle with the center and radius determined above will be used for integration. If the measurement was good and there are no shadows on the plate, this is the best choice. 
 \item[Top] The 'Top' half is taken for integration. The angle is determined by the endpoint relative to the y-axis (the center sets the zero point of the y axis). An example is given in Figure~\ref{modetop} (p. \pageref{modetop}).
-\item [Down] The button half is taken for integration. Same as above, see example is given in Figure~\ref{modedown} (p. \pageref{modedown}).
+\item [Down] The bottom half is taken for integration. The angle is determined as above, see example is given in Figure~\ref{modedown} (p. \pageref{modedown}).
 \item [Top-Down] The 'Top' and 'Down' sectors are taken for integration. The angle is determined in the same way as above. An example is given in Figure~\ref{modetopdown} (p. \pageref{modetopdown}).
 \item [Right]The right-hand side is taken for integration. The angle is the endpoint relative to the x-axis (the center is zero). An example is given in  Figure~\ref{moderight} (p. \pageref{moderight}).
 \item [Left] Same as Right, but for the left side. See Figure~\ref{modeleft} (p. \pageref{modeleft}).
@@ -93,7 +93,7 @@ The last command starts the data reduction. The script creates (or overwrites!) 
 
 \begin{itemize}
 \item [\$filename.curv] This file is used for further processing of the data. 
-\item [\$filename.plot] This file is used for plotting, a free program like xmgr \cite{xmgr} or GNUPLOT \cite{gnuplot} can be used. 
+\item [\$filename.dat] This file is used for plotting,  and can be read by a free program like xmgr \cite{xmgr} or GNUPLOT \cite{gnuplot}.
 \item [\$filename.info] This file contains detailed information about the data reduction process.
 \end{itemize}
 

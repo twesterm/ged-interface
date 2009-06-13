@@ -55,8 +55,9 @@ bool MainWindowClass::eventFilter( QObject * watched, QEvent * event ) { // this
                          float x2 = link->getXNULL().toFloat();
                          float y2 = link->getYNULL().toFloat();
                          ui->RMAXTlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)));
-                         ui->XSCATlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)));
-                         ui->YSCATlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)));
+                         // the factor of 2.0 is required by pimag - stupid!
+                         ui->XSCATlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)*2.0));
+                         ui->YSCATlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)*2.0));
                          link->setxRMAXT(QString::number(x1));
                          link->setyRMAXT(QString::number(y1));
                      //    link->setxAngle(QString::number(x1));
@@ -290,6 +291,7 @@ void MainWindowClass::on_RMINlineEdit_textEdited(QString text) {
          if (ui->listWidget->count()>0)  {
        GEDItem *link = dynamic_cast <GEDItem*>(ui->listWidget->currentItem());
         if (text.length()>0){
+            std::cout << text.toStdString() << std::endl;
             if (!link->setXSCAT(text)){
                QMessageBox::information( this, "Error", QString("You gave in a wrong type. Please check the box again (Don't use 0,2. Use 0.2, even if you are german)"), "&Ok" );
             } // of if setif

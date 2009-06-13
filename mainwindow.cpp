@@ -27,11 +27,19 @@ void MainWindowClass::setValuesByMethod(QString method) {
      float x2 = link->getxRMAXT().toFloat();
      float y2 = link->getyRMAXT().toFloat();
      if (method == "Whole area" ) {
-         ui->XSCATlineEdit->setReadOnly(false);
-         ui->YSCATlineEdit->setReadOnly(false);
+         ui->XSCATlineEdit->setReadOnly(true);
+         ui->YSCATlineEdit->setReadOnly(true);
          link->setMode(method);
-         ui->XSCATlineEdit->setText(ui->RMAXTlineEdit->text());
-         ui->YSCATlineEdit->setText(ui->RMAXTlineEdit->text());
+         if (link->getXSCAT().toFloat() == 0.0) {
+             ui->XSCATlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)*2.0));
+         } else {
+             ui->XSCATlineEdit->setText(link->getXSCAT());
+         }
+         if (link->getYSCAT().toFloat() == 0.0) {
+             ui->YSCATlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)*2.0));
+         } else {
+             ui->YSCATlineEdit->setText(link->getYSCAT());
+         }
          ui->ANGLElineEdit->setText(QString::number(0.0));
          ui->ANGLElineEdit->setReadOnly(true);
      } else if (method == "Right-Left" || method == "Left" || method == "Right") {
@@ -39,7 +47,11 @@ void MainWindowClass::setValuesByMethod(QString method) {
          ui->XSCATlineEdit->setReadOnly(true);
          ui->YSCATlineEdit->setReadOnly(false);
          ui->ANGLElineEdit->setReadOnly(false);
-         ui->YSCATlineEdit->setText(ui->RMAXTlineEdit->text());
+         if (link->getYSCAT().toFloat() == 0.0) {
+             ui->YSCATlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)*2.0));
+         } else {
+             ui->YSCATlineEdit->setText(link->getYSCAT());
+         }
          link->setMode(method);
          float x3 = 0.0; // stupid
          // lets test it the user clicked left or right from the center for the angle point
@@ -53,7 +65,11 @@ void MainWindowClass::setValuesByMethod(QString method) {
          ui->ANGLElineEdit->setText(QString::number(angle));
      } else if (method == "Top-Down"|| method == "Top" || method == "Down") {
          ui->XSCATlineEdit->setReadOnly(false);
-         ui->XSCATlineEdit->setText(ui->RMAXTlineEdit->text());
+         if (link->getXSCAT().toFloat() == 0.0) {
+             ui->XSCATlineEdit->setText(QString::number(link->distance(x1, x2, y1, y2)*2.0));
+         } else {
+             ui->XSCATlineEdit->setText(link->getXSCAT());
+         }
          ui->YSCATlineEdit->setText("0.0");
          ui->YSCATlineEdit->setReadOnly(true);
          ui->ANGLElineEdit->setReadOnly(false);
